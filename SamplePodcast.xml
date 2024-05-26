@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<media xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns="NFOStandard"       
-       xsi:schemaLocation="NFOStandard https://xsd.nfostandard.com/main.xsd">
+<root xmlns="NFOStandard" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="NFOStandard https://xsd.nfostandard.com/main.xsd">
+<media>
     <podcast>
         <title>string</title>
         <releaseDate>1987-05-15</releaseDate>
@@ -93,3 +92,4 @@
         <cover>string</cover>
     </podcast>
 </media>
+</root>

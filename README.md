@@ -57,10 +57,9 @@ This is an example of how to use the XSDs to reference it so that it's easy for 
 		<plot>Dom Cobb is a skilled thief, the absolute best in the dangerous art of extraction: stealing valuable secrets from deep within the subconscious during the dream state when the mind is at its most vulnerable. Cobb's rare ability has made him a coveted player in this treacherous new world of corporate espionage, but it has also made him an international fugitive and cost him everything he has ever loved. Now Cobb is being offered a chance at redemption. One last job could give him his life back but only if he can accomplish the impossible, inception.</plot>
 		<tagline>Your mind is the scene of the crime.</tagline>
 		<runtime>148</runtime>
-		<thumb>poster.jpg</thumb>
-		<thumb aspect="poster" preview="poster-preview.jpg"/>
-		<fanart>fanart1.jpg</fanart>
-		<fanart>fanart2.jpg</fanart>
+		<banner type="poster" width="300" height="450" url="http://example.com/banner1.jpg"/>
+        <thumb type="thumbnail" width="150" height="150" url="http://example.com/thumb1.jpg"/>
+        <fanart type="background" width="1920" height="1080" url="http://example.com/fanart1.jpg"/>
 		<contentrating country="USA" board="MPAA" rating="PG-13" image="mpaa_pg13.png"/>
 		<uniqueid type="imdb" default="true">tt1375666</uniqueid>
 		<uniqueid type="tmdb">12345</uniqueid>
