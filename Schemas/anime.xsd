@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema elementFormDefault="qualified"
+           targetNamespace="NFOStandard" 
+            xmlns="NFOStandard"
+            xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <xs:include schemaLocation="https://xsd.nfostandard.com/Schemas/common.xsd"/>
+    <xs:include schemaLocation="https://xsd.nfostandard.com/Schemas/person.xsd"/>
+
+    <xs:complexType name="animeType">
+        <xs:sequence>
+            <xs:element name="title" type="xs:string" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="releaseDate" type="xs:date" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="productionCompany" type="xs:string" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="genre" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="language" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="season" type="xs:integer" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="episode" type="xs:integer" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="duration" type="xs:integer" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="isAdult" type="xs:integer" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="director" type="personType" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="voiceActor" type="personType" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="translationVoice" type="personType" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="keyword" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="tag" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="description" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="rating" type="ratingType" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="uniqueId" type="uniqueidType" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="contentRating" type="contentRatingType" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="banner" minOccurs="0" maxOccurs="unbounded" type="subMediaType"/>
+            <xs:element name="thumb" minOccurs="0" maxOccurs="unbounded" type="subMediaType"/>
+            <xs:element name="fanart" minOccurs="0" maxOccurs="unbounded" type="subMediaType"/>
+            <xs:element name="links" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

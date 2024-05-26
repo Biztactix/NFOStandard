@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+            targetNamespace="NFOStandard"   
+            xmlns="NFOStandard"            
+            elementFormDefault="qualified">
+
+    <xs:include schemaLocation="https://xsd.nfostandard.com/Schemas/common.xsd"/>    
+
+    <xs:complexType name="metadataType">
+        <xs:sequence>
+			<xs:element name="appID" type="xs:string" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="uniqueid" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="libraryid" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="librarysubid" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="dateAdded" type="xs:dateTime" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="dateUpdated" type="xs:dateTime" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="lastMetadataScan" type="xs:dateTime" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="lastChapterSearch" type="xs:dateTime" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="lastIntroSearch" type="xs:dateTime" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="thumbnails" type="subMediaType" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="fanart" type="subMediaType" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="banner" type="subMediaType" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="internalLink" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="externalLink" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="tags" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="liked" type="xs:int" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="duration" type="xs:long" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="collection" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:attribute name="name" type="xs:string" use="required"/>
+                    <xs:attribute name="id" type="xs:string" use="optional"/>
+                    <xs:attribute name="description" type="xs:string" use="optional"/>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="statsType">
+        <xs:sequence>
+            <xs:element name="watchCount" type="xs:integer" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="liked" type="xs:boolean" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="userRating" type="xs:decimal" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="watched" type="xs:boolean" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="progress" type="xs:decimal" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+        <xs:attribute name="userId" type="xs:string" use="required"/>
+    </xs:complexType>
+
+
+</xs:schema>

@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"             
+            targetNamespace="NFOStandard"
+            xmlns="NFOStandard"           
+            elementFormDefault="qualified">
+    
+    <xs:include schemaLocation="https://xsd.nfostandard.com/Schemas/common.xsd"/>
+    <xs:include schemaLocation="https://xsd.nfostandard.com/Schemas/person.xsd"/>
+    
+        <xs:complexType name="movieType">
+            <xs:sequence>
+                <xs:element name="title" type="xs:string" minOccurs="1" maxOccurs="1"/>
+                <xs:element name="originaltitle" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="sorttitle" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="alternatetitle" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="rating" type="ratingType" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="userrating" type="xs:decimal" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="outline" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="plot" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="tagline" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="runtime" type="xs:integer" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="banner" minOccurs="0" maxOccurs="unbounded" type="subMediaType"/>
+                <xs:element name="thumb" minOccurs="0" maxOccurs="unbounded" type="subMediaType"/>
+                <xs:element name="fanart" minOccurs="0" maxOccurs="unbounded" type="subMediaType"/>
+                <xs:element name="contentrating" type="contentRatingType" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="uniqueid" type="uniqueidType" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="genre" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="tag" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="setname" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="setoverview" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="country" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="productioncompany" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="keyword" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="releasedate" type="xs:date" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="award" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="subtitlelanguage" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="soundtrack" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="parentalguide" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="actor" type="personType" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="director" type="personType" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="writer" type="personType" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="composer" type="personType" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="producers" type="personType" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="collection" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            </xs:sequence>
+
+        </xs:complexType>
+   
+</xs:schema>

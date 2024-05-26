@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<media xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="NFOStandard"       
+       xsi:schemaLocation="NFOStandard https://xsd.nfostandard.com/main.xsd">
+    <podcast>
+        <title>string</title>
+        <releaseDate>1987-05-15</releaseDate>
+        <productionCompany>string</productionCompany>
+        <host>
+            <name>string</name>
+            <role>string</role>
+            <thumb>string</thumb>
+            <bio>string</bio>
+            <url>string</url>
+            <url>string</url>
+            <tag>string</tag>
+            <tag>string</tag>
+        </host>
+        <host>
+            <name>string</name>
+            <role>string</role>
+            <thumb>string</thumb>
+            <bio>string</bio>
+            <url>string</url>
+            <tag>string</tag>
+        </host>
+        <host>
+            <name>string</name>
+            <order>3930</order>
+            <thumb>string</thumb>
+            <url>string</url>
+            <url>string</url>
+            <url>string</url>
+            <url>string</url>
+            <gender>string</gender>
+            <tag>string</tag>
+            <tag>string</tag>
+            <tag>string</tag>
+            <tag>string</tag>
+        </host>
+        <host >
+            <name>string</name>
+            <role>string</role>
+            <url>string</url>
+            <url>string</url>
+            <tag>string</tag>
+            <tag>string</tag>
+            <tag>string</tag>
+        </host>
+        <guest >
+            <name>string</name>
+            <order>2095</order>
+            <bio>string</bio>
+            <url>string</url>
+            <tag>string</tag>
+            <tag>string</tag>
+            <tag>string</tag>
+        </guest>
+        <guest>
+            <name>string</name>
+            <role>string</role>
+            <url>string</url>
+            <url>string</url>
+            <url>string</url>
+        </guest>
+        <guest>
+            <name>string</name>
+            <role>string</role>
+            <thumb>string</thumb>
+            <bio>string</bio>
+            <url>string</url>
+            <url>string</url>
+            <url>string</url>
+            <gender>string</gender>
+            <tag>string</tag>
+            <tag>string</tag>
+        </guest>
+        <duration>-4020</duration>
+        <keyword>string</keyword>
+        <keyword>string</keyword>
+        <keyword>string</keyword>
+        <tag>string</tag>
+        <tag>string</tag>
+        <tag>string</tag>
+        <rating name="amazon" value="4.5"/>
+        <rating name="spotify" value="3"/>
+        <uniqueId type="string">string</uniqueId>
+        <uniqueId type="string">string</uniqueId>
+        <uniqueId type="string">string</uniqueId>
+        <uniqueId type="string">string</uniqueId>
+        <contentRating country="string" board="string" rating="string" image="string">string</contentRating>
+        <contentRating country="string" board="string" rating="string" image="string">string</contentRating>
+        <cover>string</cover>
+    </podcast>
+</media>
