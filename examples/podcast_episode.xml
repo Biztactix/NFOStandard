@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<root xmlns="NFOStandard" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="NFOStandard https://xsd.nfostandard.com/main.xsd">
+<root xmlns="NFOStandard" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="NFOStandard https://raw.githubusercontent.com/Biztactix/NFOStandard/main/main.xsd">
     <media>
         <podcast>
             <title>The Roman Empire's Greatest Mystery</title>
@@ -36,10 +36,6 @@
             </chaptertoc>
             <sponsor>Audible</sponsor>
             <sponsor>Squarespace</sponsor>
-            <itunes:author>Dan Carlin</itunes:author>
-            <itunes:summary>Exploring the mystery of Rome's lost Ninth Legion</itunes:summary>
-            <itunes:subtitle>What happened to 5,000 Roman soldiers?</itunes:subtitle>
-            <itunes:type>episodic</itunes:type>
         </podcast>
     </media>
 </root>
