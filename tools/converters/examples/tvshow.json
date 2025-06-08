@@ -1,0 +1,71 @@
+{
+  "type": "tvshow",
+  "tvshow": {
+    "title": "Breaking Bad",
+    "originaltitle": "Breaking Bad",
+    "sorttitle": "Breaking Bad",
+    "rating": {
+      "@name": "imdb",
+      "@value": "9.5",
+      "@votes": "1800000",
+      "@default": "true"
+    },
+    "userrating": "10.0",
+    "outline": "A high school chemistry teacher turned methamphetamine producer.",
+    "plot": "Breaking Bad follows protagonist Walter White, a chemistry teacher who lives in New Mexico with his wife and teenage son who has cerebral palsy. White is diagnosed with Stage III cancer and given a prognosis of two years left to live.",
+    "tagline": "All Hail the King",
+    "runtime": 47,
+    "contentrating": {
+      "@country": "USA",
+      "@board": "TV",
+      "@rating": "TV-MA"
+    },
+    "uniqueid": [
+      {
+        "@type": "imdb",
+        "@default": "true",
+        "#text": "tt0903747"
+      },
+      {
+        "@type": "tvdb",
+        "#text": "81189"
+      },
+      {
+        "@type": "tmdb",
+        "#text": "1396"
+      }
+    ],
+    "genre": ["Crime", "Drama", "Thriller"],
+    "tag": ["drugs", "crime", "family", "cancer", "meth"],
+    "country": "USA",
+    "premiered": "2008-01-20",
+    "status": "Ended",
+    "studio": ["AMC", "Sony Pictures Television"],
+    "season": 5,
+    "episode": 62,
+    "actor": [
+      {
+        "name": "Bryan Cranston",
+        "role": "Walter White",
+        "order": 1,
+        "thumb": "bryan_cranston.jpg",
+        "bio": "Bryan Lee Cranston is an American actor, voice actor, writer and director."
+      },
+      {
+        "name": "Aaron Paul",
+        "role": "Jesse Pinkman",
+        "order": 2,
+        "thumb": "aaron_paul.jpg"
+      },
+      {
+        "name": "Anna Gunn",
+        "role": "Skyler White",
+        "order": 3
+      }
+    ],
+    "creator": {
+      "name": "Vince Gilligan",
+      "thumb": "vince_gilligan.jpg"
+    }
+  }
+}

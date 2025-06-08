@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Invalid: Missing required 'title' field -->
+<!-- Expected error: Element 'movie': Missing child element(s). Expected is ( title ). -->
+<root xmlns="NFOStandard" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="NFOStandard https://xsd.nfostandard.com/main.xsd">
+    <media>
+        <movie>
+            <year>2023</year>
+            <genre>Drama</genre>
+        </movie>
+    </media>
+</root>

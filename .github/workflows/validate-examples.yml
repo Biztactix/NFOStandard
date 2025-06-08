@@ -1,0 +1,168 @@
+name: Validate Example NFO Files
+
+on:
+  push:
+    branches: [ main, develop ]
+    paths:
+      - '**.xml'
+      - '**.xsd'
+      - '.github/workflows/validate-examples.yml'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - '**.xml'
+      - '**.xsd'
+
+jobs:
+  validate-nfo-files:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install lxml requests
+    
+    - name: Create validation script
+      run: |
+        cat > validate_examples.py << 'EOF'
+        import os
+        import sys
+        from lxml import etree
+        import requests
+        from pathlib import Path
+        
+        def validate_nfo_file(filepath):
+            """Validate a single NFO file against its schema."""
+            print(f"\nValidating: {filepath}")
+            
+            try:
+                # Parse the XML file
+                with open(filepath, 'rb') as f:
+                    doc = etree.parse(f)
+                
+                # Get schema location
+                root = doc.getroot()
+                schema_location = root.get('{http://www.w3.org/2001/XMLSchema-instance}schemaLocation')
+                
+                if not schema_location:
+                    print(f"  ❌ No xsi:schemaLocation attribute found")
+                    return False
+                
+                # Extract schema URL
+                parts = schema_location.split()
+                if len(parts) >= 2:
+                    schema_url = parts[1]
+                else:
+                    print(f"  ❌ Invalid xsi:schemaLocation format")
+                    return False
+                
+                print(f"  📋 Schema URL: {schema_url}")
+                
+                # Download schema
+                response = requests.get(schema_url, timeout=30)
+                response.raise_for_status()
+                schema_doc = etree.fromstring(response.content)
+                
+                # Create XMLSchema object
+                schema = etree.XMLSchema(schema_doc)
+                
+                # Validate
+                if schema.validate(doc):
+                    print(f"  ✅ Valid NFO file")
+                    return True
+                else:
+                    print(f"  ❌ Validation errors:")
+                    for error in schema.error_log:
+                        print(f"     Line {error.line}: {error.message}")
+                    return False
+                    
+            except etree.XMLSyntaxError as e:
+                print(f"  ❌ XML syntax error: {e}")
+                return False
+            except Exception as e:
+                print(f"  ❌ Error: {e}")
+                return False
+        
+        def main():
+            # Find all XML example files
+            example_files = []
+            for pattern in ['*.xml', 'examples/*.xml', 'Examples/*.xml']:
+                example_files.extend(Path('.').glob(pattern))
+            
+            if not example_files:
+                print("No example XML files found!")
+                return 1
+            
+            print(f"Found {len(example_files)} example files to validate")
+            
+            # Validate each file
+            failed_files = []
+            for filepath in example_files:
+                if not validate_nfo_file(str(filepath)):
+                    failed_files.append(str(filepath))
+            
+            # Summary
+            print("\n" + "="*60)
+            print(f"Total files: {len(example_files)}")
+            print(f"✅ Valid: {len(example_files) - len(failed_files)}")
+            print(f"❌ Invalid: {len(failed_files)}")
+            
+            if failed_files:
+                print("\nFailed files:")
+                for filepath in failed_files:
+                    print(f"  - {filepath}")
+                return 1
+            else:
+                print("\n🎉 All example files are valid!")
+                return 0
+        
+        if __name__ == "__main__":
+            sys.exit(main())
+        EOF
+    
+    - name: Validate example NFO files
+      run: python validate_examples.py
+    
+    - name: Check XSD files are accessible
+      run: |
+        echo "Checking XSD files are accessible..."
+        for xsd in Schemas/*.xsd; do
+          echo -n "Checking $xsd... "
+          if curl -f -s -o /dev/null "https://xsd.nfostandard.com/$xsd"; then
+            echo "✅ OK"
+          else
+            echo "❌ Not accessible at https://xsd.nfostandard.com/$xsd"
+            exit 1
+          fi
+        done
+
+  validate-schema-integrity:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Install xmllint
+      run: sudo apt-get update && sudo apt-get install -y libxml2-utils
+    
+    - name: Validate XSD schemas
+      run: |
+        echo "Validating XSD schema files..."
+        for xsd in Schemas/*.xsd main.xsd; do
+          echo -n "Validating $xsd... "
+          if xmllint --noout "$xsd" 2>/dev/null; then
+            echo "✅ Valid"
+          else
+            echo "❌ Invalid"
+            xmllint --noout "$xsd"
+            exit 1
+          fi
+        done

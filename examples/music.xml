@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root xmlns="NFOStandard" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="NFOStandard https://xsd.nfostandard.com/main.xsd">
+    <media>
+        <music>
+            <title>Dark Side of the Moon</title>
+            <artist>Pink Floyd</artist>
+            <albumartist>Pink Floyd</albumartist>
+            <album>The Dark Side of the Moon</album>
+            <year>1973</year>
+            <genre>Progressive Rock</genre>
+            <genre>Psychedelic Rock</genre>
+            <style>Art Rock</style>
+            <mood>Dark</mood>
+            <mood>Atmospheric</mood>
+            <rating name="allmusic" value="5.0" max="5"/>
+            <userrating>10</userrating>
+            <compilation>false</compilation>
+            <label>Harvest Records</label>
+            <type>album</type>
+            <releasedate>1973-03-01</releasedate>
+            <originalreleasedate>1973-03-01</originalreleasedate>
+            <barcode>5099902987521</barcode>
+            <catalognumber>SHVL 804</catalognumber>
+            <thumb type="cover" width="1000" height="1000" url="http://example.com/darkside-cover.jpg"/>
+            <thumb type="back" width="1000" height="1000" url="http://example.com/darkside-back.jpg"/>
+            <path>/music/Pink Floyd/Dark Side of the Moon/</path>
+            <track>
+                <position>1</position>
+                <title>Speak to Me</title>
+                <duration>90</duration>
+            </track>
+            <track>
+                <position>2</position>
+                <title>Breathe (In the Air)</title>
+                <duration>169</duration>
+            </track>
+            <track>
+                <position>3</position>
+                <title>On the Run</title>
+                <duration>216</duration>
+            </track>
+            <track>
+                <position>4</position>
+                <title>Time</title>
+                <duration>413</duration>
+            </track>
+            <track>
+                <position>5</position>
+                <title>The Great Gig in the Sky</title>
+                <duration>276</duration>
+            </track>
+            <track>
+                <position>6</position>
+                <title>Money</title>
+                <duration>382</duration>
+            </track>
+            <track>
+                <position>7</position>
+                <title>Us and Them</title>
+                <duration>469</duration>
+            </track>
+            <track>
+                <position>8</position>
+                <title>Any Colour You Like</title>
+                <duration>206</duration>
+            </track>
+            <track>
+                <position>9</position>
+                <title>Brain Damage</title>
+                <duration>228</duration>
+            </track>
+            <track>
+                <position>10</position>
+                <title>Eclipse</title>
+                <duration>131</duration>
+            </track>
+        </music>
+    </media>
+</root>
