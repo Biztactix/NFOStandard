@@ -41,7 +41,7 @@
             <uniqueId type="anidb">9541</uniqueId>
             <uniqueId type="myanimelist">16498</uniqueId>
             <uniqueId type="tvdb">267440</uniqueId>
-            <contentRating country="Japan" board="TV" rating="TV-MA"/>
+            <contentRating country="Japan" board="TV" rating="TV-MA" image="http://example.com/ratings/tv-ma.png"/>
             <banner type="poster" width="680" height="1000" url="http://example.com/aot-poster.jpg"/>
             <thumb type="landscape" width="1920" height="1080" url="http://example.com/aot-thumb.jpg"/>
             <fanart type="background" width="1920" height="1080" url="http://example.com/aot-fanart.jpg"/>

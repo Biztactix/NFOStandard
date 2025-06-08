@@ -28,7 +28,7 @@
             <rating name="goodreads" value="4.28" max="5" votes="3500000"/>
             <uniqueId type="isbn">9781402589263</uniqueId>
             <uniqueId type="asin">B009NQTXG0</uniqueId>
-            <contentRating country="USA" board="MPAA" rating="G"/>
+            <contentRating country="USA" board="MPAA" rating="G" image="http://example.com/ratings/mpaa-g.png"/>
             <cover type="front" width="500" height="500" url="http://example.com/hobbit-audiobook-cover.jpg"/>
         </audiobook>
     </media>

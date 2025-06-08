@@ -32,7 +32,7 @@
             <rating name="imvdb" value="9.2" max="10" votes="15000"/>
             <uniqueId type="musicbrainz">b1c62d7f-3a15-4f7f-bb21-89a0b9c6e954</uniqueId>
             <uniqueId type="imvdb">573621</uniqueId>
-            <contentRating country="UK" board="BBFC" rating="U"/>
+            <contentRating country="UK" board="BBFC" rating="U" image="http://example.com/ratings/bbfc-u.png"/>
             <cover type="poster" width="1000" height="1000" url="http://example.com/bohemian-rhapsody-poster.jpg"/>
             <serviceLinks>
                 <service>YouTube</service>

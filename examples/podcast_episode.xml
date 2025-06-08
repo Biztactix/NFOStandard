@@ -24,7 +24,7 @@
             <rating name="apple" value="4.8" max="5" votes="50000"/>
             <rating name="spotify" value="4.9" max="5" votes="75000"/>
             <uniqueId type="guid">hardcore-history-episode-75</uniqueId>
-            <contentRating country="USA" board="FCC" rating="G"/>
+            <contentRating country="USA" board="FCC" rating="G" image="http://example.com/ratings/fcc-g.png"/>
             <cover type="cover" width="3000" height="3000" url="http://example.com/hardcore-history-cover.jpg"/>
             <serviceLinks>
                 <service>Spotify</service>

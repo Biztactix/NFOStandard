@@ -28,7 +28,7 @@
             <description>One of the most influential progressive rock albums of all time, exploring themes of conflict, greed, and mental illness.</description>
             <rating name="allmusic" value="5.0" max="5"/>
             <uniqueId type="musicbrainz">a7579dcf-40b3-3bea-8a73-7d8d6a1b6a8e</uniqueId>
-            <contentRating country="UK" board="BBFC" rating="U"/>
+            <contentRating country="UK" board="BBFC" rating="U" image="http://example.com/ratings/bbfc-u.png"/>
             <cover type="front" width="1000" height="1000" url="http://example.com/darkside-cover.jpg"/>
             <serviceLinks>
                 <service>Spotify</service>
