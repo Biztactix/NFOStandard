@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<root xmlns="https://nfostandard.com/schema"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="https://nfostandard.com/schema https://xsd.nfostandard.com/main.xsd">
-    <media>
+<root xmlns="NFOStandard" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="NFOStandard https://xsd.nfostandard.com/main.xsd">
+<media>
         <tvshow>
             <title>Breaking Bad</title>
             <originaltitle>Breaking Bad</originaltitle>
