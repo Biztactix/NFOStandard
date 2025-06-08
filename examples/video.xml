@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root xmlns="NFOStandard" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="NFOStandard https://xsd.nfostandard.com/main.xsd">
+    <media>
+        <video>
+            <title>Family Vacation 2023 - Hawaii</title>
+            <description>Our amazing two-week family vacation to Hawaii in summer 2023. Includes visits to Oahu, Maui, and the Big Island. Features snorkeling at Hanauma Bay, hiking Diamond Head, Road to Hana adventure, sunrise at Haleakala, and volcano tours at Hawaii Volcanoes National Park.</description>
+            <runtime>45</runtime>
+            <date>2023-07-15</date>
+            <recordingdate>2023-07-01</recordingdate>
+            <tag>vacation</tag>
+            <tag>family</tag>
+            <tag>hawaii</tag>
+            <tag>travel</tag>
+            <tag>2023</tag>
+            <tag>summer</tag>
+            <thumb type="poster" width="1920" height="1080" url="file:///home/videos/hawaii2023-poster.jpg"/>
+            <thumb type="screenshot" width="1920" height="1080" url="file:///home/videos/hawaii2023-screen1.jpg"/>
+            <thumb type="screenshot" width="1920" height="1080" url="file:///home/videos/hawaii2023-screen2.jpg"/>
+            <thumb type="screenshot" width="1920" height="1080" url="file:///home/videos/hawaii2023-screen3.jpg"/>
+            <location>Hawaii, USA</location>
+            <location>Oahu</location>
+            <location>Maui</location>
+            <location>Big Island</location>
+            <creator>John Smith</creator>
+            <subject>Smith Family</subject>
+            <subject>Sarah Smith</subject>
+            <subject>Emma Smith</subject>
+            <subject>Michael Smith</subject>
+            <videocodec>h265</videocodec>
+            <videoaspect>16:9</videoaspect>
+            <videoresolution>3840x2160</videoresolution>
+            <framerate>30</framerate>
+            <audiocodec>aac</audiocodec>
+            <audiochannels>2</audiochannels>
+            <audiosamplerate>48000</audiosamplerate>
+            <filesize>8547392512</filesize>
+            <format>MP4</format>
+            <comment>Shot with iPhone 14 Pro and GoPro Hero 11. Edited in Final Cut Pro.</comment>
+            <event>Summer Vacation 2023</event>
+            <privacy>private</privacy>
+        </video>
+    </media>
+    <library>
+        <type>personalarchive</type>
+        <addeddate>2023-08-01</addeddate>
+        <lastviewed>2023-12-25</lastviewed>
+        <viewcount>12</viewcount>
+        <favorite>true</favorite>
+        <collection>Family Videos</collection>
+        <backup>true</backup>
+        <backuplocation>NAS://media/videos/archive/2023/</backuplocation>
+    </library>
+</root>
