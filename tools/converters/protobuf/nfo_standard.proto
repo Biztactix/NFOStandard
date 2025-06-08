@@ -1,0 +1,292 @@
+syntax = "proto3";
+
+package nfostandard;
+
+option go_package = "github.com/Biztactix/NFOStandard/protobuf";
+option java_package = "com.nfostandard.protobuf";
+option csharp_namespace = "NFOStandard.Protobuf";
+
+// Root message containing media and optional metadata
+message NFORoot {
+  Media media = 1;
+  repeated LibraryMetadata library = 2;
+  repeated Stats stats = 3;
+}
+
+// Media container - only one type should be set
+message Media {
+  oneof media_type {
+    Movie movie = 1;
+    TVShow tvshow = 2;
+    Music music = 3;
+    AudioBook audiobook = 4;
+    Podcast podcast = 5;
+    Anime anime = 6;
+    Adult adult = 7;
+    MusicVideo musicvideo = 8;
+    Video video = 9;
+  }
+}
+
+// Common types
+message Rating {
+  string name = 1;
+  float value = 2;
+  int32 votes = 3;
+  int32 max = 4;
+  bool default = 5;
+}
+
+message UniqueID {
+  string type = 1;
+  string value = 2;
+  bool default = 3;
+}
+
+message ContentRating {
+  string country = 1;
+  string board = 2;
+  string rating = 3;
+  string image = 4;
+}
+
+message MediaFile {
+  string type = 1;
+  int32 width = 2;
+  int32 height = 3;
+  string url = 4;
+  string season = 5;
+  string preview = 6;
+}
+
+message Person {
+  string name = 1;
+  string role = 2;
+  int32 order = 3;
+  string thumb = 4;
+  string bio = 5;
+  string url = 6;
+  string birthdate = 7;
+  string birthplace = 8;
+  string deathdate = 9;
+  string deathplace = 10;
+}
+
+message Track {
+  int32 position = 1;
+  string title = 2;
+  int32 duration = 3;
+  string artist = 4;
+}
+
+// Movie type
+message Movie {
+  string title = 1;
+  string originaltitle = 2;
+  string sorttitle = 3;
+  repeated string alternatetitle = 4;
+  repeated Rating rating = 5;
+  float userrating = 6;
+  string outline = 7;
+  string plot = 8;
+  string tagline = 9;
+  int32 runtime = 10;
+  repeated MediaFile banner = 11;
+  repeated MediaFile thumb = 12;
+  repeated MediaFile fanart = 13;
+  repeated ContentRating contentrating = 14;
+  repeated UniqueID uniqueid = 15;
+  repeated string genre = 16;
+  repeated string tag = 17;
+  string setname = 18;
+  string setoverview = 19;
+  repeated string country = 20;
+  repeated string productioncompany = 21;
+  repeated string keyword = 22;
+  repeated string releasedate = 23;
+  repeated string award = 24;
+  repeated string subtitlelanguage = 25;
+  string soundtrack = 26;
+  string parentalguide = 27;
+  repeated Person actor = 28;
+  repeated Person director = 29;
+  repeated Person writer = 30;
+  repeated Person composer = 31;
+  repeated Person producers = 32;
+  string collection = 33;
+  Intro intro = 34;
+  Credits credits = 35;
+  int32 year = 36;
+}
+
+// TV Show type  
+message TVShow {
+  string title = 1;
+  string originaltitle = 2;
+  string sorttitle = 3;
+  repeated string alternatetitle = 4;
+  repeated Rating rating = 5;
+  float userrating = 6;
+  string outline = 7;
+  string plot = 8;
+  string tagline = 9;
+  int32 runtime = 10;
+  repeated MediaFile banner = 11;
+  repeated MediaFile thumb = 12;
+  repeated MediaFile fanart = 13;
+  repeated ContentRating contentrating = 14;
+  repeated UniqueID uniqueid = 15;
+  repeated string genre = 16;
+  repeated string tag = 17;
+  repeated string country = 18;
+  string premiered = 19;
+  string status = 20;
+  repeated string studio = 21;
+  int32 season = 22;
+  int32 episode = 23;
+  int32 displayseason = 24;
+  int32 displayepisode = 25;
+  repeated Person actor = 26;
+  repeated Person director = 27;
+  repeated Person writer = 28;
+  repeated Person creator = 29;
+  int32 year = 30;
+}
+
+// Music type
+message Music {
+  string title = 1;
+  string artist = 2;
+  string albumartist = 3;
+  string album = 4;
+  int32 year = 5;
+  repeated string genre = 6;
+  repeated string style = 7;
+  repeated string mood = 8;
+  repeated Rating rating = 9;
+  float userrating = 10;
+  bool compilation = 11;
+  string label = 12;
+  string type = 13;
+  string releasedate = 14;
+  string originalreleasedate = 15;
+  string barcode = 16;
+  string catalognumber = 17;
+  repeated MediaFile thumb = 18;
+  string path = 19;
+  repeated Track track = 20;
+}
+
+// AudioBook type
+message AudioBook {
+  string title = 1;
+  string author = 2;
+  string narrator = 3;
+  string publisher = 4;
+  int32 year = 5;
+  repeated string genre = 6;
+  string description = 7;
+  int32 runtime = 8;
+  string language = 9;
+  string isbn = 10;
+  repeated MediaFile cover = 11;
+  repeated Rating rating = 12;
+  float userrating = 13;
+}
+
+// Podcast type
+message Podcast {
+  string title = 1;
+  string author = 2;
+  string description = 3;
+  repeated string category = 4;
+  string language = 5;
+  string pubDate = 6;
+  string link = 7;
+  string copyright = 8;
+  int32 duration = 9;
+  repeated MediaFile image = 10;
+  bool explicit = 11;
+  repeated Rating rating = 12;
+}
+
+// Anime type (extends TV show structure)
+message Anime {
+  string title = 1;
+  string originaltitle = 2;
+  repeated string alternatetitle = 3;
+  repeated Rating rating = 4;
+  float userrating = 5;
+  string plot = 6;
+  repeated string genre = 7;
+  repeated string tag = 8;
+  string premiered = 9;
+  string status = 10;
+  repeated string studio = 11;
+  int32 season = 12;
+  int32 episode = 13;
+  repeated Person actor = 14;
+  repeated Person director = 15;
+  string source = 16;  // manga, light novel, original, etc.
+  string type = 17;    // TV, OVA, Movie, etc.
+}
+
+// Adult type (extends movie structure)
+message Adult {
+  string title = 1;
+  repeated Rating rating = 2;
+  string plot = 3;
+  repeated string genre = 4;
+  repeated string tag = 5;
+  repeated Person actor = 6;
+  repeated Person director = 7;
+  string studio = 8;
+  string releasedate = 9;
+  int32 runtime = 10;
+}
+
+// Music Video type
+message MusicVideo {
+  string title = 1;
+  string artist = 2;
+  string album = 3;
+  int32 year = 4;
+  repeated string genre = 5;
+  repeated Person director = 6;
+  string releasedate = 7;
+  int32 runtime = 8;
+  repeated MediaFile thumb = 9;
+}
+
+// Generic Video type
+message Video {
+  string title = 1;
+  string description = 2;
+  int32 runtime = 3;
+  string date = 4;
+  repeated string tag = 5;
+  repeated MediaFile thumb = 6;
+}
+
+// Library metadata
+message LibraryMetadata {
+  string type = 1;
+  map<string, string> properties = 2;
+}
+
+// Stats
+message Stats {
+  string type = 1;
+  map<string, string> values = 2;
+}
+
+// Additional types
+message Intro {
+  int32 start = 1;
+  int32 end = 2;
+}
+
+message Credits {
+  int32 start = 1;
+  int32 end = 2;
+}

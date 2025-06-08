@@ -1,0 +1,103 @@
+{
+  "type": "movie",
+  "movie": {
+    "title": "Inception",
+    "originaltitle": "Inception",
+    "sorttitle": "Inception",
+    "alternatetitle": ["Origem", "Début"],
+    "rating": [
+      {
+        "@name": "imdb",
+        "@max": "10",
+        "@default": "true",
+        "@value": "8.8",
+        "@votes": "2000000"
+      },
+      {
+        "@name": "tmdb",
+        "@max": "10",
+        "@value": "8.3",
+        "@votes": "20000"
+      }
+    ],
+    "userrating": "9.0",
+    "outline": "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O.",
+    "plot": "Dom Cobb is a skilled thief, the absolute best in the dangerous art of extraction: stealing valuable secrets from deep within the subconscious during the dream state when the mind is at its most vulnerable. Cobb's rare ability has made him a coveted player in this treacherous new world of corporate espionage, but it has also made him an international fugitive and cost him everything he has ever loved.",
+    "tagline": "Your mind is the scene of the crime.",
+    "runtime": 148,
+    "banner": {
+      "@type": "poster",
+      "@width": "300",
+      "@height": "450",
+      "@url": "http://example.com/inception-poster.jpg"
+    },
+    "thumb": {
+      "@type": "thumbnail",
+      "@width": "150",
+      "@height": "150",
+      "@url": "http://example.com/inception-thumb.jpg"
+    },
+    "fanart": {
+      "@type": "background",
+      "@width": "1920",
+      "@height": "1080",
+      "@url": "http://example.com/inception-fanart.jpg"
+    },
+    "contentrating": {
+      "@country": "USA",
+      "@board": "MPAA",
+      "@rating": "PG-13",
+      "@image": "mpaa_pg13.png"
+    },
+    "uniqueid": [
+      {
+        "@type": "imdb",
+        "@default": "true",
+        "#text": "tt1375666"
+      },
+      {
+        "@type": "tmdb",
+        "#text": "27205"
+      }
+    ],
+    "genre": ["Action", "Science Fiction", "Thriller"],
+    "tag": ["heist", "dream", "subconscious", "architecture"],
+    "country": ["USA", "UK"],
+    "productioncompany": ["Warner Bros.", "Legendary Pictures", "Syncopy"],
+    "keyword": ["dream", "heist", "subconscious", "reality"],
+    "releasedate": "2010-07-16",
+    "award": ["Academy Award for Best Cinematography", "Academy Award for Best Sound Editing"],
+    "actor": [
+      {
+        "name": "Leonardo DiCaprio",
+        "role": "Dom Cobb",
+        "order": 1,
+        "thumb": "leo.jpg",
+        "bio": "Leonardo Wilhelm DiCaprio is an American actor and film producer.",
+        "url": "https://www.imdb.com/name/nm0000138/"
+      },
+      {
+        "name": "Marion Cotillard",
+        "role": "Mal",
+        "order": 2,
+        "thumb": "marion.jpg"
+      },
+      {
+        "name": "Elliot Page",
+        "role": "Ariadne",
+        "order": 3,
+        "thumb": "elliot.jpg"
+      }
+    ],
+    "director": {
+      "name": "Christopher Nolan",
+      "thumb": "nolan.jpg",
+      "bio": "Christopher Edward Nolan is a British-American film director, screenwriter, and producer.",
+      "url": "https://www.imdb.com/name/nm0634240/"
+    },
+    "writer": {
+      "name": "Christopher Nolan",
+      "thumb": "nolan.jpg"
+    }
+  }
+}
