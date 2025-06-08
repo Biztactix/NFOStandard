@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<root xmlns="NFOStandard" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="NFOStandard https://xsd.nfostandard.com/main.xsd">
+<root xmlns="https://nfostandard.com/schema"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="https://nfostandard.com/schema https://xsd.nfostandard.com/main.xsd">
     <media>
         <tvshow>
             <title>Breaking Bad</title>
@@ -50,10 +52,6 @@
                 <order>3</order>
                 <thumb>anna_gunn.jpg</thumb>
             </actor>
-            <creator>
-                <name>Vince Gilligan</name>
-                <thumb>vince_gilligan.jpg</thumb>
-            </creator>
         </tvshow>
     </media>
 </root>
