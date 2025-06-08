@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NFO Standard Web Importer</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>NFO Standard Web Importer</h1>
+            <p>Import metadata from IMDB, TMDB, and TheTVDB to create NFO Standard files</p>
+        </header>
+
+        <main>
+            <div class="import-section">
+                <h2>Import Metadata</h2>
+                
+                <div class="tabs">
+                    <button class="tab-button active" onclick="switchTab('movie')">Movies</button>
+                    <button class="tab-button" onclick="switchTab('tvshow')">TV Shows</button>
+                </div>
+
+                <div id="movie-tab" class="tab-content active">
+                    <div class="input-group">
+                        <label for="movie-id">Enter Movie ID or URL:</label>
+                        <input type="text" id="movie-id" placeholder="tt0111161 or https://www.imdb.com/title/tt0111161/">
+                        <select id="movie-source">
+                            <option value="imdb">IMDB</option>
+                            <option value="tmdb">TMDB</option>
+                        </select>
+                        <button onclick="fetchMovie()" class="fetch-btn">Fetch Metadata</button>
+                    </div>
+                    
+                    <div class="search-group">
+                        <label>Or search by title:</label>
+                        <input type="text" id="movie-search" placeholder="The Shawshank Redemption">
+                        <button onclick="searchMovie()" class="search-btn">Search</button>
+                    </div>
+                </div>
+
+                <div id="tvshow-tab" class="tab-content">
+                    <div class="input-group">
+                        <label for="tv-id">Enter TV Show ID or URL:</label>
+                        <input type="text" id="tv-id" placeholder="121361 or https://thetvdb.com/series/game-of-thrones">
+                        <select id="tv-source">
+                            <option value="tvdb">TheTVDB</option>
+                            <option value="tmdb">TMDB</option>
+                            <option value="imdb">IMDB</option>
+                        </select>
+                        <button onclick="fetchTVShow()" class="fetch-btn">Fetch Metadata</button>
+                    </div>
+                    
+                    <div class="search-group">
+                        <label>Or search by title:</label>
+                        <input type="text" id="tv-search" placeholder="Game of Thrones">
+                        <button onclick="searchTVShow()" class="search-btn">Search</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="search-results" class="search-results" style="display: none;">
+                <h3>Search Results</h3>
+                <div id="results-list"></div>
+            </div>
+
+            <div id="loading" class="loading" style="display: none;">
+                <div class="spinner"></div>
+                <p>Fetching metadata...</p>
+            </div>
+
+            <div id="metadata-preview" class="metadata-preview" style="display: none;">
+                <h2>Metadata Preview</h2>
+                <div class="preview-header">
+                    <h3 id="preview-title"></h3>
+                    <div class="preview-actions">
+                        <button onclick="editMetadata()" class="edit-btn">Edit</button>
+                        <button onclick="downloadNFO()" class="download-btn">Download NFO</button>
+                        <button onclick="copyNFO()" class="copy-btn">Copy to Clipboard</button>
+                    </div>
+                </div>
+                <div id="preview-content" class="preview-content"></div>
+            </div>
+
+            <div id="metadata-editor" class="metadata-editor" style="display: none;">
+                <h2>Edit Metadata</h2>
+                <form id="editor-form">
+                    <div id="editor-fields"></div>
+                    <div class="editor-actions">
+                        <button type="button" onclick="saveMetadata()" class="save-btn">Save Changes</button>
+                        <button type="button" onclick="cancelEdit()" class="cancel-btn">Cancel</button>
+                    </div>
+                </form>
+            </div>
+
+            <div id="nfo-output" class="nfo-output" style="display: none;">
+                <h2>Generated NFO</h2>
+                <pre id="nfo-content"></pre>
+            </div>
+        </main>
+
+        <footer>
+            <p>NFO Standard Web Importer | <a href="https://nfostandard.com" target="_blank">NFO Standard Documentation</a></p>
+            <p class="api-note">This tool uses client-side API proxies to fetch metadata. For production use, implement server-side API calls.</p>
+        </footer>
+    </div>
+
+    <script src="config.js"></script>
+    <script src="importer-api.js"></script>
+    <script src="importer.js"></script>
+</body>
+</html>

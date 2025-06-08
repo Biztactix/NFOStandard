@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NFO Standard Web Importer - Examples</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .example-section {
+            background-color: var(--card-background);
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        
+        .example-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .example-card {
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .example-card:hover {
+            background-color: var(--background);
+            transform: translateY(-2px);
+        }
+        
+        .example-card h3 {
+            margin-bottom: 10px;
+            color: var(--secondary-color);
+        }
+        
+        .example-id {
+            font-family: monospace;
+            background-color: var(--background);
+            padding: 5px 10px;
+            border-radius: 3px;
+            display: inline-block;
+            margin-top: 10px;
+        }
+        
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>NFO Standard Web Importer - Examples</h1>
+            <p>Click on any example to load it in the importer</p>
+        </header>
+
+        <main>
+            <div class="example-section">
+                <h2>Popular Movies</h2>
+                <div class="example-grid">
+                    <div class="example-card" onclick="loadExample('movie', 'imdb', 'tt0111161')">
+                        <h3>The Shawshank Redemption</h3>
+                        <p>Classic drama about hope and redemption</p>
+                        <span class="example-id">IMDB: tt0111161</span>
+                    </div>
+                    
+                    <div class="example-card" onclick="loadExample('movie', 'tmdb', '603')">
+                        <h3>The Matrix</h3>
+                        <p>Groundbreaking sci-fi action film</p>
+                        <span class="example-id">TMDB: 603</span>
+                    </div>
+                    
+                    <div class="example-card" onclick="loadExample('movie', 'imdb', 'tt0068646')">
+                        <h3>The Godfather</h3>
+                        <p>Epic crime family saga</p>
+                        <span class="example-id">IMDB: tt0068646</span>
+                    </div>
+                    
+                    <div class="example-card" onclick="loadExample('movie', 'tmdb', '27205')">
+                        <h3>Inception</h3>
+                        <p>Mind-bending thriller</p>
+                        <span class="example-id">TMDB: 27205</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="example-section">
+                <h2>Popular TV Shows</h2>
+                <div class="example-grid">
+                    <div class="example-card" onclick="loadExample('tv', 'tvdb', '121361')">
+                        <h3>Game of Thrones</h3>
+                        <p>Epic fantasy series</p>
+                        <span class="example-id">TVDB: 121361</span>
+                    </div>
+                    
+                    <div class="example-card" onclick="loadExample('tv', 'tmdb', '1396')">
+                        <h3>Breaking Bad</h3>
+                        <p>Crime drama masterpiece</p>
+                        <span class="example-id">TMDB: 1396</span>
+                    </div>
+                    
+                    <div class="example-card" onclick="loadExample('tv', 'imdb', 'tt0903747')">
+                        <h3>Breaking Bad (via IMDB)</h3>
+                        <p>Same show, different source</p>
+                        <span class="example-id">IMDB: tt0903747</span>
+                    </div>
+                    
+                    <div class="example-card" onclick="loadExample('tv', 'tmdb', '1399')">
+                        <h3>Game of Thrones (via TMDB)</h3>
+                        <p>Alternative data source</p>
+                        <span class="example-id">TMDB: 1399</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="example-section">
+                <h2>URL Examples</h2>
+                <p>The importer also accepts full URLs:</p>
+                <ul>
+                    <li>IMDB: <code>https://www.imdb.com/title/tt0111161/</code></li>
+                    <li>TMDB Movie: <code>https://www.themoviedb.org/movie/603</code></li>
+                    <li>TMDB TV: <code>https://www.themoviedb.org/tv/1396</code></li>
+                    <li>TVDB: <code>https://thetvdb.com/series/game-of-thrones</code></li>
+                </ul>
+            </div>
+
+            <div class="example-section">
+                <h2>Search Examples</h2>
+                <p>Try searching for these titles:</p>
+                <ul>
+                    <li>"The Dark Knight" - Batman movie</li>
+                    <li>"The Office" - Popular comedy series</li>
+                    <li>"Stranger Things" - Netflix original</li>
+                    <li>"Lord of the Rings" - Epic fantasy trilogy</li>
+                </ul>
+            </div>
+
+            <div class="example-section">
+                <h2>NFO File Naming</h2>
+                <p>Recommended file naming conventions:</p>
+                <ul>
+                    <li><strong>Movies:</strong> <code>movie.nfo</code> or <code>[moviename].nfo</code></li>
+                    <li><strong>TV Shows:</strong> <code>tvshow.nfo</code> in the show's root folder</li>
+                    <li><strong>Episodes:</strong> <code>[episode-filename].nfo</code> next to video file</li>
+                </ul>
+            </div>
+        </main>
+
+        <footer>
+            <p><a href="index.html">Back to Importer</a> | <a href="https://nfostandard.com" target="_blank">NFO Standard Documentation</a></p>
+        </footer>
+    </div>
+
+    <script>
+        function loadExample(type, source, id) {
+            // Store example in sessionStorage
+            sessionStorage.setItem('example', JSON.stringify({
+                type: type,
+                source: source,
+                id: id
+            }));
+            
+            // Redirect to main importer
+            window.location.href = 'index.html';
+        }
+        
+        // Check if we were redirected from an example
+        window.addEventListener('DOMContentLoaded', () => {
+            const example = sessionStorage.getItem('example');
+            if (example && window.location.pathname.endsWith('index.html')) {
+                const data = JSON.parse(example);
+                sessionStorage.removeItem('example');
+                
+                // Load the example
+                setTimeout(() => {
+                    if (data.type === 'movie') {
+                        document.getElementById('movie-id').value = data.id;
+                        document.getElementById('movie-source').value = data.source;
+                        document.querySelector('.tab-button.active').click();
+                        document.querySelector('[onclick="fetchMovie()"]').click();
+                    } else {
+                        document.querySelectorAll('.tab-button')[1].click();
+                        document.getElementById('tv-id').value = data.id;
+                        document.getElementById('tv-source').value = data.source;
+                        document.querySelector('[onclick="fetchTVShow()"]').click();
+                    }
+                }, 500);
+            }
+        });
+    </script>
+</body>
+</html>
