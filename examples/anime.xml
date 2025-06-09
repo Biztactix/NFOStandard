@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root xmlns="NFOStandard" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="NFOStandard https://xsd.nfostandard.com/main.xsd">
+    <media>
+        <anime>
+            <title>Attack on Titan</title>
+            <releaseDate>2013-04-07</releaseDate>
+            <productionCompany>Wit Studio</productionCompany>
+            <genre>Action</genre>
+            <genre>Dark Fantasy</genre>
+            <genre>Post-Apocalyptic</genre>
+            <language>Japanese</language>
+            <language>English</language>
+            <season>4</season>
+            <episode>105</episode>
+            <duration>24</duration>
+            <isAdult>0</isAdult>
+            <director>
+                <name>Tetsuro Araki</name>
+            </director>
+            <voiceActor>
+                <name>Yoshimasa Hosoya</name>
+                <role>Reiner Braun</role>
+            </voiceActor>
+            <voiceActor>
+                <name>Marina Inoue</name>
+                <role>Armin Arlert</role>
+            </voiceActor>
+            <translationVoice>
+                <name>Bryce Papenbrook</name>
+                <role>Eren Yeager</role>
+            </translationVoice>
+            <keyword>titans</keyword>
+            <keyword>military</keyword>
+            <keyword>survival</keyword>
+            <keyword>mystery</keyword>
+            <tag>action</tag>
+            <tag>drama</tag>
+            <description>After his hometown is destroyed and his mother is killed, young Eren Yeager vows to cleanse the earth of the giant humanoid Titans that have brought humanity to the brink of extinction.</description>
+            <rating name="myanimelist" value="8.54" max="10" votes="2500000"/>
+            <rating name="anidb" value="8.65" max="10" votes="15000"/>
+            <uniqueId type="anidb">9541</uniqueId>
+            <uniqueId type="myanimelist">16498</uniqueId>
+            <uniqueId type="tvdb">267440</uniqueId>
+            <contentRating country="Japan" board="TV" rating="TV-MA" image="http://example.com/ratings/tv-ma.png"/>
+            <banner type="poster" width="680" height="1000" url="http://example.com/aot-poster.jpg"/>
+            <thumb type="landscape" width="1920" height="1080" url="http://example.com/aot-thumb.jpg"/>
+            <fanart type="background" width="1920" height="1080" url="http://example.com/aot-fanart.jpg"/>
+            <links>https://myanimelist.net/anime/16498</links>
+            <intro start="90" end="180">Opening sequence</intro>
+            <credits start="1350" end="1440">End credits</credits>
+            <chapter name="Opening" start="0" end="180">Episode opening</chapter>
+            <chapter name="Main Story" start="180" end="1350">Main content</chapter>
+            <chapter name="Ending" start="1350" end="1440">Episode ending</chapter>
+        </anime>
+    </media>
+</root>
