@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<root xmlns="NFOStandard" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="NFOStandard https://xsd.nfostandard.com/main.xsd">
+<root xmlns="NFOStandard" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="NFOStandard https://xsd.nfostandard.com/v2/main.xsd">
     <media>
         <podcast>
             <title>The Roman Empire's Greatest Mystery</title>
@@ -24,8 +24,8 @@
             <rating name="apple" value="4.8" max="5" votes="50000"/>
             <rating name="spotify" value="4.9" max="5" votes="75000"/>
             <uniqueId type="guid">hardcore-history-episode-75</uniqueId>
-            <contentRating country="USA" board="FCC" rating="G" image="http://example.com/ratings/fcc-g.png"/>
-            <cover type="cover" width="3000" height="3000" url="http://example.com/hardcore-history-cover.jpg"/>
+            <contentRating country="US" board="FCC"><rating>G</rating><image>http://example.com/ratings/fcc-g.png</image></contentRating>
+            <cover type="poster" width="3000" height="3000" url="http://example.com/hardcore-history-cover.jpg">Cover Image</cover>
             <serviceLinks>
                 <service>Spotify</service>
                 <url>https://open.spotify.com/episode/hardcore-history-75</url>

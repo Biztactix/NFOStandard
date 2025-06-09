@@ -1,21 +1,57 @@
 name: Validate Example NFO Files
 
+# Workflow Strategy:
+# - SchemaUpdate branch: Uses comprehensive local test framework (test_schemas.sh) for v2.0.0 development
+# - main/develop branches: Uses legacy remote validation for v1.x compatibility  
+# - Schema integrity: Always validates XSD syntax for all branches
+
 on:
   push:
-    branches: [ main, develop ]
+    branches: [ main, develop, SchemaUpdate ]
     paths:
       - '**.xml'
       - '**.xsd'
       - '.github/workflows/validate-examples.yml'
+      - 'tools/test_schemas.sh'
   pull_request:
     branches: [ main ]
     paths:
       - '**.xml'
       - '**.xsd'
+      - 'tools/test_schemas.sh'
 
 jobs:
+  # New comprehensive validation using our test framework
+  validate-with-test-framework:
+    runs-on: ubuntu-latest
+    if: contains(github.ref, 'SchemaUpdate') || contains(github.base_ref, 'SchemaUpdate')
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Install xmllint
+      run: sudo apt-get update && sudo apt-get install -y libxml2-utils
+    
+    - name: Make test script executable
+      run: chmod +x tools/test_schemas.sh
+    
+    - name: Run comprehensive schema validation
+      run: |
+        echo "🧪 Running NFOStandard v2.0.0 comprehensive validation..."
+        ./tools/test_schemas.sh
+    
+    - name: Upload test results
+      if: always()
+      uses: actions/upload-artifact@v3
+      with:
+        name: validation-results
+        path: test_output/
+        retention-days: 7
+
+  # Legacy validation for backward compatibility (v1.x and main branch)
   validate-nfo-files:
     runs-on: ubuntu-latest
+    if: "!contains(github.ref, 'SchemaUpdate') && !contains(github.base_ref, 'SchemaUpdate')"
     
     steps:
     - uses: actions/checkout@v3
@@ -156,9 +192,10 @@ jobs:
             sys.exit(main())
         EOF
     
-    - name: Validate example NFO files
+    - name: Validate example NFO files (v1.x)
       run: python validate_examples.py
 
+  # Schema integrity validation (runs for all branches)
   validate-schema-integrity:
     runs-on: ubuntu-latest
     

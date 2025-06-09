@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<root xmlns="NFOStandard" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="NFOStandard https://xsd.nfostandard.com/main.xsd">
+<root xmlns="NFOStandard" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="NFOStandard https://xsd.nfostandard.com/v2/main.xsd">
     <media>
         <audiobook>
             <title>The Hobbit</title>
@@ -25,11 +25,11 @@
             <tag>adventure</tag>
             <description>Bilbo Baggins is a hobbit who enjoys a comfortable, unambitious life, rarely traveling any farther than his pantry or cellar. But his contentment is disturbed when the wizard Gandalf and a company of dwarves arrive on his doorstep one day to whisk him away on an adventure.</description>
             <rating name="audible" value="4.7" max="5" votes="125000"/>
-            <rating name="goodreads" value="4.28" max="5" votes="3500000"/>
+            <rating name="goodreads" value="4.3" max="5" votes="3500000"/>
             <uniqueId type="isbn">9781402589263</uniqueId>
             <uniqueId type="asin">B009NQTXG0</uniqueId>
-            <contentRating country="USA" board="MPAA" rating="G" image="http://example.com/ratings/mpaa-g.png"/>
-            <cover type="front" width="500" height="500" url="http://example.com/hobbit-audiobook-cover.jpg"/>
+            <contentRating country="US" board="MPAA"><rating>G</rating><image>http://example.com/ratings/mpaa-g.png</image></contentRating>
+            <cover type="poster" width="500" height="500" url="http://example.com/hobbit-audiobook-cover.jpg">Cover Image</cover>
         </audiobook>
     </media>
 </root>

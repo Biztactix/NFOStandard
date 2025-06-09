@@ -18,18 +18,18 @@
             <xs:element name="episode" type="xs:integer" minOccurs="0" maxOccurs="1"/>
             <xs:element name="duration" type="xs:integer" minOccurs="0" maxOccurs="1"/>
             <xs:element name="isAdult" type="xs:integer" minOccurs="0" maxOccurs="1"/>
-            <xs:element name="director" type="personType" minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element name="voiceActor" type="personType" minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element name="translationVoice" type="personType" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="director" type="PersonType" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="voiceActor" type="PersonType" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="translationVoice" type="PersonType" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="keyword" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="tag" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="description" type="xs:string" minOccurs="0" maxOccurs="1"/>
-            <xs:element name="rating" type="ratingType" minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element name="uniqueId" type="uniqueidType" minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element name="contentRating" type="contentRatingType" minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element name="banner" minOccurs="0" maxOccurs="unbounded" type="subMediaType"/>
-            <xs:element name="thumb" minOccurs="0" maxOccurs="unbounded" type="subMediaType"/>
-            <xs:element name="fanart" minOccurs="0" maxOccurs="unbounded" type="subMediaType"/>
+            <xs:element name="rating" type="RatingType" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="uniqueId" type="UniqueIdType" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="contentRating" type="ContentRatingType" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="banner" minOccurs="0" maxOccurs="unbounded" type="MediaFileType"/>
+            <xs:element name="thumb" minOccurs="0" maxOccurs="unbounded" type="MediaFileType"/>
+            <xs:element name="fanart" minOccurs="0" maxOccurs="unbounded" type="MediaFileType"/>
             <xs:element name="links" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="intro" minOccurs="0" maxOccurs="1">
                 <xs:complexType>

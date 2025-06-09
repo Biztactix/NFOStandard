@@ -16,15 +16,15 @@
             <xs:element name="VideoURL" type="xs:string" minOccurs="0" maxOccurs="1"/>
             <xs:element name="TrailerURL" type="xs:string" minOccurs="0" maxOccurs="1"/>
             <xs:element name="duration" type="xs:integer" minOccurs="0" maxOccurs="1"/>
-            <xs:element name="director" type="personType"  minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element name="performer" type="personType"  minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="director" type="PersonType"  minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="performer" type="PersonType"  minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="keyword" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="tag" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="link" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="description" type="xs:string" minOccurs="0" maxOccurs="1"/>
-            <xs:element name="rating" type="ratingType" minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element name="uniqueId" type="uniqueidType" minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element name="thumbnail" type="subMediaType" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="rating" type="RatingType" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="uniqueId" type="UniqueIdType" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="thumbnail" type="MediaFileType" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
         </xs:complexType>
 </xs:schema>

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<root xmlns="NFOStandard" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="NFOStandard https://xsd.nfostandard.com/main.xsd">
+<root xmlns="NFOStandard" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="NFOStandard https://xsd.nfostandard.com/v2/main.xsd">
 <media>
     <podcast>
         <title>string</title>
@@ -25,13 +25,13 @@
         </host>
         <host>
             <name>string</name>
-            <order>3930</order>
+            <order>3</order>
             <thumb>string</thumb>
             <url>string</url>
             <url>string</url>
             <url>string</url>
             <url>string</url>
-            <gender>string</gender>
+            <gender>Unknown</gender>
             <tag>string</tag>
             <tag>string</tag>
             <tag>string</tag>
@@ -48,7 +48,7 @@
         </host>
         <guest >
             <name>string</name>
-            <order>2095</order>
+            <order>2</order>
             <bio>string</bio>
             <url>string</url>
             <tag>string</tag>
@@ -70,7 +70,7 @@
             <url>string</url>
             <url>string</url>
             <url>string</url>
-            <gender>string</gender>
+            <gender>Unknown</gender>
             <tag>string</tag>
             <tag>string</tag>
         </guest>
@@ -87,8 +87,16 @@
         <uniqueId type="string">string</uniqueId>
         <uniqueId type="string">string</uniqueId>
         <uniqueId type="string">string</uniqueId>
-        <contentRating country="string" board="string" rating="string" image="string">string</contentRating>
-        <contentRating country="string" board="string" rating="string" image="string">string</contentRating>
+        <contentRating country="US" board="FCC">
+            <rating>PG</rating>
+            <reason>General audience content</reason>
+            <image>http://example.com/ratings/fcc-pg.png</image>
+        </contentRating>
+        <contentRating country="CA" board="CRTC">
+            <rating>G</rating>
+            <reason>General audience content</reason>
+            <image>http://example.com/ratings/crtc-g.png</image>
+        </contentRating>
         <cover>string</cover>
     </podcast>
 </media>

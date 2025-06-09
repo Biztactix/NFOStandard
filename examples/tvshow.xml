@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<root xmlns="NFOStandard" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="NFOStandard https://xsd.nfostandard.com/main.xsd">
+<root xmlns="NFOStandard" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="NFOStandard https://xsd.nfostandard.com/v2/main.xsd">
 <media>
         <tvshow>
             <title>Breaking Bad</title>
@@ -12,9 +12,13 @@
             <episode>62</episode>
             <plot>Breaking Bad follows protagonist Walter White, a chemistry teacher who lives in New Mexico with his wife and teenage son who has cerebral palsy. White is diagnosed with Stage III cancer and given a prognosis of two years left to live. With a new sense of fearlessness based on his medical prognosis, and a desire to secure his family's financial security, White chooses to enter a dangerous world of drugs and crime and ascends to power in this world.</plot>
             <tagline>All Hail the King</tagline>
-            <thumb type="landscape">http://example.com/breakingbad-thumb.jpg</thumb>
-            <fanart>http://example.com/breakingbad-fanart.jpg</fanart>
-            <contentrating country="USA" board="TV" rating="TV-MA" image="http://example.com/ratings/tv-ma.png"/>
+            <thumb type="thumb" width="1920" height="1080" url="http://example.com/breakingbad-thumb.jpg">Breaking Bad Thumbnail</thumb>
+            <fanart type="fanart" width="1920" height="1080" url="http://example.com/breakingbad-fanart.jpg">Breaking Bad Fanart</fanart>
+            <contentrating country="US" board="TV">
+                <rating>TV-MA</rating>
+                <reason>Mature content and strong language</reason>
+                <image>http://example.com/ratings/tv-ma.png</image>
+            </contentrating>
             <uniqueid type="imdb" default="true">tt0903747</uniqueid>
             <uniqueid type="tvdb">81189</uniqueid>
             <uniqueid type="tmdb">1396</uniqueid>

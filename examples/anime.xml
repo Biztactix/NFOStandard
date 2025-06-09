@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<root xmlns="NFOStandard" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="NFOStandard https://xsd.nfostandard.com/main.xsd">
+<root xmlns="NFOStandard" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="NFOStandard https://xsd.nfostandard.com/v2/main.xsd">
     <media>
         <anime>
             <title>Attack on Titan</title>
@@ -36,15 +36,19 @@
             <tag>action</tag>
             <tag>drama</tag>
             <description>After his hometown is destroyed and his mother is killed, young Eren Yeager vows to cleanse the earth of the giant humanoid Titans that have brought humanity to the brink of extinction.</description>
-            <rating name="myanimelist" value="8.54" max="10" votes="2500000"/>
-            <rating name="anidb" value="8.65" max="10" votes="15000"/>
+            <rating name="myanimelist" value="8.5" max="10" votes="2500000"/>
+            <rating name="anidb" value="8.7" max="10" votes="15000"/>
             <uniqueId type="anidb">9541</uniqueId>
             <uniqueId type="myanimelist">16498</uniqueId>
             <uniqueId type="tvdb">267440</uniqueId>
-            <contentRating country="Japan" board="TV" rating="TV-MA" image="http://example.com/ratings/tv-ma.png"/>
-            <banner type="poster" width="680" height="1000" url="http://example.com/aot-poster.jpg"/>
-            <thumb type="landscape" width="1920" height="1080" url="http://example.com/aot-thumb.jpg"/>
-            <fanart type="background" width="1920" height="1080" url="http://example.com/aot-fanart.jpg"/>
+            <contentRating country="JP" board="TV">
+                <rating>TV-MA</rating>
+                <reason>Violence and strong language</reason>
+                <image>http://example.com/ratings/tv-ma.png</image>
+            </contentRating>
+            <banner type="banner" width="680" height="1000" url="http://example.com/aot-poster.jpg">Attack on Titan Poster</banner>
+            <thumb type="thumb" width="1920" height="1080" url="http://example.com/aot-thumb.jpg">Attack on Titan Thumbnail</thumb>
+            <fanart type="fanart" width="1920" height="1080" url="http://example.com/aot-fanart.jpg">Attack on Titan Fanart</fanart>
             <links>https://myanimelist.net/anime/16498</links>
             <intro start="90" end="180">Opening sequence</intro>
             <credits start="1350" end="1440">End credits</credits>

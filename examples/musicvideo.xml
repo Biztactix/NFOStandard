@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<root xmlns="NFOStandard" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="NFOStandard https://xsd.nfostandard.com/main.xsd">
+<root xmlns="NFOStandard" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="NFOStandard https://xsd.nfostandard.com/v2/main.xsd">
     <media>
         <musicvideo>
             <title>Bohemian Rhapsody</title>
@@ -32,8 +32,8 @@
             <rating name="imvdb" value="9.2" max="10" votes="15000"/>
             <uniqueId type="musicbrainz">b1c62d7f-3a15-4f7f-bb21-89a0b9c6e954</uniqueId>
             <uniqueId type="imvdb">573621</uniqueId>
-            <contentRating country="UK" board="BBFC" rating="U" image="http://example.com/ratings/bbfc-u.png"/>
-            <cover type="poster" width="1000" height="1000" url="http://example.com/bohemian-rhapsody-poster.jpg"/>
+            <contentRating country="UK" board="BBFC"><rating>U</rating><image>http://example.com/ratings/bbfc-u.png</image></contentRating>
+            <cover type="poster" width="1000" height="1000" url="http://example.com/bohemian-rhapsody-poster.jpg">Cover Image</cover>
             <serviceLinks>
                 <service>YouTube</service>
                 <url>https://www.youtube.com/watch?v=fJ9rUzIMcZQ</url>
