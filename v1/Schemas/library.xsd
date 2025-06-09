@@ -17,9 +17,9 @@
             <xs:element name="lastMetadataScan" type="xs:dateTime" minOccurs="0" maxOccurs="1"/>
             <xs:element name="lastChapterSearch" type="xs:dateTime" minOccurs="0" maxOccurs="1"/>
             <xs:element name="lastIntroSearch" type="xs:dateTime" minOccurs="0" maxOccurs="1"/>
-            <xs:element name="thumbnails" type="MediaFileType" minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element name="fanart" type="MediaFileType" minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element name="banner" type="MediaFileType" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="thumbnails" type="subMediaType" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="fanart" type="subMediaType" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="banner" type="subMediaType" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="internalLink" type="xs:string" minOccurs="0" maxOccurs="1"/>
             <xs:element name="externalLink" type="xs:string" minOccurs="0" maxOccurs="1"/>
             <xs:element name="tags" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>

@@ -16,7 +16,8 @@ NC='\033[0m' # No Color
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
 TEST_DIR="$PROJECT_ROOT/test_output"
-SCHEMAS_DIR="$PROJECT_ROOT/Schemas"
+V2_SCHEMAS_DIR="$PROJECT_ROOT/v2/Schemas"
+V2_MAIN_XSD="$PROJECT_ROOT/v2/main.xsd"
 EXAMPLES_DIR="$PROJECT_ROOT/examples"
 TESTS_DIR="$PROJECT_ROOT/tests"
 
@@ -36,9 +37,9 @@ mkdir -p "$TEST_DIR/tests"
 # Copy schema files and update URLs
 echo -e "${YELLOW}Copying and localizing schema files...${NC}"
 
-# Copy all XSD files
-cp "$PROJECT_ROOT/main.xsd" "$TEST_DIR/schemas/"
-cp "$SCHEMAS_DIR"/*.xsd "$TEST_DIR/schemas/"
+# Copy all XSD files from v2 directory
+cp "$V2_MAIN_XSD" "$TEST_DIR/schemas/"
+cp "$V2_SCHEMAS_DIR"/*.xsd "$TEST_DIR/schemas/"
 
 # Function to update schema URLs to local paths
 update_schema_urls() {
@@ -47,12 +48,12 @@ update_schema_urls() {
     
     echo "  Updating URLs in $filename"
     
-    # Update include statements to use local paths
+    # Update include statements to use local paths for v2
     sed -i 's|https://xsd\.nfostandard\.com/v2/Schemas/|./|g' "$file"
     sed -i 's|https://xsd\.nfostandard\.com/v2/main\.xsd|./main.xsd|g' "$file"
-    # Also handle legacy v1 URLs for backward compatibility testing
-    sed -i 's|https://xsd\.nfostandard\.com/Schemas/|./|g' "$file"
-    sed -i 's|https://xsd\.nfostandard\.com/main\.xsd|./main.xsd|g' "$file"
+    # Also handle v1 URLs for backward compatibility testing
+    sed -i 's|https://xsd\.nfostandard\.com/v1/Schemas/|./|g' "$file"
+    sed -i 's|https://xsd\.nfostandard\.com/v1/main\.xsd|./main.xsd|g' "$file"
 }
 
 # Update all schema files
@@ -86,12 +87,12 @@ update_example_schema_location() {
     
     echo "  Updating schema location in $filename"
     
-    # Update schema location to point to local test schemas
+    # Update schema location to point to local test schemas for v2
     sed -i 's|https://xsd\.nfostandard\.com/v2/main\.xsd|./schemas/main.xsd|g' "$file"
     sed -i 's|xsi:schemaLocation="NFOStandard https://xsd\.nfostandard\.com/v2/main\.xsd"|xsi:schemaLocation="NFOStandard ./schemas/main.xsd"|g' "$file"
-    # Also handle legacy v1 URLs for backward compatibility testing
-    sed -i 's|https://xsd\.nfostandard\.com/main\.xsd|./schemas/main.xsd|g' "$file"
-    sed -i 's|xsi:schemaLocation="NFOStandard https://xsd\.nfostandard\.com/main\.xsd"|xsi:schemaLocation="NFOStandard ./schemas/main.xsd"|g' "$file"
+    # Also handle v1 URLs for backward compatibility testing
+    sed -i 's|https://xsd\.nfostandard\.com/v1/main\.xsd|./schemas/main.xsd|g' "$file"
+    sed -i 's|xsi:schemaLocation="NFOStandard https://xsd\.nfostandard\.com/v1/main\.xsd"|xsi:schemaLocation="NFOStandard ./schemas/main.xsd"|g' "$file"
 }
 
 # Update all example files

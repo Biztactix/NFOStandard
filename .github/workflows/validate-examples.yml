@@ -208,13 +208,52 @@ jobs:
     - name: Validate XSD schemas
       run: |
         echo "Validating XSD schema files..."
-        for xsd in Schemas/*.xsd main.xsd; do
-          echo -n "Validating $xsd... "
-          if xmllint --noout "$xsd" 2>/dev/null; then
-            echo "✅ Valid"
-          else
-            echo "❌ Invalid"
-            xmllint --noout "$xsd"
-            exit 1
-          fi
-        done
+        
+        # Validate v1 schemas if they exist
+        if [ -d "v1" ]; then
+          echo "Validating v1 schemas..."
+          for xsd in v1/Schemas/*.xsd v1/main.xsd; do
+            if [ -f "$xsd" ]; then
+              echo -n "Validating $xsd... "
+              if xmllint --noout "$xsd" 2>/dev/null; then
+                echo "✅ Valid"
+              else
+                echo "❌ Invalid"
+                xmllint --noout "$xsd"
+                exit 1
+              fi
+            fi
+          done
+        fi
+        
+        # Validate v2 schemas if they exist
+        if [ -d "v2" ]; then
+          echo "Validating v2 schemas..."
+          for xsd in v2/Schemas/*.xsd v2/main.xsd; do
+            if [ -f "$xsd" ]; then
+              echo -n "Validating $xsd... "
+              if xmllint --noout "$xsd" 2>/dev/null; then
+                echo "✅ Valid"
+              else
+                echo "❌ Invalid"
+                xmllint --noout "$xsd"
+                exit 1
+              fi
+            fi
+          done
+        fi
+        
+        # Legacy validation for old structure (main branch compatibility)
+        if [ -f "main.xsd" ] && [ -d "Schemas" ]; then
+          echo "Validating legacy schema structure..."
+          for xsd in Schemas/*.xsd main.xsd; do
+            echo -n "Validating $xsd... "
+            if xmllint --noout "$xsd" 2>/dev/null; then
+              echo "✅ Valid"
+            else
+              echo "❌ Invalid"
+              xmllint --noout "$xsd"
+              exit 1
+            fi
+          done
+        fi

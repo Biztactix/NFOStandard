@@ -13,7 +13,7 @@
             <xs:element name="artist" type="xs:string" minOccurs="1" maxOccurs="1"/>
             <xs:element name="uniqueid" type="xs:string" minOccurs="0" maxOccurs="1"/>
             <xs:element name="url" type="xs:string" minOccurs="0" maxOccurs="1"/>
-            <xs:element name="cover" type="MediaFileType" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="cover" type="subMediaType" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
     </xs:complexType>
 
@@ -29,24 +29,24 @@
                         <xs:element name="artist" type="xs:string" minOccurs="1" maxOccurs="1"/>
                         <xs:element name="uniqueid" type="xs:string" minOccurs="0" maxOccurs="1"/>
                         <xs:element name="url" type="xs:string" minOccurs="0" maxOccurs="1"/>
-                        <xs:element name="cover" type="MediaFileType" minOccurs="0" maxOccurs="unbounded"/>
+                        <xs:element name="cover" type="subMediaType" minOccurs="0" maxOccurs="unbounded"/>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
             <xs:element name="productionCompany" type="xs:string" minOccurs="1" maxOccurs="1"/>
-            <xs:element name="producer" type="PersonType" minOccurs="1" maxOccurs="unbounded"/>
-            <xs:element name="writer" type="PersonType" minOccurs="1" maxOccurs="unbounded"/>
-            <xs:element name="artist" type="PersonType" minOccurs="1" maxOccurs="unbounded"/>
+            <xs:element name="producer" type="personType" minOccurs="1" maxOccurs="unbounded"/>
+            <xs:element name="writer" type="personType" minOccurs="1" maxOccurs="unbounded"/>
+            <xs:element name="artist" type="personType" minOccurs="1" maxOccurs="unbounded"/>
             <xs:element name="genre" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="duration" type="xs:integer" minOccurs="0" maxOccurs="1"/>
             <xs:element name="language" type="xs:string" minOccurs="0" maxOccurs="1"/>
             <xs:element name="keyword" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="tag" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="description" type="xs:string" minOccurs="0" maxOccurs="1"/>
-            <xs:element name="rating" type="RatingType" minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element name="uniqueId" type="UniqueIdType" minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element name="contentRating" type="ContentRatingType" minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element name="cover" type="MediaFileType" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="rating" type="ratingType" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="uniqueId" type="uniqueidType" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="contentRating" type="contentRatingType" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="cover" type="subMediaType" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="serviceLinks" minOccurs="0" maxOccurs="unbounded">
                 <xs:complexType>
                     <xs:sequence>

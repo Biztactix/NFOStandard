@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="NFOStandard"
+           xmlns="NFOStandard"
+           elementFormDefault="qualified">
+
+     <xs:complexType name="ratingType">
+        <xs:attribute name="value" type="xs:decimal" use="required"/>
+        <xs:attribute name="votes" type="xs:integer" use="optional"/>
+        <xs:attribute name="name" type="xs:string" use="required"/>
+        <xs:attribute name="max" type="xs:integer" use="optional" default="10"/>
+        <xs:attribute name="default" type="xs:boolean" use="optional"/>
+    </xs:complexType>
+
+    <xs:complexType name="uniqueidType">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="type" type="xs:string" use="required"/>
+                <xs:attribute name="default" type="xs:boolean" use="optional"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <xs:complexType name="contentRatingType">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="country" type="xs:string" use="required"/>
+                <xs:attribute name="board" type="xs:string" use="required"/>
+                <xs:attribute name="rating" type="xs:string" use="required"/>
+                <xs:attribute name="image" type="xs:string" use="required"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <xs:complexType name="subMediaType">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="type" type="xs:string" use="optional"/>
+                <xs:attribute name="width" type="xs:integer" use="optional"/>
+                <xs:attribute name="height" type="xs:integer" use="optional"/>
+                <xs:attribute name="url" type="xs:string" use="optional"/>
+                <xs:attribute name="extUrl" type="xs:string" use="optional"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+</xs:schema>

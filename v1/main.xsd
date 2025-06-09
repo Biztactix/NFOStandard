@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+           targetNamespace="NFOStandard" 
+           xmlns="NFOStandard"
+           elementFormDefault="qualified">
+    
+    <!-- Import the common XSDs -->
+    <xs:include schemaLocation="https://xsd.nfostandard.com/v1/Schemas/common.xsd"/>
+    <xs:include schemaLocation="https://xsd.nfostandard.com/v1/Schemas/person.xsd"/>
+    <xs:include schemaLocation="https://xsd.nfostandard.com/v1/Schemas/library.xsd"/>
+
+    <!-- Import specific XSDs for different types of content -->
+    <xs:include schemaLocation="https://xsd.nfostandard.com/v1/Schemas/movie.xsd"/>
+    <xs:include schemaLocation="https://xsd.nfostandard.com/v1/Schemas/tvshow.xsd"/>
+    <xs:include schemaLocation="https://xsd.nfostandard.com/v1/Schemas/adult.xsd"/>
+    <xs:include schemaLocation="https://xsd.nfostandard.com/v1/Schemas/anime.xsd"/>
+    <xs:include schemaLocation="https://xsd.nfostandard.com/v1/Schemas/video.xsd"/>
+    <xs:include schemaLocation="https://xsd.nfostandard.com/v1/Schemas/music.xsd"/>
+    <xs:include schemaLocation="https://xsd.nfostandard.com/v1/Schemas/audiobook.xsd"/>
+    <xs:include schemaLocation="https://xsd.nfostandard.com/v1/Schemas/podcast.xsd"/>
+    <xs:include schemaLocation="https://xsd.nfostandard.com/v1/Schemas/musicvideo.xsd"/>
+
+    <!-- Define the root element and specify type based on content -->
+	 <xs:element name="root" xmlns="NFOStandard">
+        <xs:complexType>
+            <xs:sequence>
+				<xs:element name="media" minOccurs="1" maxOccurs="1">
+					<xs:complexType>
+						<xs:choice>
+							<xs:element name="movie" type="movieType"/>
+							<xs:element name="tvshow" type="tvshowType"/>
+							<xs:element name="adult" type="adultType"/>
+							<xs:element name="anime" type="animeType"/>
+							<xs:element name="video" type="videoType"/>
+							<xs:element name="music" type="musicType"/>
+							<xs:element name="audiobook" type="audiobookType"/>
+							<xs:element name="podcast" type="podcastType" />
+							<xs:element name="musicvideo" type="musicVideoType"/>
+						</xs:choice>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="library" type="metadataType" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element name="stats" type="statsType" minOccurs="0" maxOccurs="unbounded"/>
+	        </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

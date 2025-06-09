@@ -4,8 +4,8 @@
             xmlns="NFOStandard"         
            xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
-    <xs:include schemaLocation="https://xsd.nfostandard.com/Schemas/common.xsd"/>
-    <xs:include schemaLocation="https://xsd.nfostandard.com/Schemas/person.xsd"/>
+    <xs:include schemaLocation="https://xsd.nfostandard.com/v2/Schemas/common.xsd"/>
+    <xs:include schemaLocation="https://xsd.nfostandard.com/v2/Schemas/person.xsd"/>
 
     <xs:complexType name="musicVideoType">
         <xs:sequence>
