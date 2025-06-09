@@ -24,7 +24,7 @@ jobs:
   # New comprehensive validation using our test framework
   validate-with-test-framework:
     runs-on: ubuntu-latest
-    if: contains(github.ref, 'SchemaUpdate') || contains(github.base_ref, 'SchemaUpdate')
+    if: github.ref == 'refs/heads/SchemaUpdate' || github.base_ref == 'SchemaUpdate'
     
     steps:
     - uses: actions/checkout@v4
@@ -51,7 +51,7 @@ jobs:
   # Legacy validation for backward compatibility (v1.x and main branch)
   validate-nfo-files:
     runs-on: ubuntu-latest
-    if: "!contains(github.ref, 'SchemaUpdate') && !contains(github.base_ref, 'SchemaUpdate')"
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop'
     
     steps:
     - uses: actions/checkout@v4
