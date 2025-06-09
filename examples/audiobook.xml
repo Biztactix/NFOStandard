@@ -3,39 +3,33 @@
     <media>
         <audiobook>
             <title>The Hobbit</title>
-            <subtitle>Or There and Back Again</subtitle>
-            <author>J.R.R. Tolkien</author>
-            <narrator>Rob Inglis</narrator>
-            <publisher>Recorded Books</publisher>
-            <year>2012</year>
-            <genre>Fantasy</genre>
-            <genre>Adventure</genre>
-            <genre>Classic</genre>
-            <description>Bilbo Baggins is a hobbit who enjoys a comfortable, unambitious life, rarely traveling any farther than his pantry or cellar. But his contentment is disturbed when the wizard Gandalf and a company of dwarves arrive on his doorstep one day to whisk him away on an adventure. They have launched a plot to raid the treasure hoard guarded by Smaug the Magnificent, a large and very dangerous dragon. Bilbo reluctantly joins their quest, unaware that on his journey to the Lonely Mountain he will encounter both a magic ring and a frightening creature known as Gollum.</description>
-            <runtime>665</runtime>
-            <language>English</language>
+            <releaseDate>2012-09-18</releaseDate>
+            <productionCompany>Recorded Books</productionCompany>
             <isbn>9781402589263</isbn>
-            <isbn13>978-1402589263</isbn13>
-            <asin>B009NQTXG0</asin>
-            <cover type="front" width="500" height="500" url="http://example.com/hobbit-audiobook-cover.jpg"/>
-            <thumb type="thumbnail" width="150" height="150" url="http://example.com/hobbit-audiobook-thumb.jpg"/>
+            <duration>39900</duration>
+            <language>English</language>
+            <genre>Fantasy</genre>
+            <writer>
+                <name>J.R.R. Tolkien</name>
+            </writer>
+            <voiceActor>
+                <name>Rob Inglis</name>
+                <role>Narrator</role>
+            </voiceActor>
+            <keyword>dragons</keyword>
+            <keyword>adventure</keyword>
+            <keyword>magic</keyword>
+            <keyword>quest</keyword>
+            <tag>classic</tag>
+            <tag>fantasy</tag>
+            <tag>adventure</tag>
+            <description>Bilbo Baggins is a hobbit who enjoys a comfortable, unambitious life, rarely traveling any farther than his pantry or cellar. But his contentment is disturbed when the wizard Gandalf and a company of dwarves arrive on his doorstep one day to whisk him away on an adventure.</description>
             <rating name="audible" value="4.7" max="5" votes="125000"/>
             <rating name="goodreads" value="4.28" max="5" votes="3500000"/>
-            <userrating>9.5</userrating>
-            <format>MP3</format>
-            <bitrate>128</bitrate>
-            <samplerate>44100</samplerate>
-            <channels>2</channels>
-            <releasedate>2012-09-18</releasedate>
-            <series>Middle-earth Universe</series>
-            <seriesnumber>0</seriesnumber>
-            <tag>dragons</tag>
-            <tag>adventure</tag>
-            <tag>magic</tag>
-            <tag>quest</tag>
-            <copyright>© 1937, 1951, 1966, 1978, 1995 by The J.R.R. Tolkien Copyright Trust</copyright>
-            <edition>Unabridged</edition>
-            <chapters>19</chapters>
+            <uniqueId type="isbn">9781402589263</uniqueId>
+            <uniqueId type="asin">B009NQTXG0</uniqueId>
+            <contentRating country="USA" board="MPAA" rating="G" image="http://example.com/ratings/mpaa-g.png"/>
+            <cover type="front" width="500" height="500" url="http://example.com/hobbit-audiobook-cover.jpg"/>
         </audiobook>
     </media>
 </root>
