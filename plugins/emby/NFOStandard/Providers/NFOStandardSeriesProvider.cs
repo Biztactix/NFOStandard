@@ -1,14 +1,18 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using MediaBrowser.Controller.Entities;
 using MediaBrowser.Controller.Entities.TV;
+using MediaBrowser.Controller.Library;
 using MediaBrowser.Controller.Providers;
 using MediaBrowser.Model.Entities;
 using MediaBrowser.Model.IO;
 using MediaBrowser.Model.Logging;
+using MediaBrowser.Model.Configuration;
 
 namespace NFOStandard.Providers
 {
@@ -19,17 +23,19 @@ namespace NFOStandard.Providers
     {
         private readonly ILogger _logger;
         private readonly IFileSystem _fileSystem;
+        private readonly ILibraryManager _libraryManager;
         private const string NFONamespace = "NFOStandard";
 
         public string Name => "NFO Standard";
 
-        public NFOStandardSeriesProvider(ILogger logger, IFileSystem fileSystem)
+        public NFOStandardSeriesProvider(ILogger logger, IFileSystem fileSystem, ILibraryManager libraryManager)
         {
             _logger = logger;
             _fileSystem = fileSystem;
+            _libraryManager = libraryManager;
         }
 
-        public Task<MetadataResult<Series>> GetMetadata(ItemInfo info, IDirectoryService directoryService, CancellationToken cancellationToken)
+        public Task<MetadataResult<Series>> GetMetadata(ItemInfo info, LibraryOptions libraryOptions, IDirectoryService directoryService, CancellationToken cancellationToken)
         {
             var result = new MetadataResult<Series>();
             
@@ -59,7 +65,7 @@ namespace NFOStandard.Providers
                 if (tvshowElement != null)
                 {
                     var series = new Series();
-                    ParseSeriesElement(series, tvshowElement);
+                    ParseSeriesElement(series, tvshowElement, result);
                     
                     result.HasMetadata = true;
                     result.Item = series;
@@ -73,7 +79,7 @@ namespace NFOStandard.Providers
             return Task.FromResult(result);
         }
 
-        private void ParseSeriesElement(Series series, XElement tvshowElement)
+        private void ParseSeriesElement(Series series, XElement tvshowElement, MetadataResult<Series> result)
         {
             // Title
             series.Name = GetElementValue(tvshowElement, "title");
@@ -151,7 +157,7 @@ namespace NFOStandard.Providers
             }
 
             // People
-            ParsePeople(series, tvshowElement);
+            ParsePeople(series, tvshowElement, result);
 
             // Premiered date
             var premieredStr = GetElementValue(tvshowElement, "premiered");
@@ -206,13 +212,30 @@ namespace NFOStandard.Providers
             }
         }
 
-        private void ParsePeople(Series series, XElement tvshowElement)
+        private void ParsePeople(Series series, XElement tvshowElement, MetadataResult<Series> result)
         {
-            var people = new System.Collections.Generic.List<PersonInfo>();
+            var config = NFOStandardPlugin.Instance?.Configuration;
+            if (config != null && !config.EnablePeopleExtraction)
+            {
+                return;
+            }
+
+            var people = new List<PersonInfo>();
+            var maxActors = config?.MaxActors ?? 50;
+            var actorCount = 0;
 
             // Actors
             foreach (var actor in tvshowElement.Elements("actor"))
             {
+                if (actorCount >= maxActors)
+                {
+                    if (config?.EnableDetailedLogging == true)
+                    {
+                        _logger.Debug($"Reached maximum actor limit ({maxActors}) for series: {series.Name}");
+                    }
+                    break;
+                }
+
                 var person = new PersonInfo
                 {
                     Name = GetElementValue(actor, "name"),
@@ -220,15 +243,33 @@ namespace NFOStandard.Providers
                     Type = PersonType.Actor
                 };
 
+                // Handle actor order/sort
                 var orderStr = GetElementValue(actor, "order");
                 if (int.TryParse(orderStr, out var order))
                 {
-                    person.SortOrder = order;
+                    // SortOrder not available in Emby 4.8, but we preserve the data
+                    if (config?.EnableDetailedLogging == true)
+                    {
+                        _logger.Debug($"Actor {person.Name} has order {order} (preserved for future use)");
+                    }
+                }
+
+                // Handle actor thumb/image
+                var thumb = GetElementValue(actor, "thumb");
+                if (!string.IsNullOrWhiteSpace(thumb))
+                {
+                    person.ImageUrl = thumb;
                 }
 
                 if (!string.IsNullOrWhiteSpace(person.Name))
                 {
                     people.Add(person);
+                    actorCount++;
+
+                    if (config?.EnableDetailedLogging == true)
+                    {
+                        _logger.Debug($"Added actor: {person.Name} as {person.Role ?? "[Unknown Role]"}");
+                    }
                 }
             }
 
@@ -238,17 +279,91 @@ namespace NFOStandard.Providers
                 var name = GetElementValue(creator, "name");
                 if (!string.IsNullOrWhiteSpace(name))
                 {
-                    people.Add(new PersonInfo
+                    var person = new PersonInfo
+                    {
+                        Name = name,
+                        Type = PersonType.Producer // Creators are treated as producers in Emby
+                    };
+
+                    // Handle creator thumb/image
+                    var thumb = GetElementValue(creator, "thumb");
+                    if (!string.IsNullOrWhiteSpace(thumb))
+                    {
+                        person.ImageUrl = thumb;
+                    }
+
+                    people.Add(person);
+
+                    if (config?.EnableDetailedLogging == true)
+                    {
+                        _logger.Debug($"Added creator: {name}");
+                    }
+                }
+            }
+
+            // Directors (for series-level directors)
+            foreach (var director in tvshowElement.Elements("director"))
+            {
+                var name = GetElementValue(director, "name");
+                if (!string.IsNullOrWhiteSpace(name))
+                {
+                    var person = new PersonInfo
+                    {
+                        Name = name,
+                        Type = PersonType.Director
+                    };
+
+                    // Handle director thumb/image
+                    var thumb = GetElementValue(director, "thumb");
+                    if (!string.IsNullOrWhiteSpace(thumb))
+                    {
+                        person.ImageUrl = thumb;
+                    }
+
+                    people.Add(person);
+
+                    if (config?.EnableDetailedLogging == true)
+                    {
+                        _logger.Debug($"Added director: {name}");
+                    }
+                }
+            }
+
+            // Producers
+            foreach (var producer in tvshowElement.Elements("producer"))
+            {
+                var name = GetElementValue(producer, "name");
+                if (!string.IsNullOrWhiteSpace(name))
+                {
+                    var person = new PersonInfo
                     {
                         Name = name,
                         Type = PersonType.Producer
-                    });
+                    };
+
+                    // Handle producer thumb/image
+                    var thumb = GetElementValue(producer, "thumb");
+                    if (!string.IsNullOrWhiteSpace(thumb))
+                    {
+                        person.ImageUrl = thumb;
+                    }
+
+                    people.Add(person);
+
+                    if (config?.EnableDetailedLogging == true)
+                    {
+                        _logger.Debug($"Added producer: {name}");
+                    }
                 }
             }
 
             if (people.Any())
             {
-                series.People = people.ToArray();
+                // Store people in MetadataResult.People for Emby to process
+                // The people will be handled by Emby's people management system
+                result.People = people;
+
+                _logger.Info($"Loaded {people.Count} people for series: {series.Name} (Actors: {actorCount}, Creators: {people.Count(p => p.Type == PersonType.Producer)}, Directors: {people.Count(p => p.Type == PersonType.Director)})");
             }
         }
 
@@ -284,16 +399,16 @@ namespace NFOStandard.Providers
                     switch (type.ToLowerInvariant())
                     {
                         case "imdb":
-                            series.ProviderIds[MetadataProviders.Imdb.ToString()] = value;
+                            series.SetProviderId(MetadataProviders.Imdb, value);
                             break;
                         case "tvdb":
-                            series.ProviderIds[MetadataProviders.Tvdb.ToString()] = value;
+                            series.SetProviderId(MetadataProviders.Tvdb, value);
                             break;
                         case "tmdb":
-                            series.ProviderIds[MetadataProviders.Tmdb.ToString()] = value;
+                            series.SetProviderId(MetadataProviders.Tmdb, value);
                             break;
                         default:
-                            series.ProviderIds[type] = value;
+                            series.SetProviderId(type, value);
                             break;
                     }
                 }
@@ -321,7 +436,7 @@ namespace NFOStandard.Providers
             return null;
         }
 
-        public bool HasChanged(BaseItem item, IDirectoryService directoryService)
+        public bool HasChanged(BaseItem item, LibraryOptions libraryOptions, IDirectoryService directoryService)
         {
             var nfoPath = GetNfoPath(item.Path);
             if (string.IsNullOrEmpty(nfoPath))

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PluginManifest xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <guid>e4a0e5a6-7c8b-4f86-a916-7e3c89552289</guid>
+  <name>NFO Standard Metadata</name>
+  <description>Read and write metadata using the NFO Standard format</description>
+  <overview>This plugin enables Emby/Jellyfin to read and write NFO files following the NFO Standard specification, providing enhanced metadata support and compatibility.</overview>
+  <owner>NFO Standard Contributors</owner>
+  <category>Metadata</category>
+  <imageUrl>https://nfostandard.com/logo.png</imageUrl>
+  <versions>
+    <version>
+      <version>1.0.0.0</version>
+      <changelog>Initial release with support for movies and TV shows</changelog>
+      <targetAbi>10.8.0.0</targetAbi>
+      <sourceUrl>https://github.com/Biztactix/NFOStandard/releases/download/v1.0.0/NFOStandard.dll</sourceUrl>
+      <checksum></checksum>
+      <timestamp>2025-06-09T00:00:00Z</timestamp>
+    </version>
+  </versions>
+</PluginManifest>

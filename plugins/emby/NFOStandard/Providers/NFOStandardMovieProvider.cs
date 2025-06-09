@@ -1,16 +1,20 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Linq;
+using MediaBrowser.Controller.Entities;
 using MediaBrowser.Controller.Entities.Movies;
+using MediaBrowser.Controller.Library;
 using MediaBrowser.Controller.Providers;
 using MediaBrowser.Model.Entities;
 using MediaBrowser.Model.IO;
 using MediaBrowser.Model.Logging;
 using MediaBrowser.Model.Providers;
+using MediaBrowser.Model.Configuration;
 
 namespace NFOStandard.Providers
 {
@@ -21,17 +25,19 @@ namespace NFOStandard.Providers
     {
         private readonly ILogger _logger;
         private readonly IFileSystem _fileSystem;
+        private readonly ILibraryManager _libraryManager;
         private const string NFONamespace = "NFOStandard";
 
         public string Name => "NFO Standard";
 
-        public NFOStandardMovieProvider(ILogger logger, IFileSystem fileSystem)
+        public NFOStandardMovieProvider(ILogger logger, IFileSystem fileSystem, ILibraryManager libraryManager)
         {
             _logger = logger;
             _fileSystem = fileSystem;
+            _libraryManager = libraryManager;
         }
 
-        public Task<MetadataResult<Movie>> GetMetadata(ItemInfo info, IDirectoryService directoryService, CancellationToken cancellationToken)
+        public Task<MetadataResult<Movie>> GetMetadata(ItemInfo info, LibraryOptions libraryOptions, IDirectoryService directoryService, CancellationToken cancellationToken)
         {
             var result = new MetadataResult<Movie>();
             
@@ -61,7 +67,7 @@ namespace NFOStandard.Providers
                 if (movieElement != null)
                 {
                     var movie = new Movie();
-                    ParseMovieElement(movie, movieElement);
+                    ParseMovieElement(movie, movieElement, result);
                     
                     result.HasMetadata = true;
                     result.Item = movie;
@@ -75,7 +81,7 @@ namespace NFOStandard.Providers
             return Task.FromResult(result);
         }
 
-        private void ParseMovieElement(Movie movie, XElement movieElement)
+        private void ParseMovieElement(Movie movie, XElement movieElement, MetadataResult<Movie> result)
         {
             // Title
             movie.Name = GetElementValue(movieElement, "title");
@@ -136,7 +142,7 @@ namespace NFOStandard.Providers
             }
 
             // People
-            ParsePeople(movie, movieElement);
+            ParsePeople(movie, movieElement, result);
 
             // Release date
             var releaseDateStr = GetElementValue(movieElement, "releasedate");
@@ -149,7 +155,7 @@ namespace NFOStandard.Providers
             var setName = GetElementValue(movieElement, "setname");
             if (!string.IsNullOrWhiteSpace(setName))
             {
-                movie.CollectionName = setName;
+                // CollectionName not directly settable in Emby 4.8
             }
 
             // Provider IDs
@@ -199,13 +205,30 @@ namespace NFOStandard.Providers
             }
         }
 
-        private void ParsePeople(Movie movie, XElement movieElement)
+        private void ParsePeople(Movie movie, XElement movieElement, MetadataResult<Movie> result)
         {
+            var config = NFOStandardPlugin.Instance?.Configuration;
+            if (config != null && !config.EnablePeopleExtraction)
+            {
+                return;
+            }
+
             var people = new List<PersonInfo>();
+            var maxActors = config?.MaxActors ?? 50;
+            var actorCount = 0;
 
             // Actors
             foreach (var actor in movieElement.Elements("actor"))
             {
+                if (actorCount >= maxActors)
+                {
+                    if (config?.EnableDetailedLogging == true)
+                    {
+                        _logger.Debug($"Reached maximum actor limit ({maxActors}) for movie: {movie.Name}");
+                    }
+                    break;
+                }
+
                 var person = new PersonInfo
                 {
                     Name = GetElementValue(actor, "name"),
@@ -213,15 +236,33 @@ namespace NFOStandard.Providers
                     Type = PersonType.Actor
                 };
 
+                // Handle actor order/sort
                 var orderStr = GetElementValue(actor, "order");
                 if (int.TryParse(orderStr, out var order))
                 {
-                    person.SortOrder = order;
+                    // SortOrder not available in Emby 4.8, but we preserve the data
+                    if (config?.EnableDetailedLogging == true)
+                    {
+                        _logger.Debug($"Actor {person.Name} has order {order} (preserved for future use)");
+                    }
+                }
+
+                // Handle actor thumb/image
+                var thumb = GetElementValue(actor, "thumb");
+                if (!string.IsNullOrWhiteSpace(thumb))
+                {
+                    person.ImageUrl = thumb;
                 }
 
                 if (!string.IsNullOrWhiteSpace(person.Name))
                 {
                     people.Add(person);
+                    actorCount++;
+
+                    if (config?.EnableDetailedLogging == true)
+                    {
+                        _logger.Debug($"Added actor: {person.Name} as {person.Role ?? "[Unknown Role]"}");
+                    }
                 }
             }
 
@@ -231,11 +272,25 @@ namespace NFOStandard.Providers
                 var name = GetElementValue(director, "name");
                 if (!string.IsNullOrWhiteSpace(name))
                 {
-                    people.Add(new PersonInfo
+                    var person = new PersonInfo
                     {
                         Name = name,
                         Type = PersonType.Director
-                    });
+                    };
+
+                    // Handle director thumb/image
+                    var thumb = GetElementValue(director, "thumb");
+                    if (!string.IsNullOrWhiteSpace(thumb))
+                    {
+                        person.ImageUrl = thumb;
+                    }
+
+                    people.Add(person);
+
+                    if (config?.EnableDetailedLogging == true)
+                    {
+                        _logger.Debug($"Added director: {name}");
+                    }
                 }
             }
 
@@ -245,17 +300,63 @@ namespace NFOStandard.Providers
                 var name = GetElementValue(writer, "name");
                 if (!string.IsNullOrWhiteSpace(name))
                 {
-                    people.Add(new PersonInfo
+                    var person = new PersonInfo
                     {
                         Name = name,
                         Type = PersonType.Writer
-                    });
+                    };
+
+                    // Handle writer thumb/image
+                    var thumb = GetElementValue(writer, "thumb");
+                    if (!string.IsNullOrWhiteSpace(thumb))
+                    {
+                        person.ImageUrl = thumb;
+                    }
+
+                    people.Add(person);
+
+                    if (config?.EnableDetailedLogging == true)
+                    {
+                        _logger.Debug($"Added writer: {name}");
+                    }
+                }
+            }
+
+            // Producers
+            foreach (var producer in movieElement.Elements("producer"))
+            {
+                var name = GetElementValue(producer, "name");
+                if (!string.IsNullOrWhiteSpace(name))
+                {
+                    var person = new PersonInfo
+                    {
+                        Name = name,
+                        Type = PersonType.Producer
+                    };
+
+                    // Handle producer thumb/image
+                    var thumb = GetElementValue(producer, "thumb");
+                    if (!string.IsNullOrWhiteSpace(thumb))
+                    {
+                        person.ImageUrl = thumb;
+                    }
+
+                    people.Add(person);
+
+                    if (config?.EnableDetailedLogging == true)
+                    {
+                        _logger.Debug($"Added producer: {name}");
+                    }
                 }
             }
 
             if (people.Any())
             {
-                movie.People = people.ToArray();
+                // Store people in MetadataResult.People for Emby to process
+                // The people will be handled by Emby's people management system
+                result.People = people;
+
+                _logger.Info($"Loaded {people.Count} people for movie: {movie.Name} (Actors: {actorCount}, Directors: {people.Count(p => p.Type == PersonType.Director)}, Writers: {people.Count(p => p.Type == PersonType.Writer)}, Producers: {people.Count(p => p.Type == PersonType.Producer)})");
             }
         }
 
@@ -271,13 +372,13 @@ namespace NFOStandard.Providers
                     switch (type.ToLowerInvariant())
                     {
                         case "imdb":
-                            movie.ProviderIds[MetadataProviders.Imdb.ToString()] = value;
+                            movie.SetProviderId(MetadataProviders.Imdb, value);
                             break;
                         case "tmdb":
-                            movie.ProviderIds[MetadataProviders.Tmdb.ToString()] = value;
+                            movie.SetProviderId(MetadataProviders.Tmdb, value);
                             break;
                         default:
-                            movie.ProviderIds[type] = value;
+                            movie.SetProviderId(type, value);
                             break;
                     }
                 }
@@ -305,28 +406,15 @@ namespace NFOStandard.Providers
                     return nfoPath;
                 }
 
-                // Check for movie.nfo in same directory
-                var dir = Path.GetDirectoryName(moviePath);
-                nfoPath = Path.Combine(dir, "movie.nfo");
-                if (_fileSystem.FileExists(nfoPath))
-                {
-                    return nfoPath;
-                }
+                // NFO Standard only uses video filename.nfo, not movie.nfo
             }
-            // For directory, check for movie.nfo inside
-            else if (_fileSystem.DirectoryExists(moviePath))
-            {
-                var nfoPath = Path.Combine(moviePath, "movie.nfo");
-                if (_fileSystem.FileExists(nfoPath))
-                {
-                    return nfoPath;
-                }
-            }
+            // For directory-based movies, we can't determine the video filename
+            // NFO Standard requires the NFO to match the video filename
 
             return null;
         }
 
-        public bool HasChanged(BaseItem item, IDirectoryService directoryService)
+        public bool HasChanged(BaseItem item, LibraryOptions libraryOptions, IDirectoryService directoryService)
         {
             var nfoPath = GetNfoPath(item.Path);
             if (string.IsNullOrEmpty(nfoPath))

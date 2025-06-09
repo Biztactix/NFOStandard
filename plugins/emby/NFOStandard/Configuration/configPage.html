@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>NFO Standard</title>
+</head>
+<body>
+    <div id="nfoStandardConfigPage" data-role="page" class="page type-interior pluginConfigurationPage" data-require="emby-input,emby-button,emby-checkbox,emby-select">
+        <div data-role="content">
+            <div class="content-primary">
+                <form id="nfoStandardConfigForm">
+                    <div class="sectionTitleContainer">
+                        <h2 class="sectionTitle">NFO Standard Settings</h2>
+                    </div>
+                    <div class="verticalSection">
+                        <p>This plugin enables reading and writing metadata in the NFO Standard format.</p>
+                        
+                        <div class="checkboxContainer">
+                            <label>
+                                <input is="emby-checkbox" type="checkbox" id="chkEnableMovies" />
+                                <span>Enable for Movies</span>
+                            </label>
+                        </div>
+                        
+                        <div class="checkboxContainer">
+                            <label>
+                                <input is="emby-checkbox" type="checkbox" id="chkEnableTvShows" />
+                                <span>Enable for TV Shows</span>
+                            </label>
+                        </div>
+                        
+                        <div class="checkboxContainer">
+                            <label>
+                                <input is="emby-checkbox" type="checkbox" id="chkEnableEpisodes" />
+                                <span>Enable for Episodes</span>
+                            </label>
+                        </div>
+                        
+                        <br />
+                        
+                        <div class="checkboxContainer">
+                            <label>
+                                <input is="emby-checkbox" type="checkbox" id="chkSaveMetadata" />
+                                <span>Save metadata to NFO files</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="verticalSection">
+                        <h3>About NFO Standard</h3>
+                        <p>NFO Standard is an open metadata format designed for media centers. It provides a consistent way to store and share metadata across different applications.</p>
+                        <p>For more information, visit <a href="https://nfostandard.com" target="_blank">nfostandard.com</a></p>
+                    </div>
+                    
+                    <div>
+                        <button is="emby-button" type="submit" class="raised button-submit block">
+                            <span>Save</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+            var NFOStandardConfig = {
+                pluginUniqueId: 'e4a0e5a6-7c8b-4f86-a916-7e3c89552289'
+            };
+
+            $('#nfoStandardConfigPage').on('pageshow', function () {
+                Dashboard.showLoadingMsg();
+                var page = this;
+                
+                ApiClient.getPluginConfiguration(NFOStandardConfig.pluginUniqueId).then(function (config) {
+                    $('#chkEnableMovies', page).checked(config.EnableMovies);
+                    $('#chkEnableTvShows', page).checked(config.EnableTvShows);
+                    $('#chkEnableEpisodes', page).checked(config.EnableEpisodes);
+                    $('#chkSaveMetadata', page).checked(config.SaveMetadataToNfo);
+                    
+                    Dashboard.hideLoadingMsg();
+                });
+            });
+
+            $('#nfoStandardConfigForm').on('submit', function () {
+                Dashboard.showLoadingMsg();
+                var form = this;
+                
+                ApiClient.getPluginConfiguration(NFOStandardConfig.pluginUniqueId).then(function (config) {
+                    config.EnableMovies = $('#chkEnableMovies', form).checked();
+                    config.EnableTvShows = $('#chkEnableTvShows', form).checked();
+                    config.EnableEpisodes = $('#chkEnableEpisodes', form).checked();
+                    config.SaveMetadataToNfo = $('#chkSaveMetadata', form).checked();
+                    
+                    ApiClient.updatePluginConfiguration(NFOStandardConfig.pluginUniqueId, config).then(function () {
+                        Dashboard.processPluginConfigurationUpdateResult();
+                    });
+                });
+                
+                return false;
+            });
+        </script>
+    </div>
+</body>
+</html>

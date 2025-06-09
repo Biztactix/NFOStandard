@@ -4,11 +4,12 @@ using MediaBrowser.Common.Configuration;
 using MediaBrowser.Common.Plugins;
 using MediaBrowser.Model.Plugins;
 using MediaBrowser.Model.Serialization;
+using NFOStandard.Configuration;
 
 namespace NFOStandard
 {
     /// <summary>
-    /// NFO Standard plugin for Emby/Jellyfin
+    /// NFO Standard plugin for Emby
     /// </summary>
     public class NFOStandardPlugin : BasePlugin<PluginConfiguration>, IHasWebPages
     {
@@ -18,7 +19,7 @@ namespace NFOStandard
 
         public override string Description => "Read and write metadata using the NFO Standard format";
 
-        public static NFOStandardPlugin Instance { get; private set; }
+        public static NFOStandardPlugin? Instance { get; private set; }
 
         public NFOStandardPlugin(IApplicationPaths applicationPaths, IXmlSerializer xmlSerializer)
             : base(applicationPaths, xmlSerializer)
@@ -32,8 +33,10 @@ namespace NFOStandard
             {
                 new PluginPageInfo
                 {
-                    Name = this.Name,
-                    EmbeddedResourcePath = $"{GetType().Namespace}.Configuration.configPage.html"
+                    Name = "NFO Standard",
+                    EmbeddedResourcePath = GetType().Namespace + ".Configuration.configPage.html",
+                    EnableInMainMenu = true,
+                    DisplayName = "NFO Standard"
                 }
             };
         }
