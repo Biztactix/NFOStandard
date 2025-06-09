@@ -1,24 +1,60 @@
 name: Validate Example NFO Files
 
+# Workflow Strategy:
+# - SchemaUpdate branch: Uses comprehensive local test framework (test_schemas.sh) for v2.0.0 development
+# - main/develop branches: Uses legacy remote validation for v1.x compatibility  
+# - Schema integrity: Always validates XSD syntax for all branches
+
 on:
   push:
-    branches: [ main, develop ]
+    branches: [ main, develop, SchemaUpdate ]
     paths:
       - '**.xml'
       - '**.xsd'
       - '.github/workflows/validate-examples.yml'
+      - 'tools/test_schemas.sh'
   pull_request:
     branches: [ main ]
     paths:
       - '**.xml'
       - '**.xsd'
+      - 'tools/test_schemas.sh'
 
 jobs:
-  validate-nfo-files:
+  # New comprehensive validation using our test framework
+  validate-with-test-framework:
     runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/SchemaUpdate' || github.base_ref == 'SchemaUpdate'
     
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
+    
+    - name: Install xmllint
+      run: sudo apt-get update && sudo apt-get install -y libxml2-utils
+    
+    - name: Make test script executable
+      run: chmod +x tools/test_schemas.sh
+    
+    - name: Run comprehensive schema validation
+      run: |
+        echo "🧪 Running NFOStandard v2.0.0 comprehensive validation..."
+        ./tools/test_schemas.sh
+    
+    - name: Upload test results
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: validation-results
+        path: test_output/
+        retention-days: 7
+
+  # Legacy validation for backward compatibility (v1.x and main branch)
+  validate-nfo-files:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop'
+    
+    steps:
+    - uses: actions/checkout@v4
     
     - name: Set up Python
       uses: actions/setup-python@v4
@@ -156,14 +192,15 @@ jobs:
             sys.exit(main())
         EOF
     
-    - name: Validate example NFO files
+    - name: Validate example NFO files (v1.x)
       run: python validate_examples.py
 
+  # Schema integrity validation (runs for all branches)
   validate-schema-integrity:
     runs-on: ubuntu-latest
     
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     
     - name: Install xmllint
       run: sudo apt-get update && sudo apt-get install -y libxml2-utils
@@ -171,13 +208,52 @@ jobs:
     - name: Validate XSD schemas
       run: |
         echo "Validating XSD schema files..."
-        for xsd in Schemas/*.xsd main.xsd; do
-          echo -n "Validating $xsd... "
-          if xmllint --noout "$xsd" 2>/dev/null; then
-            echo "✅ Valid"
-          else
-            echo "❌ Invalid"
-            xmllint --noout "$xsd"
-            exit 1
-          fi
-        done
+        
+        # Validate v1 schemas if they exist
+        if [ -d "v1" ]; then
+          echo "Validating v1 schemas..."
+          for xsd in v1/Schemas/*.xsd v1/main.xsd; do
+            if [ -f "$xsd" ]; then
+              echo -n "Validating $xsd... "
+              if xmllint --noout "$xsd" 2>/dev/null; then
+                echo "✅ Valid"
+              else
+                echo "❌ Invalid"
+                xmllint --noout "$xsd"
+                exit 1
+              fi
+            fi
+          done
+        fi
+        
+        # Validate v2 schemas if they exist
+        if [ -d "v2" ]; then
+          echo "Validating v2 schemas..."
+          for xsd in v2/Schemas/*.xsd v2/main.xsd; do
+            if [ -f "$xsd" ]; then
+              echo -n "Validating $xsd... "
+              if xmllint --noout "$xsd" 2>/dev/null; then
+                echo "✅ Valid"
+              else
+                echo "❌ Invalid"
+                xmllint --noout "$xsd"
+                exit 1
+              fi
+            fi
+          done
+        fi
+        
+        # Legacy validation for old structure (main branch compatibility)
+        if [ -f "main.xsd" ] && [ -d "Schemas" ]; then
+          echo "Validating legacy schema structure..."
+          for xsd in Schemas/*.xsd main.xsd; do
+            echo -n "Validating $xsd... "
+            if xmllint --noout "$xsd" 2>/dev/null; then
+              echo "✅ Valid"
+            else
+              echo "❌ Invalid"
+              xmllint --noout "$xsd"
+              exit 1
+            fi
+          done
+        fi

@@ -1,0 +1,313 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="NFOStandard"
+           xmlns="NFOStandard"
+           elementFormDefault="qualified"
+           version="1.0">
+
+    <xs:annotation>
+        <xs:documentation>
+            NFOStandard Common Types Schema v1.0
+            
+            This schema defines common data types used across all NFOStandard media types.
+            It includes ratings, unique identifiers, content ratings, and media file references.
+            
+            For more information, visit: https://nfostandard.com
+        </xs:documentation>
+    </xs:annotation>
+
+    <!-- Rating Type -->
+    <xs:complexType name="RatingType">
+        <xs:annotation>
+            <xs:documentation>
+                Represents a rating from a specific rating provider (e.g., IMDB, TMDB, Metacritic).
+                Multiple ratings can be provided for the same content from different sources.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:attribute name="name" type="xs:string" use="required">
+            <xs:annotation>
+                <xs:documentation>
+                    The name of the rating provider. Common values: imdb, tmdb, metacritic, rottentomatoes, tvdb, mal, anidb
+                </xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="value" use="required">
+            <xs:annotation>
+                <xs:documentation>
+                    The numeric rating value. Should be within the range specified by the max attribute.
+                </xs:documentation>
+            </xs:annotation>
+            <xs:simpleType>
+                <xs:restriction base="xs:decimal">
+                    <xs:minInclusive value="0"/>
+                    <xs:maxInclusive value="100"/>
+                    <xs:fractionDigits value="1"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+        <xs:attribute name="max" use="optional" default="10">
+            <xs:annotation>
+                <xs:documentation>
+                    The maximum possible rating value for this provider. Common values: 10 (IMDB, TMDB), 100 (Metacritic), 5 (Netflix)
+                </xs:documentation>
+            </xs:annotation>
+            <xs:simpleType>
+                <xs:restriction base="xs:positiveInteger">
+                    <xs:minInclusive value="1"/>
+                    <xs:maxInclusive value="100"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+        <xs:attribute name="votes" type="xs:nonNegativeInteger" use="optional">
+            <xs:annotation>
+                <xs:documentation>
+                    The number of votes/reviews that contributed to this rating. Optional field.
+                </xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="default" type="xs:boolean" use="optional" default="false">
+            <xs:annotation>
+                <xs:documentation>
+                    Indicates if this is the primary/default rating to display. Only one rating should be marked as default.
+                </xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+    </xs:complexType>
+
+    <!-- Unique Identifier Type -->
+    <xs:complexType name="UniqueIdType">
+        <xs:annotation>
+            <xs:documentation>
+                Represents a unique identifier from external databases or services.
+                Examples: IMDB ID, TMDB ID, TVDB ID, MusicBrainz ID, etc.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:simpleContent>
+            <xs:extension base="UniqueIdValueType">
+                <xs:attribute name="type" use="required">
+                    <xs:annotation>
+                        <xs:documentation>
+                            The type/source of the unique identifier. Common values: imdb, tmdb, tvdb, musicbrainz, mal, anidb, spotify, etc.
+                        </xs:documentation>
+                    </xs:annotation>
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:pattern value="[a-zA-Z][a-zA-Z0-9_-]*"/>
+                            <xs:minLength value="2"/>
+                            <xs:maxLength value="20"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:attribute>
+                <xs:attribute name="default" type="xs:boolean" use="optional" default="false">
+                    <xs:annotation>
+                        <xs:documentation>
+                            Indicates if this is the primary/preferred identifier for the content. Only one should be marked as default.
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <!-- Unique ID Value Type -->
+    <xs:simpleType name="UniqueIdValueType">
+        <xs:annotation>
+            <xs:documentation>
+                The actual unique identifier value. Must be non-empty and contain valid characters.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="50"/>
+            <xs:pattern value="[a-zA-Z0-9_-]+"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- Content Rating Type -->
+    <xs:complexType name="ContentRatingType">
+        <xs:annotation>
+            <xs:documentation>
+                Represents content rating information from various rating boards and countries.
+                Includes the rating value, board information, and optional descriptive reason.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="rating" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>
+                        The content rating value (e.g., PG-13, R, TV-MA, 18, etc.)
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="reason" type="xs:string" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Optional reason for the rating (e.g., "Violence and strong language")
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="image" type="xs:anyURI" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Optional URL or path to the rating board's official rating image/logo
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="country" use="required">
+            <xs:annotation>
+                <xs:documentation>
+                    ISO 3166-1 alpha-2 country code (e.g., US, UK, DE, JP)
+                </xs:documentation>
+            </xs:annotation>
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:pattern value="[A-Z]{2}"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+        <xs:attribute name="board" type="xs:string" use="required">
+            <xs:annotation>
+                <xs:documentation>
+                    The rating board/organization name (e.g., MPAA, BBFC, FSK, ESRB)
+                </xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+    </xs:complexType>
+
+    <!-- Media File Type -->
+    <xs:complexType name="MediaFileType">
+        <xs:annotation>
+            <xs:documentation>
+                Represents artwork, images, or other media files associated with the content.
+                Includes dimensions, URLs, and type information.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="type" use="optional">
+                    <xs:annotation>
+                        <xs:documentation>
+                            The type of media file: poster, fanart, banner, thumb, clearlogo, discart, etc.
+                        </xs:documentation>
+                    </xs:annotation>
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="poster"/>
+                            <xs:enumeration value="fanart"/>
+                            <xs:enumeration value="banner"/>
+                            <xs:enumeration value="thumb"/>
+                            <xs:enumeration value="clearlogo"/>
+                            <xs:enumeration value="clearart"/>
+                            <xs:enumeration value="discart"/>
+                            <xs:enumeration value="landscape"/>
+                            <xs:enumeration value="characterart"/>
+                            <xs:enumeration value="keyart"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:attribute>
+                <xs:attribute name="width" type="xs:positiveInteger" use="optional">
+                    <xs:annotation>
+                        <xs:documentation>Width of the image in pixels</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+                <xs:attribute name="height" type="xs:positiveInteger" use="optional">
+                    <xs:annotation>
+                        <xs:documentation>Height of the image in pixels</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+                <xs:attribute name="url" type="xs:anyURI" use="optional">
+                    <xs:annotation>
+                        <xs:documentation>
+                            URL to the media file. Can be local file path or remote URL.
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+                <xs:attribute name="season" use="optional">
+                    <xs:annotation>
+                        <xs:documentation>
+                            For TV shows: specific season this artwork applies to, or "all" for series-wide artwork
+                        </xs:documentation>
+                    </xs:annotation>
+                    <xs:simpleType>
+                        <xs:union>
+                            <xs:simpleType>
+                                <xs:restriction base="xs:string">
+                                    <xs:enumeration value="all"/>
+                                    <xs:enumeration value="specials"/>
+                                </xs:restriction>
+                            </xs:simpleType>
+                            <xs:simpleType>
+                                <xs:restriction base="xs:positiveInteger">
+                                    <xs:maxInclusive value="100"/>
+                                </xs:restriction>
+                            </xs:simpleType>
+                        </xs:union>
+                    </xs:simpleType>
+                </xs:attribute>
+                <xs:attribute name="language" use="optional">
+                    <xs:annotation>
+                        <xs:documentation>
+                            ISO 639-1 language code for language-specific artwork (e.g., en, fr, de, ja)
+                        </xs:documentation>
+                    </xs:annotation>
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:pattern value="[a-z]{2}"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:attribute>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <!-- Date Type -->
+    <xs:simpleType name="DateType">
+        <xs:annotation>
+            <xs:documentation>
+                Standard date format for NFOStandard. Uses ISO 8601 format (YYYY-MM-DD).
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:date"/>
+    </xs:simpleType>
+
+    <!-- Year Type -->
+    <xs:simpleType name="YearType">
+        <xs:annotation>
+            <xs:documentation>
+                Year value with reasonable constraints for media content (1900-2100).
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:int">
+            <xs:minInclusive value="1900"/>
+            <xs:maxInclusive value="2100"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- Runtime Type -->
+    <xs:simpleType name="RuntimeType">
+        <xs:annotation>
+            <xs:documentation>
+                Runtime/duration in minutes. Must be a positive integer.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:positiveInteger">
+            <xs:maxInclusive value="10080"/>  <!-- Max 1 week = 7*24*60 minutes -->
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- User Rating Type -->
+    <xs:simpleType name="UserRatingType">
+        <xs:annotation>
+            <xs:documentation>
+                User's personal rating, typically on a scale of 1-10 with decimal precision.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:decimal">
+            <xs:minInclusive value="0"/>
+            <xs:maxInclusive value="10"/>
+            <xs:fractionDigits value="1"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+</xs:schema>

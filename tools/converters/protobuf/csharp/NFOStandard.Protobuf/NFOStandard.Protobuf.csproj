@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageId>NFOStandard.Protobuf</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>NFOStandard Community</Authors>
+    <Description>Protocol Buffer implementation for NFOStandard - a unified metadata format for media files</Description>
+    <PackageLicenseExpression>Unlicense</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/Biztactix/NFOStandard</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Biztactix/NFOStandard</RepositoryUrl>
+    <PackageTags>nfo;metadata;protobuf;media;movies;tvshows;music</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Google.Protobuf" Version="3.25.1" />
+    <PackageReference Include="Grpc.Tools" Version="2.60.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Protobuf Include="..\..\nfo_standard.proto" GrpcServices="None" />
+  </ItemGroup>
+
+</Project>

@@ -5,20 +5,20 @@
            elementFormDefault="qualified">
     
     <!-- Import the common XSDs -->
-    <xs:include schemaLocation="https://xsd.nfostandard.com/Schemas/common.xsd"/>
-    <xs:include schemaLocation="https://xsd.nfostandard.com/Schemas/person.xsd"/>
-    <xs:include schemaLocation="https://xsd.nfostandard.com/Schemas/library.xsd"/>
+    <xs:include schemaLocation="https://xsd.nfostandard.com/v1/Schemas/common.xsd"/>
+    <xs:include schemaLocation="https://xsd.nfostandard.com/v1/Schemas/person.xsd"/>
+    <xs:include schemaLocation="https://xsd.nfostandard.com/v1/Schemas/library.xsd"/>
 
     <!-- Import specific XSDs for different types of content -->
-    <xs:include schemaLocation="https://xsd.nfostandard.com/Schemas/movie.xsd"/>
-    <xs:include schemaLocation="https://xsd.nfostandard.com/Schemas/tvshow.xsd"/>
-    <xs:include schemaLocation="https://xsd.nfostandard.com/Schemas/adult.xsd"/>
-    <xs:include schemaLocation="https://xsd.nfostandard.com/Schemas/anime.xsd"/>
-    <xs:include schemaLocation="https://xsd.nfostandard.com/Schemas/video.xsd"/>
-    <xs:include schemaLocation="https://xsd.nfostandard.com/Schemas/music.xsd"/>
-    <xs:include schemaLocation="https://xsd.nfostandard.com/Schemas/audiobook.xsd"/>
-    <xs:include schemaLocation="https://xsd.nfostandard.com/Schemas/podcast.xsd"/>
-    <xs:include schemaLocation="https://xsd.nfostandard.com/Schemas/musicvideo.xsd"/>
+    <xs:include schemaLocation="https://xsd.nfostandard.com/v1/Schemas/movie.xsd"/>
+    <xs:include schemaLocation="https://xsd.nfostandard.com/v1/Schemas/tvshow.xsd"/>
+    <xs:include schemaLocation="https://xsd.nfostandard.com/v1/Schemas/adult.xsd"/>
+    <xs:include schemaLocation="https://xsd.nfostandard.com/v1/Schemas/anime.xsd"/>
+    <xs:include schemaLocation="https://xsd.nfostandard.com/v1/Schemas/video.xsd"/>
+    <xs:include schemaLocation="https://xsd.nfostandard.com/v1/Schemas/music.xsd"/>
+    <xs:include schemaLocation="https://xsd.nfostandard.com/v1/Schemas/audiobook.xsd"/>
+    <xs:include schemaLocation="https://xsd.nfostandard.com/v1/Schemas/podcast.xsd"/>
+    <xs:include schemaLocation="https://xsd.nfostandard.com/v1/Schemas/musicvideo.xsd"/>
 
     <!-- Define the root element and specify type based on content -->
 	 <xs:element name="root" xmlns="NFOStandard">

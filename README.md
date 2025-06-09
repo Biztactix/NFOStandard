@@ -1,6 +1,14 @@
 # NFOStandard
 
+[![Version](https://img.shields.io/badge/version-2.0.0-blue.svg)](https://github.com/Biztactix/NFOStandard/releases)
+[![License](https://img.shields.io/badge/license-Unlicense-green.svg)](LICENSE)
+[![Validation](https://img.shields.io/badge/examples-100%25%20valid-green.svg)](#validation)
+
 Welcome to the Open NFO Standard repository! This project aims to create a unified, open standard for .nfo files used in various media applications, eliminating the need for each application to create its own format. This standard is designed to cover 95% of use cases, with built-in extensibility for fringe cases.
+
+## Current Version: 2.0.0
+
+🚨 **Version 2.0.0 contains breaking changes from v1.0.0**. See the [CHANGELOG](CHANGELOG.md) for migration details.
 
 ## Table of Contents
 
@@ -43,7 +51,7 @@ The NFO Standard is designed to provide a consistent and comprehensive metadata 
 This is an example of how to use the XSDs to reference it so that it's easy for others to understand and apps to extract the content.
 ```
 <?xml version="1.0" encoding="UTF-8"?>
-<root xmlns="NFOStandard" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="NFOStandard https://xsd.nfostandard.com/main.xsd">
+<root xmlns="NFOStandard" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="NFOStandard https://xsd.nfostandard.com/v2/main.xsd">
 	<media>
 	  <movie>
 		<title>Inception</title>
@@ -60,7 +68,10 @@ This is an example of how to use the XSDs to reference it so that it's easy for 
 		<banner type="poster" width="300" height="450" url="http://example.com/banner1.jpg"/>
         <thumb type="thumbnail" width="150" height="150" url="http://example.com/thumb1.jpg"/>
         <fanart type="background" width="1920" height="1080" url="http://example.com/fanart1.jpg"/>
-		<contentrating country="USA" board="MPAA" rating="PG-13" image="mpaa_pg13.png"/>
+		<contentrating country="US" board="MPAA">
+			<rating>PG-13</rating>
+			<image>mpaa_pg13.png</image>
+		</contentrating>
 		<uniqueid type="imdb" default="true">tt1375666</uniqueid>
 		<uniqueid type="tmdb">12345</uniqueid>
 		<genre>Action</genre>

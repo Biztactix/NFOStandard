@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Invalid: Runtime must be an integer (minutes), not a string -->
 <!-- Expected error: Element 'runtime': 'two hours' is not a valid value of the atomic type 'xs:integer'. -->
-<root xmlns="NFOStandard" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="NFOStandard https://xsd.nfostandard.com/main.xsd">
+<root xmlns="NFOStandard" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="NFOStandard https://xsd.nfostandard.com/v2/main.xsd">
     <media>
         <movie>
             <title>Invalid Runtime Example</title>

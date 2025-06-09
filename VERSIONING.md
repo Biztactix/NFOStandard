@@ -14,7 +14,7 @@ The NFO Standard follows [Semantic Versioning 2.0.0](https://semver.org/) with s
 
 ## Current Version
 
-**1.0.0** (Initial Release)
+**2.0.0** (Enhanced Schema with Breaking Changes)
 
 ## Versioning Rules
 
@@ -191,9 +191,10 @@ All changes are documented in `CHANGELOG.md` following [Keep a Changelog](https:
 
 | Version | Status | Released | EOL | Notes |
 |---------|--------|----------|-----|-------|
-| 1.0.x | Current | 2024-01 | 2027-01 | Initial release, LTS |
-| 1.1.x | Planned | 2024-06 | 2025-06 | New media types |
-| 2.0.x | Future | 2025-01 | 2028-01 | Major restructure |
+| 1.0.x | Legacy | 2024-01 | 2027-01 | Initial release, LTS |
+| 2.0.x | Current | 2024-12 | 2027-12 | Enhanced schema, breaking changes, LTS |
+| 2.1.x | Planned | 2025-06 | 2026-06 | New media types |
+| 3.0.x | Future | 2026-01 | 2029-01 | Future enhancements |
 
 ## Implementation Requirements
 

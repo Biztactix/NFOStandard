@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root xmlns="NFOStandard" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="NFOStandard https://xsd.nfostandard.com/v2/main.xsd">
+<media>
+    <podcast>
+        <title>The Example Podcast</title>
+        <releaseDate>2023-05-15</releaseDate>
+        <productionCompany>Example Media Corp</productionCompany>
+        <host>
+            <name>John Smith</name>
+            <role>Host</role>
+            <order>1</order>
+            <thumb>john_smith.jpg</thumb>
+            <bio>Experienced podcast host and interviewer.</bio>
+            <url>https://example.com/johnsmith</url>
+            <gender>Male</gender>
+            <tag>interviewer</tag>
+            <tag>veteran</tag>
+        </host>
+        <host>
+            <name>Jane Doe</name>
+            <role>Co-Host</role>
+            <order>2</order>
+            <thumb>jane_doe.jpg</thumb>
+            <bio>Tech journalist and podcast co-host.</bio>
+            <url>https://example.com/janedoe</url>
+            <gender>Female</gender>
+            <tag>journalist</tag>
+        </host>
+        <genre>Technology</genre>
+        <genre>Interview</genre>
+        <tag>weekly</tag>
+        <tag>technology</tag>
+        <description>A weekly technology podcast covering the latest trends and innovations.</description>
+        <rating name="apple" value="4.5" max="5" votes="1250"/>
+        <uniqueId type="spotify" default="true">4rOoJ6Egrf8K2IrywzwOMk</uniqueId>
+        <uniqueId type="apple">podcast123456</uniqueId>
+        <contentRating country="US" board="ESRB">
+            <rating>E</rating>
+            <reason>General audience content</reason>
+        </contentRating>
+        <cover type="poster" width="400" height="400" url="https://example.com/podcast_cover.jpg"/>
+    </podcast>
+</media>
+<library>
+    <appID>Jellyfin</appID>
+    <libraryid>podcasts</libraryid>
+    <dateAdded>2023-12-01T10:00:00</dateAdded>
+</library>
+</root>

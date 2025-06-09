@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Edge case: Unicode characters from various languages -->
-<root xmlns="NFOStandard" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="NFOStandard https://xsd.nfostandard.com/main.xsd">
+<root xmlns="NFOStandard" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="NFOStandard https://xsd.nfostandard.com/v2/main.xsd">
     <media>
         <movie>
             <title>千と千尋の神隠し</title>
@@ -13,6 +13,9 @@
             <plot>千尋という10歳の少女が、引っ越し先へ向かう途中で異世界に迷い込む。🎭</plot>
             <genre>アニメーション</genre>
             <genre>ファンタジー</genre>
+            <tag>神々</tag>
+            <tag>魔法</tag>
+            <tag>成長</tag>
             <country>日本</country>
             <actor>
                 <name>柊瑠美</name>
@@ -22,9 +25,6 @@
             <director>
                 <name>宮崎駿</name>
             </director>
-            <tag>神々</tag>
-            <tag>魔法</tag>
-            <tag>成長</tag>
         </movie>
     </media>
 </root>
