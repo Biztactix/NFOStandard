@@ -16,8 +16,17 @@ NC='\033[0m' # No Color
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
 TEST_DIR="$PROJECT_ROOT/test_output"
+
+# Version-specific directories
+V1_SCHEMAS_DIR="$PROJECT_ROOT/v1/Schemas"
+V1_MAIN_XSD="$PROJECT_ROOT/v1/main.xsd"
+V1_EXAMPLES_DIR="$PROJECT_ROOT/v1/examples"
+
 V2_SCHEMAS_DIR="$PROJECT_ROOT/v2/Schemas"
 V2_MAIN_XSD="$PROJECT_ROOT/v2/main.xsd"
+V2_EXAMPLES_DIR="$PROJECT_ROOT/v2/examples"
+
+# Legacy directories for backward compatibility
 EXAMPLES_DIR="$PROJECT_ROOT/examples"
 TESTS_DIR="$PROJECT_ROOT/tests"
 
@@ -27,19 +36,35 @@ echo "Project Root: $PROJECT_ROOT"
 echo "Test Directory: $TEST_DIR"
 echo ""
 
+# Determine which version to test (default: v2, but allow v1 via parameter)
+VERSION="${1:-v2}"
+if [ "$VERSION" != "v1" ] && [ "$VERSION" != "v2" ]; then
+    echo -e "${RED}Error: Invalid version '$VERSION'. Use 'v1' or 'v2'${NC}"
+    exit 1
+fi
+
+echo "Testing Version: $VERSION"
+echo ""
+
 # Clean and create test directory
-echo -e "${YELLOW}Setting up test environment...${NC}"
+echo -e "${YELLOW}Setting up test environment for $VERSION...${NC}"
 rm -rf "$TEST_DIR"
 mkdir -p "$TEST_DIR/schemas"
 mkdir -p "$TEST_DIR/examples"
 mkdir -p "$TEST_DIR/tests"
 
-# Copy schema files and update URLs
-echo -e "${YELLOW}Copying and localizing schema files...${NC}"
+# Copy schema files based on version
+echo -e "${YELLOW}Copying and localizing $VERSION schema files...${NC}"
 
-# Copy all XSD files from v2 directory
-cp "$V2_MAIN_XSD" "$TEST_DIR/schemas/"
-cp "$V2_SCHEMAS_DIR"/*.xsd "$TEST_DIR/schemas/"
+if [ "$VERSION" = "v1" ]; then
+    cp "$V1_MAIN_XSD" "$TEST_DIR/schemas/"
+    cp "$V1_SCHEMAS_DIR"/*.xsd "$TEST_DIR/schemas/"
+    EXAMPLES_SOURCE="$V1_EXAMPLES_DIR"
+else
+    cp "$V2_MAIN_XSD" "$TEST_DIR/schemas/"
+    cp "$V2_SCHEMAS_DIR"/*.xsd "$TEST_DIR/schemas/"
+    EXAMPLES_SOURCE="$V2_EXAMPLES_DIR"
+fi
 
 # Function to update schema URLs to local paths
 update_schema_urls() {
@@ -48,12 +73,17 @@ update_schema_urls() {
     
     echo "  Updating URLs in $filename"
     
-    # Update include statements to use local paths for v2
-    sed -i 's|https://xsd\.nfostandard\.com/v2/Schemas/|./|g' "$file"
-    sed -i 's|https://xsd\.nfostandard\.com/v2/main\.xsd|./main.xsd|g' "$file"
-    # Also handle v1 URLs for backward compatibility testing
-    sed -i 's|https://xsd\.nfostandard\.com/v1/Schemas/|./|g' "$file"
-    sed -i 's|https://xsd\.nfostandard\.com/v1/main\.xsd|./main.xsd|g' "$file"
+    # Update include statements to use local paths based on version
+    if [ "$VERSION" = "v1" ]; then
+        sed -i 's|https://xsd\.nfostandard\.com/v1/Schemas/|./|g' "$file"
+        sed -i 's|https://xsd\.nfostandard\.com/v1/main\.xsd|./main.xsd|g' "$file"
+        # Also handle legacy URLs without version
+        sed -i 's|https://xsd\.nfostandard\.com/Schemas/|./|g' "$file"
+        sed -i 's|https://xsd\.nfostandard\.com/main\.xsd|./main.xsd|g' "$file"
+    else
+        sed -i 's|https://xsd\.nfostandard\.com/v2/Schemas/|./|g' "$file"
+        sed -i 's|https://xsd\.nfostandard\.com/v2/main\.xsd|./main.xsd|g' "$file"
+    fi
 }
 
 # Update all schema files
@@ -61,15 +91,15 @@ for schema_file in "$TEST_DIR/schemas"/*.xsd; do
     update_schema_urls "$schema_file"
 done
 
-# Copy example files and update schema locations
-echo -e "${YELLOW}Copying and updating example files...${NC}"
+# Copy example files based on version
+echo -e "${YELLOW}Copying and updating $VERSION example files...${NC}"
 
-# Copy example files
-if [ -d "$EXAMPLES_DIR" ]; then
-    cp "$EXAMPLES_DIR"/*.xml "$TEST_DIR/examples/" 2>/dev/null || true
+# Copy version-specific example files
+if [ -d "$EXAMPLES_SOURCE" ]; then
+    cp "$EXAMPLES_SOURCE"/*.xml "$TEST_DIR/examples/" 2>/dev/null || true
 fi
 
-# Copy test files
+# Copy test files (always use current test files)
 if [ -d "$TESTS_DIR" ]; then
     mkdir -p "$TEST_DIR/tests/valid" "$TEST_DIR/tests/invalid" "$TEST_DIR/tests/edge-cases"
     find "$TESTS_DIR/valid" -name "*.xml" -exec cp {} "$TEST_DIR/tests/valid/" \; 2>/dev/null || true
@@ -77,8 +107,13 @@ if [ -d "$TESTS_DIR" ]; then
     find "$TESTS_DIR/edge-cases" -name "*.xml" -exec cp {} "$TEST_DIR/tests/edge-cases/" \; 2>/dev/null || true
 fi
 
-# Copy root-level example files
-cp "$PROJECT_ROOT"/*.xml "$TEST_DIR/examples/" 2>/dev/null || true
+# Copy legacy example files for backward compatibility (if testing v2 and no v2 examples exist)
+if [ "$VERSION" = "v2" ] && [ ! "$(ls -A "$TEST_DIR/examples/" 2>/dev/null)" ]; then
+    if [ -d "$EXAMPLES_DIR" ]; then
+        cp "$EXAMPLES_DIR"/*.xml "$TEST_DIR/examples/" 2>/dev/null || true
+    fi
+    cp "$PROJECT_ROOT"/*.xml "$TEST_DIR/examples/" 2>/dev/null || true
+fi
 
 # Function to update example schema locations
 update_example_schema_location() {
@@ -87,12 +122,17 @@ update_example_schema_location() {
     
     echo "  Updating schema location in $filename"
     
-    # Update schema location to point to local test schemas for v2
-    sed -i 's|https://xsd\.nfostandard\.com/v2/main\.xsd|./schemas/main.xsd|g' "$file"
-    sed -i 's|xsi:schemaLocation="NFOStandard https://xsd\.nfostandard\.com/v2/main\.xsd"|xsi:schemaLocation="NFOStandard ./schemas/main.xsd"|g' "$file"
-    # Also handle v1 URLs for backward compatibility testing
-    sed -i 's|https://xsd\.nfostandard\.com/v1/main\.xsd|./schemas/main.xsd|g' "$file"
-    sed -i 's|xsi:schemaLocation="NFOStandard https://xsd\.nfostandard\.com/v1/main\.xsd"|xsi:schemaLocation="NFOStandard ./schemas/main.xsd"|g' "$file"
+    # Update schema location to point to local test schemas based on version
+    if [ "$VERSION" = "v1" ]; then
+        sed -i 's|https://xsd\.nfostandard\.com/v1/main\.xsd|./schemas/main.xsd|g' "$file"
+        sed -i 's|xsi:schemaLocation="NFOStandard https://xsd\.nfostandard\.com/v1/main\.xsd"|xsi:schemaLocation="NFOStandard ./schemas/main.xsd"|g' "$file"
+        # Also handle legacy URLs without version
+        sed -i 's|https://xsd\.nfostandard\.com/main\.xsd|./schemas/main.xsd|g' "$file"
+        sed -i 's|xsi:schemaLocation="NFOStandard https://xsd\.nfostandard\.com/main\.xsd"|xsi:schemaLocation="NFOStandard ./schemas/main.xsd"|g' "$file"
+    else
+        sed -i 's|https://xsd\.nfostandard\.com/v2/main\.xsd|./schemas/main.xsd|g' "$file"
+        sed -i 's|xsi:schemaLocation="NFOStandard https://xsd\.nfostandard\.com/v2/main\.xsd"|xsi:schemaLocation="NFOStandard ./schemas/main.xsd"|g' "$file"
+    fi
 }
 
 # Update all example files

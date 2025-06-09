@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<root xmlns="NFOStandard" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="NFOStandard https://xsd.nfostandard.com/main.xsd">
+<root xmlns="NFOStandard" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="NFOStandard https://xsd.nfostandard.com/v2/main.xsd">
     <media>
         <movie>
             <title>Example Movie</title>
@@ -14,9 +14,12 @@
             <tagline>An example tagline.</tagline>
             <runtime>120</runtime>
             <banner type="poster" width="300" height="450" url="http://example.com/banner1.jpg"/>
-            <thumb type="thumbnail" width="150" height="150" url="http://example.com/thumb1.jpg"/>
-            <fanart type="background" width="1920" height="1080" url="http://example.com/fanart1.jpg"/>
-            <contentrating country="US" board="MPAA" rating="PG-13" image="http://example.com/rating.jpg"/>
+            <thumb type="thumb" width="150" height="150" url="http://example.com/thumb1.jpg"/>
+            <fanart type="fanart" width="1920" height="1080" url="http://example.com/fanart1.jpg"/>
+            <contentrating country="US" board="MPAA">
+                <rating>PG-13</rating>
+                <image>http://example.com/rating.jpg</image>
+            </contentrating>
             <uniqueid type="imdb" default="true">tt1234567</uniqueid>
             <genre>Action</genre>
             <genre>Adventure</genre>
@@ -30,7 +33,7 @@
             <keyword>Keyword2</keyword>
             <releasedate>2022-05-26</releasedate>
             <award>Best Movie Award</award>
-            <subtitlelanguage>English</subtitlelanguage>
+            <subtitlelanguage>en</subtitlelanguage>
             <soundtrack>Example Soundtrack</soundtrack>
             <parentalguide>Parental guide information.</parentalguide>
             <actor>

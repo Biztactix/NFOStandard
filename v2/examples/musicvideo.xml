@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root xmlns="NFOStandard" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="NFOStandard https://xsd.nfostandard.com/v2/main.xsd">
+    <media>
+        <musicvideo>
+            <title>Bohemian Rhapsody</title>
+            <releaseDate>1975-10-31</releaseDate>
+            <productionCompany>Bruce Gowers Productions</productionCompany>
+            <producer>
+                <name>Roy Thomas Baker</name>
+            </producer>
+            <producer>
+                <name>Queen</name>
+            </producer>
+            <writer>
+                <name>Freddie Mercury</name>
+            </writer>
+            <artist>
+                <name>Queen</name>
+            </artist>
+            <genre>Rock</genre>
+            <genre>Progressive Rock</genre>
+            <genre>Art Rock</genre>
+            <duration>360</duration>
+            <language>English</language>
+            <keyword>rock</keyword>
+            <keyword>opera</keyword>
+            <keyword>epic</keyword>
+            <tag>classic</tag>
+            <tag>iconic</tag>
+            <tag>groundbreaking</tag>
+            <description>The groundbreaking music video features the four members of Queen performing the song with various visual effects and multiple image overlays, creating a revolutionary promotional film that helped establish the music video as an art form.</description>
+            <rating name="imvdb" value="9.2" max="10" votes="15000"/>
+            <uniqueId type="musicbrainz">b1c62d7f-3a15-4f7f-bb21-89a0b9c6e954</uniqueId>
+            <uniqueId type="imvdb">573621</uniqueId>
+            <contentRating country="UK" board="BBFC"><rating>U</rating><image>http://example.com/ratings/bbfc-u.png</image></contentRating>
+            <cover type="poster" width="1000" height="1000" url="http://example.com/bohemian-rhapsody-poster.jpg">Cover Image</cover>
+            <serviceLinks>
+                <service>YouTube</service>
+                <url>https://www.youtube.com/watch?v=fJ9rUzIMcZQ</url>
+            </serviceLinks>
+        </musicvideo>
+    </media>
+</root>

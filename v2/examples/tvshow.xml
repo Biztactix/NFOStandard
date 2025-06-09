@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root xmlns="NFOStandard" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="NFOStandard https://xsd.nfostandard.com/v2/main.xsd">
+<media>
+        <tvshow>
+            <title>Breaking Bad</title>
+            <originaltitle>Breaking Bad</originaltitle>
+            <sorttitle>Breaking Bad</sorttitle>
+            <rating name="imdb" value="9.5" votes="1800000" default="true"/>
+            <rating name="tvdb" value="9.3" votes="50000"/>
+            <rating name="user" value="10.0" max="10"/>
+            <season>5</season>
+            <episode>62</episode>
+            <plot>Breaking Bad follows protagonist Walter White, a chemistry teacher who lives in New Mexico with his wife and teenage son who has cerebral palsy. White is diagnosed with Stage III cancer and given a prognosis of two years left to live. With a new sense of fearlessness based on his medical prognosis, and a desire to secure his family's financial security, White chooses to enter a dangerous world of drugs and crime and ascends to power in this world.</plot>
+            <tagline>All Hail the King</tagline>
+            <thumb type="thumb" width="1920" height="1080" url="http://example.com/breakingbad-thumb.jpg">Breaking Bad Thumbnail</thumb>
+            <fanart type="fanart" width="1920" height="1080" url="http://example.com/breakingbad-fanart.jpg">Breaking Bad Fanart</fanart>
+            <contentrating country="US" board="TV">
+                <rating>TV-MA</rating>
+                <reason>Mature content and strong language</reason>
+                <image>http://example.com/ratings/tv-ma.png</image>
+            </contentrating>
+            <uniqueid type="imdb" default="true">tt0903747</uniqueid>
+            <uniqueid type="tvdb">81189</uniqueid>
+            <uniqueid type="tmdb">1396</uniqueid>
+            <genre>Crime</genre>
+            <genre>Drama</genre>
+            <genre>Thriller</genre>
+            <tag>drugs</tag>
+            <tag>crime</tag>
+            <tag>family</tag>
+            <premiered>2008-01-20</premiered>
+            <status>Ended</status>
+            <studio>AMC</studio>
+            <studio>Sony Pictures Television</studio>
+            <actor>
+                <name>Bryan Cranston</name>
+                <role>Walter White</role>
+                <order>1</order>
+                <thumb>bryan_cranston.jpg</thumb>
+                <bio>Bryan Lee Cranston is an American actor, voice actor, writer and director.</bio>
+                <url>https://www.imdb.com/name/nm0186505/</url>
+            </actor>
+            <actor>
+                <name>Aaron Paul</name>
+                <role>Jesse Pinkman</role>
+                <order>2</order>
+                <thumb>aaron_paul.jpg</thumb>
+                <bio>Aaron Paul Sturtevant is an American actor.</bio>
+                <url>https://www.imdb.com/name/nm0666739/</url>
+            </actor>
+            <actor>
+                <name>Anna Gunn</name>
+                <role>Skyler White</role>
+                <order>3</order>
+                <thumb>anna_gunn.jpg</thumb>
+            </actor>
+        </tvshow>
+    </media>
+</root>
