@@ -1,14 +1,33 @@
 # NFO Standard Protocol Buffers Support
 
-This directory contains Protocol Buffers (protobuf) definitions for the NFO Standard, providing a binary serialization format that's compact and efficient.
+This directory contains Protocol Buffers (protobuf) definitions for the NFO Standard, providing a binary serialization format that's compact and efficient. Files use the `.nfpb` extension (NFO Protocol Buffer).
 
 ## Why Protobuf?
 
-- **Space Efficient**: Binary format uses 50-80% less space than XML
+- **Space Efficient**: NFPB format uses 50-80% less space than XML
 - **Fast Parsing**: 20-100x faster parsing than XML
 - **Type Safety**: Strongly typed with schema validation
 - **Language Support**: Native libraries for most programming languages
 - **Backward Compatible**: Protobuf's field numbering allows schema evolution
+
+## Current Implementations
+
+### ✅ C# (.NET) - Complete
+- Full implementation with bidirectional XML ↔ Protocol Buffer conversion
+- Command-line tool: `nfo-protobuf`
+- NuGet package: `NFOStandard.Protobuf`
+- Comprehensive unit tests
+- See [csharp/README.md](csharp/README.md) for detailed documentation
+
+### 🚧 Python - In Progress
+- Basic converter implementation available
+- See usage examples below
+
+### 📋 Planned
+- Java/Android
+- Go
+- JavaScript/TypeScript
+- Rust
 
 ## Setup
 
@@ -49,16 +68,16 @@ protoc --js_out=. nfo_standard.proto
 
 ```bash
 # JSON to Protobuf
-python ../protobuf_converter.py -f json -t protobuf movie.json -o movie.pb
+python ../protobuf_converter.py -f json -t protobuf movie.json -o movie.nfpb
 
 # Protobuf to JSON
-python ../protobuf_converter.py -f protobuf -t json movie.pb -o movie.json
+python ../protobuf_converter.py -f protobuf -t json movie.nfpb -o movie.json
 
 # XML to Protobuf
-python ../protobuf_converter.py -f xml -t protobuf movie.nfo -o movie.pb
+python ../protobuf_converter.py -f xml -t protobuf movie.nfo -o movie.nfpb
 
 # Protobuf to XML
-python ../protobuf_converter.py -f protobuf -t xml movie.pb -o movie.nfo
+python ../protobuf_converter.py -f protobuf -t xml movie.nfpb -o movie.nfo
 
 # Base64 encoding (for text transport)
 python ../protobuf_converter.py -f json -t protobuf --base64 movie.json
@@ -153,11 +172,13 @@ var root = new NFORoot
     Media = new Media { Movie = movie }
 };
 
-// Serialize
-byte[] data = root.ToByteArray();
+// Serialize to .nfpb file
+using var output = File.Create("movie.nfpb");
+root.WriteTo(output);
 
-// Deserialize  
-var parsed = NFORoot.Parser.ParseFrom(data);
+// Deserialize from .nfpb file
+using var input = File.OpenRead("movie.nfpb");
+var parsed = NFORoot.Parser.ParseFrom(input);
 ```
 
 ## Size Comparison
@@ -166,10 +187,10 @@ Example movie with full metadata:
 
 | Format | Size | Relative |
 |--------|------|----------|
-| XML | 3,247 bytes | 100% |
+| XML (.nfo) | 3,247 bytes | 100% |
 | JSON | 2,891 bytes | 89% |
-| Protobuf | 1,102 bytes | 34% |
-| Protobuf+gzip | 687 bytes | 21% |
+| NFO Protobuf (.nfpb) | 1,102 bytes | 34% |
+| NFPB+gzip | 687 bytes | 21% |
 
 ## Schema Evolution
 
@@ -189,7 +210,7 @@ Protobuf allows backward-compatible schema changes:
 
 ## Best Practices
 
-1. **Use for Storage**: Store NFO data as protobuf for space efficiency
+1. **Use for Storage**: Store NFO data as .nfpb files for space efficiency
 2. **Convert for Display**: Convert to XML/JSON when human readability needed
 3. **Transport**: Use base64 encoding for text-based transport
 4. **Streaming**: Protobuf supports streaming for large collections

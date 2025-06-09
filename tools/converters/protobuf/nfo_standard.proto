@@ -4,7 +4,10 @@ package nfostandard;
 
 option go_package = "github.com/Biztactix/NFOStandard/protobuf";
 option java_package = "com.nfostandard.protobuf";
+option java_multiple_files = true;
 option csharp_namespace = "NFOStandard.Protobuf";
+
+import "google/protobuf/timestamp.proto";
 
 // Root message containing media and optional metadata
 message NFORoot {
