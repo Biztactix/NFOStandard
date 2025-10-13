@@ -1,0 +1,75 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "NFOStandard/1.0.0": {
+        "dependencies": {
+          "MediaBrowser.Server.Core": "4.8.11"
+        },
+        "runtime": {
+          "NFOStandard.dll": {}
+        }
+      },
+      "MediaBrowser.Common/4.8.11": {
+        "runtime": {
+          "lib/netstandard2.0/Emby.Media.Model.dll": {
+            "assemblyVersion": "4.8.11.0",
+            "fileVersion": "4.8.11.0"
+          },
+          "lib/netstandard2.0/Emby.Web.GenericEdit.dll": {
+            "assemblyVersion": "4.8.11.0",
+            "fileVersion": "4.8.11.0"
+          },
+          "lib/netstandard2.0/MediaBrowser.Common.dll": {
+            "assemblyVersion": "4.8.11.0",
+            "fileVersion": "4.8.11.0"
+          },
+          "lib/netstandard2.0/MediaBrowser.Model.dll": {
+            "assemblyVersion": "4.8.11.0",
+            "fileVersion": "4.8.11.0"
+          }
+        }
+      },
+      "MediaBrowser.Server.Core/4.8.11": {
+        "dependencies": {
+          "MediaBrowser.Common": "4.8.11"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Emby.Naming.dll": {
+            "assemblyVersion": "1.1.8.0",
+            "fileVersion": "1.1.8.0"
+          },
+          "lib/netstandard2.0/MediaBrowser.Controller.dll": {
+            "assemblyVersion": "4.8.11.0",
+            "fileVersion": "4.8.11.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "NFOStandard/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "MediaBrowser.Common/4.8.11": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Taq7T1Ufo0v3a/L6Fr6oCOjiKTjMWEd+6L46tYugzvdsHU48uPFvYiyV3zbL1OGbY0HBwggLbmb0Dg9J7LKXaw==",
+      "path": "mediabrowser.common/4.8.11",
+      "hashPath": "mediabrowser.common.4.8.11.nupkg.sha512"
+    },
+    "MediaBrowser.Server.Core/4.8.11": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-tN7qhYEuNJlf3fssNIQFa+/rNT1XMHTHlygdGWKdyVsOQCLAVUvCqWUX6wDY+9fO/khnpHBR0fnzyghCM7TF5g==",
+      "path": "mediabrowser.server.core/4.8.11",
+      "hashPath": "mediabrowser.server.core.4.8.11.nupkg.sha512"
+    }
+  }
+}

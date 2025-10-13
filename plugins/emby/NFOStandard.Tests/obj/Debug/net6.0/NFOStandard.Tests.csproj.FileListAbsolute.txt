@@ -1,0 +1,6 @@
+/home/ClaudeCodeRepos/NFOStandard/plugins/emby-jellyfin/NFOStandard.Tests/obj/Debug/net6.0/NFOStandard.Tests.csproj.AssemblyReference.cache
+/home/ClaudeCodeRepos/NFOStandard/plugins/emby-jellyfin/NFOStandard.Tests/obj/Debug/net6.0/NFOStandard.Tests.GeneratedMSBuildEditorConfig.editorconfig
+/home/ClaudeCodeRepos/NFOStandard/plugins/emby-jellyfin/NFOStandard.Tests/obj/Debug/net6.0/NFOStandard.Tests.AssemblyInfoInputs.cache
+/home/ClaudeCodeRepos/NFOStandard/plugins/emby-jellyfin/NFOStandard.Tests/obj/Debug/net6.0/NFOStandard.Tests.AssemblyInfo.cs
+/home/ClaudeCodeRepos/NFOStandard/plugins/emby-jellyfin/NFOStandard.Tests/obj/Debug/net6.0/NFOStandard.Tests.csproj.CoreCompileInputs.cache
+/home/ClaudeCodeRepos/NFOStandard/plugins/emby-jellyfin/NFOStandard.Tests/obj/Debug/net6.0/NFOStandard.Tests.sourcelink.json

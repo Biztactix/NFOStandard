@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "CUNGatE0igg=",
+  "success": true,
+  "projectFilePath": "/home/ClaudeCodeRepos/NFOStandard/plugins/emby/NFOStandard/NFOStandard.csproj",
+  "expectedPackageFiles": [
+    "/home/biztactix/.nuget/packages/mediabrowser.common/4.8.11/mediabrowser.common.4.8.11.nupkg.sha512",
+    "/home/biztactix/.nuget/packages/mediabrowser.server.core/4.8.11/mediabrowser.server.core.4.8.11.nupkg.sha512",
+    "/home/biztactix/.nuget/packages/microsoft.netcore.app.ref/6.0.36/microsoft.netcore.app.ref.6.0.36.nupkg.sha512",
+    "/home/biztactix/.nuget/packages/microsoft.aspnetcore.app.ref/6.0.36/microsoft.aspnetcore.app.ref.6.0.36.nupkg.sha512"
+  ],
+  "logs": []
+}

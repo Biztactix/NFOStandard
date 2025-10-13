@@ -1,0 +1,128 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>NFOStandard</name>
+    </assembly>
+    <members>
+        <member name="T:NFOStandard.Configuration.PluginConfiguration">
+            <summary>
+            NFO Standard plugin configuration
+            </summary>
+        </member>
+        <member name="P:NFOStandard.Configuration.PluginConfiguration.EnablePeopleExtraction">
+            <summary>
+            Enable people metadata extraction from NFO files
+            </summary>
+        </member>
+        <member name="P:NFOStandard.Configuration.PluginConfiguration.EnablePeopleWriting">
+            <summary>
+            Enable writing people metadata back to NFO files
+            </summary>
+        </member>
+        <member name="P:NFOStandard.Configuration.PluginConfiguration.MaxActors">
+            <summary>
+            Maximum number of actors to extract from NFO files
+            </summary>
+        </member>
+        <member name="P:NFOStandard.Configuration.PluginConfiguration.StrictNamespaceValidation">
+            <summary>
+            Enable strict NFO Standard namespace validation
+            </summary>
+        </member>
+        <member name="P:NFOStandard.Configuration.PluginConfiguration.EnableDetailedLogging">
+            <summary>
+            Enable detailed logging for people operations
+            </summary>
+        </member>
+        <member name="P:NFOStandard.Configuration.PluginConfiguration.EnableLegacyFallback">
+            <summary>
+            Fallback to legacy NFO format if NFO Standard format is not found
+            </summary>
+        </member>
+        <member name="T:NFOStandard.EntryPoint">
+            <summary>
+            Entry point for the NFO Standard plugin
+            </summary>
+        </member>
+        <member name="T:NFOStandard.NFOStandardPlugin">
+            <summary>
+            NFO Standard plugin for Emby
+            </summary>
+        </member>
+        <member name="T:NFOStandard.Providers.NFOStandardEpisodeProvider">
+            <summary>
+            NFO Standard episode metadata provider for Emby
+            </summary>
+        </member>
+        <member name="P:NFOStandard.Providers.NFOStandardEpisodeProvider.Name">
+            <summary>
+            Gets the name of this provider
+            </summary>
+        </member>
+        <member name="M:NFOStandard.Providers.NFOStandardEpisodeProvider.#ctor(MediaBrowser.Model.Logging.ILogger,MediaBrowser.Model.IO.IFileSystem)">
+            <summary>
+            Initializes a new instance of the <see cref="T:NFOStandard.Providers.NFOStandardEpisodeProvider"/> class.
+            </summary>
+        </member>
+        <member name="M:NFOStandard.Providers.NFOStandardEpisodeProvider.GetMetadata(MediaBrowser.Controller.Providers.ItemInfo,MediaBrowser.Model.Configuration.LibraryOptions,MediaBrowser.Controller.Providers.IDirectoryService,System.Threading.CancellationToken)">
+            <summary>
+            Gets metadata for an episode from NFO file
+            </summary>
+        </member>
+        <member name="M:NFOStandard.Providers.NFOStandardEpisodeProvider.HasChanged(MediaBrowser.Controller.Entities.BaseItem,MediaBrowser.Model.Configuration.LibraryOptions,MediaBrowser.Controller.Providers.IDirectoryService)">
+            <summary>
+            Checks if the NFO file has changed since last scan
+            </summary>
+        </member>
+        <member name="T:NFOStandard.Providers.NFOStandardMovieProvider">
+            <summary>
+            NFO Standard movie metadata provider for Emby/Jellyfin
+            </summary>
+        </member>
+        <member name="T:NFOStandard.Providers.NFOStandardSeriesProvider">
+            <summary>
+            NFO Standard TV series metadata provider for Emby/Jellyfin
+            </summary>
+        </member>
+        <member name="T:NFOStandard.Savers.NFOStandardEpisodeSaver">
+            <summary>
+            NFO Standard episode metadata saver for Emby
+            </summary>
+        </member>
+        <member name="P:NFOStandard.Savers.NFOStandardEpisodeSaver.Name">
+            <summary>
+            Gets the name of this saver
+            </summary>
+        </member>
+        <member name="M:NFOStandard.Savers.NFOStandardEpisodeSaver.#ctor(MediaBrowser.Model.Logging.ILogger,MediaBrowser.Model.IO.IFileSystem,MediaBrowser.Controller.Configuration.IServerConfigurationManager,MediaBrowser.Controller.Library.ILibraryManager)">
+            <summary>
+            Initializes a new instance of the <see cref="T:NFOStandard.Savers.NFOStandardEpisodeSaver"/> class.
+            </summary>
+        </member>
+        <member name="M:NFOStandard.Savers.NFOStandardEpisodeSaver.GetSavePath(MediaBrowser.Controller.Entities.BaseItem)">
+            <summary>
+            Gets the save path for the NFO file
+            </summary>
+        </member>
+        <member name="M:NFOStandard.Savers.NFOStandardEpisodeSaver.IsEnabledFor(MediaBrowser.Controller.Entities.BaseItem,MediaBrowser.Controller.Library.ItemUpdateType)">
+            <summary>
+            Determines if saving is enabled for this item
+            </summary>
+        </member>
+        <member name="M:NFOStandard.Savers.NFOStandardEpisodeSaver.Save(MediaBrowser.Controller.Entities.BaseItem,MediaBrowser.Model.Configuration.LibraryOptions,System.Threading.CancellationToken)">
+            <summary>
+            Saves the episode metadata to NFO file
+            </summary>
+        </member>
+        <member name="T:NFOStandard.Savers.NFOStandardMovieSaver">
+            <summary>
+            NFO Standard movie metadata saver for Emby/Jellyfin
+            </summary>
+        </member>
+        <member name="T:NFOStandard.Savers.NFOStandardSeriesSaver">
+            <summary>
+            NFO Standard TV series metadata saver for Emby/Jellyfin
+            </summary>
+        </member>
+    </members>
+</doc>

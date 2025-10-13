@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root xmlns="NFOStandard" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="NFOStandard https://xsd.nfostandard.com/main.xsd">
+    <media>
+        <adult>
+            <name>Example Adult Title</name>
+            <releaseDate>2023-06-15</releaseDate>
+            <productionCompany>Example Studios</productionCompany>
+            <siteName>Example Studio Site</siteName>
+            <VideoURL>http://example.com/video/123456</VideoURL>
+            <TrailerURL>http://example.com/trailer/123456</TrailerURL>
+            <duration>7200</duration>
+            <director>
+                <name>Example Director</name>
+            </director>
+            <performer>
+                <name>Example Performer 1</name>
+                <gender>Female</gender>
+            </performer>
+            <performer>
+                <name>Example Performer 2</name>
+                <gender>Male</gender>
+            </performer>
+            <keyword>romance</keyword>
+            <keyword>drama</keyword>
+            <tag>feature</tag>
+            <tag>couples</tag>
+            <link>http://example.com/details/123456</link>
+            <description>A detailed description of the content and scenes.</description>
+            <rating name="adultdvdempire" value="4.5" max="5" votes="250"/>
+            <uniqueId type="aebn">123456</uniqueId>
+            <uniqueId type="adultdvdempire">789012</uniqueId>
+            <thumbnail type="poster" width="800" height="1200" url="http://example.com/adult-poster.jpg"/>
+        </adult>
+    </media>
+</root>

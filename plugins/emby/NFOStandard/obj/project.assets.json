@@ -1,0 +1,185 @@
+{
+  "version": 3,
+  "targets": {
+    "net6.0": {
+      "MediaBrowser.Common/4.8.11": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/Emby.Media.Model.dll": {
+            "related": ".pdb;.xml"
+          },
+          "lib/netstandard2.0/Emby.Web.GenericEdit.dll": {
+            "related": ".pdb;.xml"
+          },
+          "lib/netstandard2.0/MediaBrowser.Common.dll": {
+            "related": ".pdb;.xml"
+          },
+          "lib/netstandard2.0/MediaBrowser.Model.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/Emby.Media.Model.dll": {
+            "related": ".pdb;.xml"
+          },
+          "lib/netstandard2.0/Emby.Web.GenericEdit.dll": {
+            "related": ".pdb;.xml"
+          },
+          "lib/netstandard2.0/MediaBrowser.Common.dll": {
+            "related": ".pdb;.xml"
+          },
+          "lib/netstandard2.0/MediaBrowser.Model.dll": {
+            "related": ".pdb;.xml"
+          }
+        }
+      },
+      "MediaBrowser.Server.Core/4.8.11": {
+        "type": "package",
+        "dependencies": {
+          "MediaBrowser.Common": "4.8.11"
+        },
+        "compile": {
+          "lib/netstandard2.0/Emby.Naming.dll": {
+            "related": ".pdb;.xml"
+          },
+          "lib/netstandard2.0/MediaBrowser.Controller.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/Emby.Naming.dll": {
+            "related": ".pdb;.xml"
+          },
+          "lib/netstandard2.0/MediaBrowser.Controller.dll": {
+            "related": ".pdb;.xml"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "MediaBrowser.Common/4.8.11": {
+      "sha512": "Taq7T1Ufo0v3a/L6Fr6oCOjiKTjMWEd+6L46tYugzvdsHU48uPFvYiyV3zbL1OGbY0HBwggLbmb0Dg9J7LKXaw==",
+      "type": "package",
+      "path": "mediabrowser.common/4.8.11",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netstandard2.0/Emby.Media.Model.dll",
+        "lib/netstandard2.0/Emby.Media.Model.pdb",
+        "lib/netstandard2.0/Emby.Media.Model.xml",
+        "lib/netstandard2.0/Emby.Web.GenericEdit.dll",
+        "lib/netstandard2.0/Emby.Web.GenericEdit.pdb",
+        "lib/netstandard2.0/Emby.Web.GenericEdit.xml",
+        "lib/netstandard2.0/MediaBrowser.Common.dll",
+        "lib/netstandard2.0/MediaBrowser.Common.pdb",
+        "lib/netstandard2.0/MediaBrowser.Common.xml",
+        "lib/netstandard2.0/MediaBrowser.Model.dll",
+        "lib/netstandard2.0/MediaBrowser.Model.pdb",
+        "lib/netstandard2.0/MediaBrowser.Model.xml",
+        "mediabrowser.common.4.8.11.nupkg.sha512",
+        "mediabrowser.common.nuspec"
+      ]
+    },
+    "MediaBrowser.Server.Core/4.8.11": {
+      "sha512": "tN7qhYEuNJlf3fssNIQFa+/rNT1XMHTHlygdGWKdyVsOQCLAVUvCqWUX6wDY+9fO/khnpHBR0fnzyghCM7TF5g==",
+      "type": "package",
+      "path": "mediabrowser.server.core/4.8.11",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netstandard2.0/Emby.Naming.dll",
+        "lib/netstandard2.0/Emby.Naming.pdb",
+        "lib/netstandard2.0/Emby.Naming.xml",
+        "lib/netstandard2.0/MediaBrowser.Controller.dll",
+        "lib/netstandard2.0/MediaBrowser.Controller.pdb",
+        "lib/netstandard2.0/MediaBrowser.Controller.xml",
+        "mediabrowser.server.core.4.8.11.nupkg.sha512",
+        "mediabrowser.server.core.nuspec"
+      ]
+    }
+  },
+  "projectFileDependencyGroups": {
+    "net6.0": [
+      "MediaBrowser.Server.Core >= 4.8.*"
+    ]
+  },
+  "packageFolders": {
+    "/home/biztactix/.nuget/packages/": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "/home/ClaudeCodeRepos/NFOStandard/plugins/emby/NFOStandard/NFOStandard.csproj",
+      "projectName": "NFOStandard",
+      "projectPath": "/home/ClaudeCodeRepos/NFOStandard/plugins/emby/NFOStandard/NFOStandard.csproj",
+      "packagesPath": "/home/biztactix/.nuget/packages/",
+      "outputPath": "/home/ClaudeCodeRepos/NFOStandard/plugins/emby/NFOStandard/obj/",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "/home/biztactix/.nuget/NuGet/NuGet.Config"
+      ],
+      "originalTargetFrameworks": [
+        "net6.0"
+      ],
+      "sources": {
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "projectReferences": {}
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
+      },
+      "SdkAnalysisLevel": "9.0.300"
+    },
+    "frameworks": {
+      "net6.0": {
+        "targetAlias": "net6.0",
+        "dependencies": {
+          "MediaBrowser.Server.Core": {
+            "target": "Package",
+            "version": "[4.8.*, )"
+          }
+        },
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48",
+          "net481"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[6.0.36, 6.0.36]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Ref",
+            "version": "[6.0.36, 6.0.36]"
+          }
+        ],
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/9.0.300/RuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}

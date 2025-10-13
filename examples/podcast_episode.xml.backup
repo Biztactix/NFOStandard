@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root xmlns="NFOStandard" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="NFOStandard https://xsd.nfostandard.com/main.xsd">
+    <media>
+        <podcast>
+            <title>The Roman Empire's Greatest Mystery</title>
+            <releaseDate>2023-10-15</releaseDate>
+            <productionCompany>Hardcore History Productions</productionCompany>
+            <host>
+                <name>Dan Carlin</name>
+            </host>
+            <duration>14520</duration>
+            <language>English</language>
+            <genre>History</genre>
+            <genre>Education</genre>
+            <keyword>rome</keyword>
+            <keyword>history</keyword>
+            <keyword>ninth legion</keyword>
+            <keyword>britain</keyword>
+            <keyword>mystery</keyword>
+            <keyword>military history</keyword>
+            <tag>ancient history</tag>
+            <tag>documentary</tag>
+            <description>Dan Carlin examines one of the most enduring mysteries of ancient history - what really happened to the lost Ninth Legion of Rome? This deep dive explores the historical evidence, the myths, and the lasting impact of this legendary disappearance on Roman military culture and British folklore.</description>
+            <rating name="apple" value="4.8" max="5" votes="50000"/>
+            <rating name="spotify" value="4.9" max="5" votes="75000"/>
+            <uniqueId type="guid">hardcore-history-episode-75</uniqueId>
+            <contentRating country="USA" board="FCC" rating="G" image="http://example.com/ratings/fcc-g.png"/>
+            <cover type="cover" width="3000" height="3000" url="http://example.com/hardcore-history-cover.jpg"/>
+            <serviceLinks>
+                <service>Spotify</service>
+                <url>https://open.spotify.com/episode/hardcore-history-75</url>
+            </serviceLinks>
+        </podcast>
+    </media>
+</root>
