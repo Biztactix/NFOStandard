@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <PackageId>NFOStandard.Validator</PackageId>
+    <Version>2.0.0</Version>
+    <Authors>Biztactix</Authors>
+    <Company>Biztactix</Company>
+    <Description>.NET validator for NFO Standard XML files.</Description>
+    <PackageLicenseExpression>Unlicense</PackageLicenseExpression>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageProjectUrl>https://github.com/Biztactix/NFOStandard</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Biztactix/NFOStandard</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>nfo;xml;validator;schema</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="README.md" Pack="true" PackagePath="/" />
+  </ItemGroup>
+</Project>
