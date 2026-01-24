@@ -21,7 +21,7 @@ internal sealed class LocalSchemaResolver : XmlUrlResolver
             return new FileStream(localPath, FileMode.Open, FileAccess.Read, FileShare.Read);
         }
 
-        return base.GetEntity(absoluteUri, role, ofObjectToReturn);
+        return base.GetEntity(absoluteUri, role, ofObjectToReturn)!;
     }
 
     private string? TryResolveLocalPath(Uri absoluteUri)

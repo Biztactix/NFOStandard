@@ -1,3 +1,5 @@
 AGENTS.md
 .venv/
 __pycache__/
+**/bin/
+**/obj/

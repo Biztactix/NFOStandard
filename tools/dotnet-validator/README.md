@@ -10,7 +10,7 @@ class library for integration and a small CLI wrapper for local validation.
 
 ## Requirements
 
-- .NET 6.0 SDK or later
+- .NET 8.0 SDK or later
 
 ## Build
 
