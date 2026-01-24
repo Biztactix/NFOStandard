@@ -1,8 +1,8 @@
 # NFOStandard.Xml
 
-`NFOStandard.Xml` provides models and an offline-capable XML validator for the
-NFO Standard schemas. It is designed to be packaged for NuGet and embedded in
-.NET applications that need to validate `.nfo` files.
+`NFOStandard.Xml` provides generated models and an offline-capable XML
+validator for the NFO Standard schemas. It is designed to be packaged for
+NuGet and embedded in .NET applications that need to validate `.nfo` files.
 
 ## Usage
 
@@ -28,6 +28,8 @@ NfoSerializer.Save(root, "movie.updated.nfo");
 `schemaDir` should point to a directory that contains `main.xsd` and a
 `Schemas/` folder. When omitted, the validator will look for `./v2`.
 
-## Roadmap
+## Model Generation
 
-- Add a source generator to keep the model classes synchronized with the XSDs.
+The package uses a source generator to produce strongly typed models from the
+XSD files under `v2/`. The generator runs at build time and keeps the models in
+sync with schema updates.

@@ -20,4 +20,13 @@
   <ItemGroup>
     <None Include="README.md" Pack="true" PackagePath="/" />
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NFOStandard.Xml.SourceGen\NFOStandard.Xml.SourceGen.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="$(MSBuildProjectDirectory)\..\..\..\v2\main.xsd" />
+    <AdditionalFiles Include="$(MSBuildProjectDirectory)\..\..\..\v2\Schemas\*.xsd" />
+  </ItemGroup>
 </Project>

@@ -1,8 +1,8 @@
 # NFOStandard .NET XML Toolkit
 
-This tool provides .NET models and validation for NFO Standard XML files. It
-includes a class library for integration and a small CLI wrapper for local
-validation.
+This tool provides generated .NET models and validation for NFO Standard XML
+files. It includes a class library for integration and a small CLI wrapper for
+local validation.
 
 ## Projects
 
@@ -58,6 +58,7 @@ dotnet pack tools/dotnet-xml/NFOStandard.Xml/NFOStandard.Xml.csproj -c Release
 The package metadata is configured in `NFOStandard.Xml.csproj` and is
 ready for future publishing.
 
-## Roadmap
+## Model Generation
 
-- Add a source generator to produce strongly typed models directly from the XSDs.
+The models are generated at build time from the `v2` XSDs using a source
+generator. Updating the schema files will regenerate the models automatically.
