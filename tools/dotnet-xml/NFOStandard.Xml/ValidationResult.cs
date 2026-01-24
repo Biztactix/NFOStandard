@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace NFOStandard.Validator;
+namespace NFOStandard.Xml;
 
 public sealed class ValidationResult
 {

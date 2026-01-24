@@ -2,7 +2,7 @@ using System;
 using System.IO;
 using System.Xml;
 
-namespace NFOStandard.Validator;
+namespace NFOStandard.Xml;
 
 internal sealed class LocalSchemaResolver : XmlUrlResolver
 {

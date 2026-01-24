@@ -2,7 +2,7 @@ using System;
 using System.IO;
 using System.Xml.Linq;
 
-namespace NFOStandard.Validator;
+namespace NFOStandard.Xml;
 
 public sealed class NfoDocument
 {

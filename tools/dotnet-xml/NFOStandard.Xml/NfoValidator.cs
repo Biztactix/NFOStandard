@@ -4,7 +4,7 @@ using System.IO;
 using System.Xml;
 using System.Xml.Schema;
 
-namespace NFOStandard.Validator;
+namespace NFOStandard.Xml;
 
 public sealed class NfoValidator
 {

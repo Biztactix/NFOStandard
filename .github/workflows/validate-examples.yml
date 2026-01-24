@@ -80,7 +80,7 @@ jobs:
     - name: Run test framework (offline v2)
       run: python tests/test_runner.py --offline --schema-dir v2 tests
 
-  dotnet-validator:
+  dotnet-xml:
     runs-on: ubuntu-latest
     if: github.event_name == 'pull_request' || github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop'
 
@@ -92,11 +92,11 @@ jobs:
       with:
         dotnet-version: '8.0.x'
 
-    - name: Build .NET validator
-      run: dotnet build tools/dotnet-validator/NFOStandard.Validator.Console/NFOStandard.Validator.Console.csproj
+    - name: Build .NET XML toolkit
+      run: dotnet build tools/dotnet-xml/NFOStandard.Xml.Console/NFOStandard.Xml.Console.csproj
 
     - name: Validate root examples (offline v2)
-      run: dotnet run --no-build --project tools/dotnet-validator/NFOStandard.Validator.Console/NFOStandard.Validator.Console.csproj -- \
+      run: dotnet run --no-build --project tools/dotnet-xml/NFOStandard.Xml.Console/NFOStandard.Xml.Console.csproj -- \
         --file ExampleMovie.xml \
         --schema-dir v2
 
@@ -104,7 +104,7 @@ jobs:
       run: |
         for xml_file in examples/*.xml v2/examples/*.xml; do
           if [ -f "$xml_file" ]; then
-            dotnet run --no-build --project tools/dotnet-validator/NFOStandard.Validator.Console/NFOStandard.Validator.Console.csproj -- \
+            dotnet run --no-build --project tools/dotnet-xml/NFOStandard.Xml.Console/NFOStandard.Xml.Console.csproj -- \
               --file "$xml_file" \
               --schema-dir v2
           fi

@@ -1,9 +1,9 @@
 using System;
 using System.IO;
 using System.Text.Json;
-using NFOStandard.Validator;
+using NFOStandard.Xml;
 
-namespace NFOStandard.Validator.Console;
+namespace NFOStandard.Xml.Console;
 
 internal static class Program
 {
@@ -118,9 +118,9 @@ internal static class Program
 
     private static void PrintUsage()
     {
-        System.Console.WriteLine("NFOStandard .NET Validator");
+        System.Console.WriteLine("NFOStandard .NET XML Toolkit");
         System.Console.WriteLine("Usage:");
-        System.Console.WriteLine("  nfo-validator --file <path> [--schema-dir <path>] [--json]");
+        System.Console.WriteLine("  nfo-xml --file <path> [--schema-dir <path>] [--json]");
         System.Console.WriteLine();
         System.Console.WriteLine("Options:");
         System.Console.WriteLine("  --file, -f         XML file to validate");
