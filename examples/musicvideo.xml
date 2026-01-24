@@ -21,7 +21,7 @@
             <genre>Progressive Rock</genre>
             <genre>Art Rock</genre>
             <duration>360</duration>
-            <language>English</language>
+            <language>en</language>
             <keyword>rock</keyword>
             <keyword>opera</keyword>
             <keyword>epic</keyword>
@@ -32,7 +32,7 @@
             <rating name="imvdb" value="9.2" max="10" votes="15000"/>
             <uniqueId type="musicbrainz">b1c62d7f-3a15-4f7f-bb21-89a0b9c6e954</uniqueId>
             <uniqueId type="imvdb">573621</uniqueId>
-            <contentRating country="UK" board="BBFC"><rating>U</rating><image>http://example.com/ratings/bbfc-u.png</image></contentRating>
+            <contentRating country="GB" board="BBFC"><rating>U</rating><image>http://example.com/ratings/bbfc-u.png</image></contentRating>
             <cover type="poster" width="1000" height="1000" url="http://example.com/bohemian-rhapsody-poster.jpg">Cover Image</cover>
             <serviceLinks>
                 <service>YouTube</service>

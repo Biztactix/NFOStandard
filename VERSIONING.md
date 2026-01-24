@@ -56,8 +56,6 @@ Increment PATCH version when:
 
 | NFO Version | Can Read | Can Write |
 |-------------|----------|-----------|
-| 1.0.0 | 1.0.x | 1.0.0 |
-| 1.1.0 | 1.0.x - 1.1.x | 1.0.0 or 1.1.0 |
 | 2.0.0 | 2.0.x | 2.0.0 |
 
 ## Schema Versioning
@@ -66,8 +64,8 @@ Increment PATCH version when:
 
 Schemas are versioned in their URLs:
 ```
-https://xsd.nfostandard.com/v1/main.xsd
-https://xsd.nfostandard.com/v1/Schemas/movie.xsd
+https://xsd.nfostandard.com/v2/main.xsd
+https://xsd.nfostandard.com/v2/Schemas/movie.xsd
 ```
 
 ### Version Negotiation
@@ -79,9 +77,9 @@ xsi:schemaLocation="NFOStandard https://xsd.nfostandard.com/v1/main.xsd"
 
 ### Legacy Support
 
-- Version 1.x schemas remain available indefinitely at their original URLs
+- Versions prior to v2 are archived under `/archive/` and are not supported
 - A `latest` alias points to the current stable version
-- Deprecated versions are marked but remain functional
+- Deprecated versions are marked but remain functional while supported
 
 ## Migration Path
 
@@ -89,15 +87,15 @@ xsi:schemaLocation="NFOStandard https://xsd.nfostandard.com/v1/main.xsd"
 
 No migration required. New features are optional:
 ```xml
-<!-- Version 1.0 -->
+<!-- Version 2.0 -->
 <movie>
     <title>Example</title>
 </movie>
 
-<!-- Version 1.1 (with new optional field) -->
+<!-- Version 2.1 (with new optional field) -->
 <movie>
     <title>Example</title>
-    <awards>Oscar Winner</awards> <!-- New in 1.1 -->
+    <awards>Oscar Winner</awards> <!-- New in 2.1 -->
 </movie>
 ```
 
@@ -191,7 +189,6 @@ All changes are documented in `CHANGELOG.md` following [Keep a Changelog](https:
 
 | Version | Status | Released | EOL | Notes |
 |---------|--------|----------|-----|-------|
-| 1.0.x | Legacy | 2024-01 | 2027-01 | Initial release, LTS |
 | 2.0.x | Current | 2024-12 | 2027-12 | Enhanced schema, breaking changes, LTS |
 | 2.1.x | Planned | 2025-06 | 2026-06 | New media types |
 | 3.0.x | Future | 2026-01 | 2029-01 | Future enhancements |

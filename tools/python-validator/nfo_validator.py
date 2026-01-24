@@ -27,6 +27,37 @@ class NFOValidator:
         self.schema_dir = schema_dir
         self.schemas_cache = {}
         self.main_schema = None
+
+        self._schema_dir_path = Path(schema_dir) if schema_dir else None
+
+    class _LocalSchemaResolver(etree.Resolver):
+        def __init__(self, schema_dir: Optional[Path]):
+            super().__init__()
+            self.schema_dir = schema_dir
+
+        def resolve(self, url: str, pubid: str, context):
+            if not self.schema_dir:
+                return None
+
+            parsed = urlparse(url)
+            schema_filename = os.path.basename(parsed.path)
+            if not schema_filename:
+                return None
+
+            if '/Schemas/' in parsed.path:
+                local_path = self.schema_dir / 'Schemas' / schema_filename
+            else:
+                local_path = self.schema_dir / schema_filename
+
+            if local_path.exists():
+                return self.resolve_filename(str(local_path), context)
+
+            if schema_filename == 'main.xsd':
+                parent_path = self.schema_dir.parent / schema_filename
+                if parent_path.exists():
+                    return self.resolve_filename(str(parent_path), context)
+
+            return None
         
     def _load_schema(self, schema_url: str) -> etree.XMLSchema:
         """Load and cache XSD schema."""
@@ -34,11 +65,24 @@ class NFOValidator:
             return self.schemas_cache[schema_url]
             
         if self.offline and self.schema_dir:
-            # Load from local directory
+            if not self._schema_dir_path:
+                raise FileNotFoundError("Schema directory not set for offline mode")
             schema_filename = os.path.basename(urlparse(schema_url).path)
-            schema_path = os.path.join(self.schema_dir, schema_filename)
-            with open(schema_path, 'rb') as f:
-                schema_doc = etree.parse(f)
+            candidate_paths = [
+                self._schema_dir_path / schema_filename,
+                self._schema_dir_path / 'Schemas' / schema_filename
+            ]
+
+            if schema_filename == self.MAIN_SCHEMA:
+                candidate_paths.append(self._schema_dir_path.parent / schema_filename)
+
+            schema_path = next((path for path in candidate_paths if path.exists()), None)
+            if not schema_path:
+                raise FileNotFoundError(f"Schema not found for offline mode: {schema_filename}")
+
+            parser = etree.XMLParser()
+            parser.resolvers.add(self._LocalSchemaResolver(self._schema_dir_path))
+            schema_doc = etree.parse(str(schema_path), parser)
         else:
             # Load from URL
             response = requests.get(schema_url, timeout=10)

@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- Dropped v1 backward-compat support and archived v1 assets due to no known
+  production implementations; v2+ is the only supported schema line going
+  forward.
+
 ## [2.0.0] - 2024-12-09
 
 ### 🚨 **BREAKING CHANGES**
