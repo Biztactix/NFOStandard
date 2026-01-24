@@ -8,7 +8,7 @@ import os
 import sys
 import json
 from pathlib import Path
-from typing import Dict, List, Tuple
+from typing import Dict, List, Tuple, Optional
 import subprocess
 
 # Add parent directory to path for validator import
@@ -22,8 +22,8 @@ except ImportError:
 
 
 class TestRunner:
-    def __init__(self):
-        self.validator = NFOValidator()
+    def __init__(self, offline: bool = False, schema_dir: Optional[str] = None):
+        self.validator = NFOValidator(offline=offline, schema_dir=schema_dir)
         self.results = {
             'valid': {'passed': 0, 'failed': 0, 'files': []},
             'invalid': {'passed': 0, 'failed': 0, 'files': []},
@@ -183,6 +183,10 @@ def main():
                        help='Output results as JSON')
     parser.add_argument('--verbose', '-v', action='store_true',
                        help='Verbose output')
+    parser.add_argument('--offline', action='store_true',
+                       help='Use offline validation with local schemas')
+    parser.add_argument('--schema-dir',
+                       help='Directory containing local schema files')
     
     args = parser.parse_args()
     
@@ -192,18 +196,23 @@ def main():
         sys.exit(1)
     
     # Run tests
-    runner = TestRunner()
+    schema_dir = args.schema_dir
+    if args.offline and not schema_dir:
+        schema_dir = str(Path(__file__).resolve().parents[1] / 'v2')
+
+    runner = TestRunner(offline=args.offline, schema_dir=schema_dir)
     report = runner.run_tests(args.test_dir)
     
     # Output results
     print("\n" + "="*60)
     print("TEST SUMMARY")
     print("="*60)
+
+    summary = report['summary']
     
     if args.json:
         print(json.dumps(report, indent=2))
     else:
-        summary = report['summary']
         print(f"Total Tests: {summary['total_tests']}")
         print(f"Passed: {summary['passed']}")
         print(f"Failed: {summary['failed']}")

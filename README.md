@@ -9,6 +9,8 @@ Welcome to the Open NFO Standard repository! This project aims to create a unifi
 ## Current Version: 2.0.0
 
 🚨 **Version 2.0.0 contains breaking changes from v1.0.0**. See the [CHANGELOG](CHANGELOG.md) for migration details.
+Version 1 assets are archived under `archive/v1` due to no known production
+implementations.
 
 ## Table of Contents
 
@@ -80,13 +82,13 @@ This is an example of how to use the XSDs to reference it so that it's easy for 
 		<tag>Dream</tag>
 		<setname>Inception Series</setname>
 		<setoverview>Movies about dream extraction.</setoverview>
-		<country>USA</country>
+		<country>US</country>
 		<productioncompany>Warner Bros.</productioncompany>
 		<keyword>dream</keyword>
 		<keyword>heist</keyword>
 		<releasedate>2010-07-16</releasedate>
 		<award>Academy Award for Best Cinematography</award>
-		<subtitlelanguage>English</subtitlelanguage>
+		<subtitlelanguage>en</subtitlelanguage>
 		<soundtrack>Inception OST</soundtrack>
 		<parentalguide>Some material may be inappropriate for children under 13.</parentalguide>
 		<actor>

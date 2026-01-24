@@ -20,7 +20,7 @@
             <genre>Progressive Rock</genre>
             <genre>Psychedelic Rock</genre>
             <duration>2580</duration>
-            <language>English</language>
+            <language>en</language>
             <keyword>progressive</keyword>
             <keyword>psychedelic</keyword>
             <tag>classic rock</tag>
@@ -28,7 +28,7 @@
             <description>One of the most influential progressive rock albums of all time, exploring themes of conflict, greed, and mental illness.</description>
             <rating name="allmusic" value="5.0" max="5"/>
             <uniqueId type="musicbrainz">a7579dcf-40b3-3bea-8a73-7d8d6a1b6a8e</uniqueId>
-            <contentRating country="UK" board="BBFC"><rating>U</rating><image>http://example.com/ratings/bbfc-u.png</image></contentRating>
+            <contentRating country="GB" board="BBFC"><rating>U</rating><image>http://example.com/ratings/bbfc-u.png</image></contentRating>
             <cover type="poster" width="1000" height="1000" url="http://example.com/darkside-cover.jpg">Cover Image</cover>
             <serviceLinks>
                 <service>Spotify</service>
