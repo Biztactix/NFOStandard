@@ -9,6 +9,9 @@ NFO Standard schemas. It is designed to be packaged for NuGet and embedded in
 ```csharp
 using NFOStandard.Validator;
 
+var document = NfoDocument.Load("movie.nfo");
+var media = document.Media;
+
 var validator = new NfoValidator();
 var result = validator.ValidateFile("movie.nfo", "./v2");
 if (!result.IsValid)
@@ -18,6 +21,8 @@ if (!result.IsValid)
         Console.WriteLine(error);
     }
 }
+
+document.Save("movie.updated.nfo");
 ```
 
 `schemaDir` should point to a directory that contains `main.xsd` and a

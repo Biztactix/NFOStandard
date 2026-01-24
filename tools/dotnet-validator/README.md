@@ -31,6 +31,21 @@ Arguments:
 - `--schema-dir`, `-s`: Path containing `main.xsd` and `Schemas/` (defaults to `./v2` when present)
 - `--json`: Output results as JSON
 
+## Library Usage
+
+```csharp
+using NFOStandard.Validator;
+
+var document = NfoDocument.Load("movie.nfo");
+var media = document.Media;
+
+// Make edits using LINQ to XML
+media?.Element(XName.Get("movie", media.Name.NamespaceName))
+    ?.SetElementValue(XName.Get("title", media.Name.NamespaceName), "Updated Title");
+
+document.Save("movie.updated.nfo");
+```
+
 ## NuGet Packaging
 
 ```bash
