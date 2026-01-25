@@ -33,13 +33,16 @@ This plugin enables Emby and Jellyfin to read and write NFO files following the 
 ### Building from Source
 
 Requirements:
-- .NET Core SDK 5.0 or higher
-- Visual Studio 2019+ or VS Code
+- .NET 8 SDK
+- Visual Studio 2022+ or VS Code
 
 ```bash
 cd plugins/emby-jellyfin/NFOStandard
 dotnet build -c Release
 ```
+
+This project references `tools/dotnet-xml/NFOStandard.Xml` via a local
+`ProjectReference` for offline builds.
 
 The compiled plugin will be in `bin/Release/net5.0/`
 
