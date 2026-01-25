@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema elementFormDefault="qualified"
+           targetNamespace="NFOStandard" 
+            xmlns="NFOStandard"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <xs:include schemaLocation="https://xsd.nfostandard.com/v2/Schemas/common.xsd"/>
+    <xs:include schemaLocation="https://xsd.nfostandard.com/v2/Schemas/person.xsd"/>
+
+    <xs:complexType name="videoType">
+        <xs:sequence>
+            <xs:element name="name" type="xs:string" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="filmingDate" type="xs:date" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="producer" type="PersonType" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="collectionName" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="people" type="PersonType" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="keyword" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="tag" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="description" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="rating" type="RatingType" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="uniqueId" type="UniqueIdType" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="contentRating" type="ContentRatingType" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="thumbnail" type="MediaFileType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

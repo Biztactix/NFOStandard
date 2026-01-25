@@ -14,6 +14,11 @@ This directory contains various tools for working with NFO Standard files.
 - Browser and Node.js compatible validation
 - Includes both CLI and library usage
 
+### .NET XML Toolkit
+- Location: `dotnet-xml/`
+- .NET class library plus CLI for local validation and editing
+- Uses local schemas for offline validation
+
 ### Format Converters
 - Location: `converters/`
 - Convert between NFO Standard XML, JSON, and Protobuf formats
@@ -47,6 +52,11 @@ cd web-importer
 open index.html
 # For API mode:
 python api_server.py
+
+# .NET validator
+dotnet run --project dotnet-xml/NFOStandard.Xml.Console -- \
+  --file ../examples/movie.xml \
+  --schema-dir ../v2
 ```
 
 ## Development

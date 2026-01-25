@@ -80,6 +80,35 @@ jobs:
     - name: Run test framework (offline v2)
       run: python tests/test_runner.py --offline --schema-dir v2 tests
 
+  dotnet-xml:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request' || github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop'
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
+
+    - name: Build .NET XML toolkit
+      run: dotnet build tools/dotnet-xml/NFOStandard.Xml.Console/NFOStandard.Xml.Console.csproj
+
+    - name: Run .NET XML tests
+      run: dotnet test tools/dotnet-xml/NFOStandard.Xml.Tests/NFOStandard.Xml.Tests.csproj
+
+    - name: Validate root examples (offline v2)
+      run: dotnet run --no-build --project tools/dotnet-xml/NFOStandard.Xml.Console/NFOStandard.Xml.Console.csproj -- --file ExampleMovie.xml --schema-dir v2
+
+    - name: Validate example sets (offline v2)
+      run: |
+        for xml_file in examples/*.xml v2/examples/*.xml; do
+          if [ -f "$xml_file" ]; then
+            dotnet run --no-build --project tools/dotnet-xml/NFOStandard.Xml.Console/NFOStandard.Xml.Console.csproj -- --file "$xml_file" --schema-dir v2
+          fi
+        done
+
   # Schema integrity validation (runs for all branches)
   validate-schema-integrity:
     runs-on: ubuntu-latest

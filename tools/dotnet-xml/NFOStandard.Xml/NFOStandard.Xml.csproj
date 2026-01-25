@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <PackageId>NFOStandard.Xml</PackageId>
+    <Version>2.0.0</Version>
+    <Authors>Biztactix</Authors>
+    <Company>Biztactix</Company>
+    <Description>.NET models and validator for NFO Standard XML files.</Description>
+    <PackageLicenseExpression>Unlicense</PackageLicenseExpression>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageProjectUrl>https://github.com/Biztactix/NFOStandard</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Biztactix/NFOStandard</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>nfo;xml;validator;schema;metadata</PackageTags>
+    <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
+    <CompilerGeneratedFilesOutputPath>$(BaseIntermediateOutputPath)Generated</CompilerGeneratedFilesOutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="README.md" Pack="true" PackagePath="/" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Schemas\v2\**\*.xsd" LogicalName="NFOStandard.Xml.Schemas/%(RecursiveDir)%(Filename)%(Extension)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NFOStandard.Xml.SourceGen\NFOStandard.Xml.SourceGen.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+  </ItemGroup>
+</Project>
