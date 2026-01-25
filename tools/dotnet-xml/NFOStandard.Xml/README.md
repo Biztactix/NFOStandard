@@ -102,6 +102,12 @@ versioned XSD files embedded in the NuGet package. The generator runs at build
 time and stays locked to the schema version shipped with the package; upgrading
 the package is how you move to a newer schema.
 
+## Publishing
+
+The repository includes a GitHub Actions workflow that packs the NuGet package
+on manual dispatch. Set the `publish` input to `true` to push to nuget.org and
+add a repository secret named `NUGET_API_KEY` to enable publishing.
+
 ## Compatibility Plan
 
 - NuGet version aligns with schema version (v2 package ships v2 schemas/models).
