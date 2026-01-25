@@ -61,6 +61,14 @@ dotnet pack tools/dotnet-xml/NFOStandard.Xml/NFOStandard.Xml.csproj -c Release
 The package metadata is configured in `NFOStandard.Xml.csproj` and is
 ready for future publishing.
 
+### Release Workflow
+
+1. Update the version in `tools/dotnet-xml/NFOStandard.Xml/NFOStandard.Xml.csproj`.
+2. Create a tag in the format `dotnet-xml-v<version>` (example: `dotnet-xml-v2.0.1`).
+3. Push the tag to GitHub; the workflow `Pack NuGet (NFOStandard.Xml)` will
+   build, pack, and upload the artifacts.
+4. To publish to nuget.org, add a repository secret named `NUGET_API_KEY`.
+
 ## Model Generation
 
 The models are generated at build time from versioned XSDs embedded in the
