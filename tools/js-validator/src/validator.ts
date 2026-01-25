@@ -92,8 +92,8 @@ export class NFOValidator {
         for (const error of xmlErrors) {
           errors.push({
             message: error.message || 'Unknown validation error',
-            line: error.line,
-            column: error.column,
+            line: error.line ?? undefined,
+            column: error.column ?? undefined,
             level: 'error'
           });
         }
@@ -186,13 +186,13 @@ export class NFOValidator {
     if (!root) return warnings;
 
     // Find media element
-    const mediaElement = root.get('//media', { 'default': 'NFOStandard' });
+    const mediaElement = root.get('//media', { 'default': 'NFOStandard' }) as libxmljs.Element | null;
     if (!mediaElement) return warnings;
 
     // Check different media types
     const mediaTypes = ['movie', 'tvshow', 'music', 'audiobook', 'podcast'];
     for (const mediaType of mediaTypes) {
-      const element = mediaElement.get(`.//${mediaType}`, { 'default': 'NFOStandard' });
+      const element = mediaElement.get(`.//${mediaType}`, { 'default': 'NFOStandard' }) as libxmljs.Element | null;
       if (element) {
         const typeWarnings = this.checkRecommendedFields(element, mediaType);
         warnings.push(...typeWarnings);

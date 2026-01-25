@@ -3,3 +3,6 @@ AGENTS.md
 __pycache__/
 **/bin/
 **/obj/
+**/node_modules/
+!tools/js-validator/package-lock.json
+tools/js-validator/lib/
