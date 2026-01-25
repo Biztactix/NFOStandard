@@ -64,10 +64,9 @@ ready for future publishing.
 ### Release Workflow
 
 1. Update the version in `tools/dotnet-xml/NFOStandard.Xml/NFOStandard.Xml.csproj`.
-2. Create a tag in the format `dotnet-xml-v<version>` (example: `dotnet-xml-v2.0.1`).
-3. Push the tag to GitHub; the workflow `Pack NuGet (NFOStandard.Xml)` will
-   build, pack, and upload the artifacts.
-4. To publish to nuget.org, add a repository secret named `NUGET_API_KEY`.
+2. Run the workflow `Pack NuGet (NFOStandard.Xml)` from GitHub Actions.
+3. Set the `publish` input to `true` when you are ready to push to nuget.org.
+4. To enable publishing, add a repository secret named `NUGET_API_KEY`.
 
 ## Model Generation
 

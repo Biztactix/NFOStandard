@@ -105,8 +105,8 @@ the package is how you move to a newer schema.
 ## Publishing
 
 The repository includes a GitHub Actions workflow that packs the NuGet package
-when you push a tag in the format `dotnet-xml-v<version>`. Add a repository
-secret named `NUGET_API_KEY` to enable publishing to nuget.org.
+on manual dispatch. Set the `publish` input to `true` to push to nuget.org and
+add a repository secret named `NUGET_API_KEY` to enable publishing.
 
 ## Compatibility Plan
 

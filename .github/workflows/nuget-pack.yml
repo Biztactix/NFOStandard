@@ -2,9 +2,11 @@ name: Pack NuGet (NFOStandard.Xml)
 
 on:
   workflow_dispatch:
-  push:
-    tags:
-      - "dotnet-xml-v*"
+    inputs:
+      publish:
+        description: "Publish to nuget.org"
+        required: true
+        default: "false"
 
 jobs:
   pack:
@@ -28,7 +30,7 @@ jobs:
           path: artifacts
 
       - name: Publish NuGet package
-        if: startsWith(github.ref, 'refs/tags/dotnet-xml-v')
+        if: github.event.inputs.publish == 'true'
         run: dotnet nuget push "artifacts/*.nupkg" --api-key "${NUGET_API_KEY}" --source "https://api.nuget.org/v3/index.json" --skip-duplicate
         env:
           NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
