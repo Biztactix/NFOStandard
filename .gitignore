@@ -4,5 +4,5 @@ __pycache__/
 **/bin/
 **/obj/
 **/node_modules/
-**/package-lock.json
+!tools/js-validator/package-lock.json
 tools/js-validator/lib/
