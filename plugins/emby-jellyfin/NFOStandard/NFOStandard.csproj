@@ -8,9 +8,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MediaBrowser.Common" Version="10.7.0" />
-    <PackageReference Include="MediaBrowser.Controller" Version="10.7.0" />
-    <PackageReference Include="MediaBrowser.Model" Version="10.7.0" />
+    <PackageReference Include="Jellyfin.Common" Version="10.11.6" />
+    <PackageReference Include="Jellyfin.Controller" Version="10.11.6" />
+    <PackageReference Include="Jellyfin.Model" Version="10.11.6" />
   </ItemGroup>
 
   <ItemGroup>
