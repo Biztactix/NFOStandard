@@ -99,17 +99,13 @@ jobs:
       run: dotnet test tools/dotnet-xml/NFOStandard.Xml.Tests/NFOStandard.Xml.Tests.csproj
 
     - name: Validate root examples (offline v2)
-      run: dotnet run --no-build --project tools/dotnet-xml/NFOStandard.Xml.Console/NFOStandard.Xml.Console.csproj -- \
-        --file ExampleMovie.xml \
-        --schema-dir v2
+      run: dotnet run --no-build --project tools/dotnet-xml/NFOStandard.Xml.Console/NFOStandard.Xml.Console.csproj -- --file ExampleMovie.xml --schema-dir v2
 
     - name: Validate example sets (offline v2)
       run: |
         for xml_file in examples/*.xml v2/examples/*.xml; do
           if [ -f "$xml_file" ]; then
-            dotnet run --no-build --project tools/dotnet-xml/NFOStandard.Xml.Console/NFOStandard.Xml.Console.csproj -- \
-              --file "$xml_file" \
-              --schema-dir v2
+            dotnet run --no-build --project tools/dotnet-xml/NFOStandard.Xml.Console/NFOStandard.Xml.Console.csproj -- --file "$xml_file" --schema-dir v2
           fi
         done
 
