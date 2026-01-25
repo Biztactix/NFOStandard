@@ -61,8 +61,6 @@ dotnet pack tools/dotnet-xml/NFOStandard.Xml/NFOStandard.Xml.csproj -c Release
 The package metadata is configured in `NFOStandard.Xml.csproj` and is
 ready for future publishing.
 
-For a step-by-step release flow, see `tools/dotnet-xml/RELEASE_CHECKLIST.md`.
-
 ### Release Workflow
 
 1. Update the version in `tools/dotnet-xml/NFOStandard.Xml/NFOStandard.Xml.csproj`.
