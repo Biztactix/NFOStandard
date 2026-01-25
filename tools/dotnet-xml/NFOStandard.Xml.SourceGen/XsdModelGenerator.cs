@@ -395,32 +395,121 @@ public sealed class XsdModelGenerator : IIncrementalGenerator
                 return;
             }
 
-            var members = values
-                .Select(NormalizeEnumMember)
-                .Where(member => !string.IsNullOrWhiteSpace(member))
-                .Distinct(StringComparer.OrdinalIgnoreCase)
-                .ToList();
-
+            var members = BuildEnumMembers(values);
             var generatedEnum = new GeneratedEnum(enumName, members);
             _enumNames[enumName] = generatedEnum;
             _enums.Add(generatedEnum);
         }
 
+        private List<EnumMember> BuildEnumMembers(IEnumerable<string> values)
+        {
+            var usedNames = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
+            var members = new List<EnumMember>();
+
+            foreach (var value in values)
+            {
+                var normalized = NormalizeEnumMember(value);
+                if (string.IsNullOrWhiteSpace(normalized))
+                {
+                    normalized = "Unknown";
+                }
+
+                if (usedNames.TryGetValue(normalized, out var count))
+                {
+                    count += 1;
+                    usedNames[normalized] = count;
+                    normalized = $"{normalized}{count}";
+                }
+                else
+                {
+                    usedNames[normalized] = 1;
+                }
+
+                members.Add(new EnumMember(normalized, value));
+            }
+
+            return members;
+        }
+
         private string NormalizeEnumMember(string value)
         {
-            var cleaned = new string(value.Where(ch => char.IsLetterOrDigit(ch) || ch == '_' || ch == '-').ToArray());
+            var trimmed = value?.Trim();
+            if (string.IsNullOrWhiteSpace(trimmed))
+            {
+                return "Unknown";
+            }
+
+            if (TryGetEnumOverride(trimmed ?? string.Empty, out var overrideName))
+            {
+                return overrideName;
+            }
+
+            var cleaned = new string(trimmed.Where(ch => char.IsLetterOrDigit(ch) || ch == '_' || ch == '-' || ch == ' ').ToArray());
             if (string.IsNullOrWhiteSpace(cleaned))
             {
                 return "Unknown";
             }
 
-            var candidate = ToPascal(cleaned);
+            var tokens = cleaned
+                .Split(new[] { '-', '_', ' ' }, StringSplitOptions.RemoveEmptyEntries)
+                .Select(NormalizeToken)
+                .Where(token => !string.IsNullOrWhiteSpace(token))
+                .ToList();
+
+            var candidate = string.Concat(tokens);
+            if (string.IsNullOrWhiteSpace(candidate))
+            {
+                return "Unknown";
+            }
+
             if (char.IsDigit(candidate[0]))
             {
                 return $"Value{candidate}";
             }
 
             return candidate;
+        }
+
+        private bool TryGetEnumOverride(string value, out string name)
+        {
+            var map = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+            {
+                ["fanart"] = "FanArt",
+                ["clearlogo"] = "ClearLogo",
+                ["clearart"] = "ClearArt",
+                ["discart"] = "DiscArt",
+                ["characterart"] = "CharacterArt",
+                ["keyart"] = "KeyArt",
+                ["non-binary"] = "NonBinary",
+                ["in production"] = "InProduction"
+            };
+
+            return map.TryGetValue(value, out name!);
+        }
+
+        private string NormalizeToken(string token)
+        {
+            var acronyms = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+            {
+                "tv",
+                "id",
+                "url",
+                "api",
+                "imdb",
+                "tmdb",
+                "tvdb",
+                "mpaa",
+                "bbfc",
+                "fsk",
+                "esrb"
+            };
+
+            if (acronyms.Contains(token))
+            {
+                return token.ToUpperInvariant();
+            }
+
+            return ToPascal(token);
         }
 
         private string ToPascal(string value)
@@ -528,14 +617,14 @@ public sealed class XsdModelGenerator : IIncrementalGenerator
 
     private sealed class GeneratedEnum
     {
-        public GeneratedEnum(string name, List<string> members)
+        public GeneratedEnum(string name, List<EnumMember> members)
         {
             Name = name;
             Members = members;
         }
 
         public string Name { get; }
-        public List<string> Members { get; }
+        public List<EnumMember> Members { get; }
 
         public string ToCode()
         {
@@ -544,11 +633,25 @@ public sealed class XsdModelGenerator : IIncrementalGenerator
             builder.AppendLine("{");
             foreach (var member in Members)
             {
-                builder.AppendLine($"    {member},");
+                var xmlValue = member.XmlValue.Replace("\"", "\\\"");
+                builder.AppendLine($"    [XmlEnum(\"{xmlValue}\")]");
+                builder.AppendLine($"    {member.Name},");
             }
             builder.AppendLine("}");
             builder.AppendLine();
             return builder.ToString();
         }
+    }
+
+    private sealed class EnumMember
+    {
+        public EnumMember(string name, string xmlValue)
+        {
+            Name = name;
+            XmlValue = xmlValue;
+        }
+
+        public string Name { get; }
+        public string XmlValue { get; }
     }
 }
