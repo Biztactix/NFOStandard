@@ -101,3 +101,11 @@ The package uses a source generator to produce strongly typed models from the
 versioned XSD files embedded in the NuGet package. The generator runs at build
 time and stays locked to the schema version shipped with the package; upgrading
 the package is how you move to a newer schema.
+
+## Compatibility Plan
+
+- NuGet version aligns with schema version (v2 package ships v2 schemas/models).
+- When v3 is released, `NFOStandard.Xml` v3 will embed both v2 and v3 schemas so
+  it can read v2 or v3 inputs.
+- The v3 package will only write v3 output; upgrading legacy content will be a
+  one-way operation via `object.Migrate()` to a v3 model.

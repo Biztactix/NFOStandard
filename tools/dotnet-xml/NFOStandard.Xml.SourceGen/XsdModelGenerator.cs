@@ -216,7 +216,10 @@ public sealed class XsdModelGenerator : IIncrementalGenerator
                 {
                     foreach (XmlSchemaAttribute attribute in extension.Attributes)
                     {
-                        type.Properties.Add(CreateAttributeProperty(attribute, type.Name));
+                        foreach (var property in CreateAttributeProperties(attribute, type.Name))
+                        {
+                            type.Properties.Add(property);
+                        }
                     }
                 }
 
@@ -230,7 +233,10 @@ public sealed class XsdModelGenerator : IIncrementalGenerator
 
             foreach (XmlSchemaAttribute attribute in complexType.Attributes)
             {
-                type.Properties.Add(CreateAttributeProperty(attribute, type.Name));
+                foreach (var property in CreateAttributeProperties(attribute, type.Name))
+                {
+                    type.Properties.Add(property);
+                }
             }
 
             return type;
@@ -266,56 +272,95 @@ public sealed class XsdModelGenerator : IIncrementalGenerator
 
             if (particle is XmlSchemaElement element)
             {
-                var elementName = element.Name ?? element.RefName.Name ?? "Element";
-                var isList = element.MaxOccurs > 1;
-                var propertyName = ToPascal(elementName);
-
-                var (propertyType, nestedType) = ResolveElementType(element, propertyName, parent.Name);
-                if (nestedType != null)
+                foreach (var property in CreateElementProperties(element, parent))
                 {
-                    parent.NestedTypes.Add(nestedType);
+                    yield return property;
                 }
-
-                var attribute = "XmlElement";
-                yield return new PropertySpec(propertyName, propertyType, attribute, elementName, isList);
                 yield break;
             }
 
             yield break;
         }
 
-        private (string typeName, GeneratedType? nestedType) ResolveElementType(XmlSchemaElement element, string fallbackName, string parentName)
+        private IEnumerable<PropertySpec> CreateElementProperties(XmlSchemaElement element, GeneratedType parent)
         {
+            var elementName = element.Name ?? element.RefName.Name ?? "Element";
+            var isList = element.MaxOccurs > 1;
+            var isOptional = element.MinOccurs == 0;
+            var propertyName = ToPascal(elementName);
+
+            string propertyType;
+            string? dataType = null;
+            GeneratedType? nestedType = null;
+
             var schemaType = element.ElementSchemaType;
             if (schemaType is XmlSchemaSimpleType simpleType)
             {
-                return (MapSimpleType(simpleType, $"{parentName}{fallbackName}"), null);
+                var baseType = MapSimpleType(simpleType, $"{parent.Name}{propertyName}");
+                dataType = ResolveXmlDataType(simpleType);
+                propertyType = baseType;
             }
-
-            if (schemaType is XmlSchemaComplexType complexType)
+            else if (schemaType is XmlSchemaComplexType complexType)
             {
                 if (!string.IsNullOrWhiteSpace(complexType.Name))
                 {
-                    var name = ResolveTypeName(complexType, complexType.Name) ?? fallbackName;
-                    return ($"{name}?", null);
+                    propertyType = ResolveTypeName(complexType, complexType.Name) ?? propertyName;
                 }
-
-                var nestedName = fallbackName;
-                var nestedType = ResolveType(complexType, nestedName);
-                return ($"{nestedType.Name}?", nestedType);
+                else
+                {
+                    nestedType = ResolveType(complexType, propertyName);
+                    propertyType = nestedType.Name;
+                }
+            }
+            else
+            {
+                propertyType = "string?";
             }
 
-            return ("string?", null);
+            if (nestedType != null)
+            {
+                parent.NestedTypes.Add(nestedType);
+            }
+
+            if (isOptional && !isList && !IsValueTypeOrEnum(propertyType) && !propertyType.EndsWith("?", StringComparison.OrdinalIgnoreCase))
+            {
+                propertyType = $"{propertyType}?";
+            }
+
+            yield return new PropertySpec(propertyName, propertyType, "XmlElement", elementName, isList, dataType, false);
+
+            if (isOptional && !isList && IsValueTypeOrEnum(propertyType))
+            {
+                yield return PropertySpec.XmlIgnore($"{propertyName}Specified", "bool");
+            }
         }
 
-        private PropertySpec CreateAttributeProperty(XmlSchemaAttribute attribute, string parentName)
+        private IEnumerable<PropertySpec> CreateAttributeProperties(XmlSchemaAttribute attribute, string parentName)
         {
             var name = attribute.Name ?? attribute.RefName.Name ?? "attribute";
             var propertyName = ToPascal(name);
+            var isOptional = attribute.Use != XmlSchemaUse.Required;
+            string? dataType = null;
             var type = attribute.AttributeSchemaType is XmlSchemaSimpleType simpleType
                 ? MapSimpleType(simpleType, $"{parentName}{propertyName}")
                 : "string?";
-            return new PropertySpec(propertyName, type, "XmlAttribute", name, false);
+
+            if (attribute.AttributeSchemaType is XmlSchemaSimpleType attributeSimpleType)
+            {
+                dataType = ResolveXmlDataType(attributeSimpleType);
+            }
+
+            var properties = new List<PropertySpec>
+            {
+                new PropertySpec(propertyName, type, "XmlAttribute", name, false, dataType, false)
+            };
+
+            if (isOptional && IsValueTypeOrEnum(type))
+            {
+                properties.Add(PropertySpec.XmlIgnore($"{propertyName}Specified", "bool"));
+            }
+
+            return properties;
         }
 
         private string MapSimpleType(XmlSchemaSimpleType simpleType, string fallbackName)
@@ -324,7 +369,7 @@ public sealed class XsdModelGenerator : IIncrementalGenerator
             {
                 var enumName = ResolveEnumName(simpleType, fallbackName);
                 RegisterEnum(enumName, values);
-                return $"{enumName}?";
+                return enumName;
             }
 
             if (simpleType.Datatype == null)
@@ -332,28 +377,74 @@ public sealed class XsdModelGenerator : IIncrementalGenerator
                 return "string?";
             }
 
+            var mapped = simpleType.Datatype.TypeCode switch
+            {
+                XmlTypeCode.Boolean => "bool",
+                XmlTypeCode.Decimal => "decimal",
+                XmlTypeCode.Integer => "int",
+                XmlTypeCode.NonPositiveInteger => "int",
+                XmlTypeCode.NegativeInteger => "int",
+                XmlTypeCode.Long => "long",
+                XmlTypeCode.Int => "int",
+                XmlTypeCode.Short => "short",
+                XmlTypeCode.Byte => "byte",
+                XmlTypeCode.NonNegativeInteger => "int",
+                XmlTypeCode.PositiveInteger => "int",
+                XmlTypeCode.UnsignedLong => "ulong",
+                XmlTypeCode.UnsignedInt => "uint",
+                XmlTypeCode.UnsignedShort => "ushort",
+                XmlTypeCode.UnsignedByte => "byte",
+                XmlTypeCode.Float => "float",
+                XmlTypeCode.Double => "double",
+                XmlTypeCode.Date => "DateTime",
+                XmlTypeCode.DateTime => "DateTime",
+                _ => "string?"
+            };
+
+            return mapped;
+        }
+
+        private bool IsValueTypeOrEnum(string typeName)
+        {
+            if (typeName.EndsWith("?", StringComparison.OrdinalIgnoreCase))
+            {
+                typeName = typeName.Substring(0, typeName.Length - 1);
+            }
+
+            if (_enumNames.ContainsKey(typeName))
+            {
+                return true;
+            }
+
+            return typeName switch
+            {
+                "bool" => true,
+                "decimal" => true,
+                "int" => true,
+                "long" => true,
+                "short" => true,
+                "byte" => true,
+                "float" => true,
+                "double" => true,
+                "DateTime" => true,
+                "uint" => true,
+                "ushort" => true,
+                "ulong" => true,
+                _ => false
+            };
+        }
+
+        private string? ResolveXmlDataType(XmlSchemaSimpleType simpleType)
+        {
+            if (simpleType.Datatype == null)
+            {
+                return null;
+            }
+
             return simpleType.Datatype.TypeCode switch
             {
-                XmlTypeCode.Boolean => "bool?",
-                XmlTypeCode.Decimal => "decimal?",
-                XmlTypeCode.Integer => "int?",
-                XmlTypeCode.NonPositiveInteger => "int?",
-                XmlTypeCode.NegativeInteger => "int?",
-                XmlTypeCode.Long => "long?",
-                XmlTypeCode.Int => "int?",
-                XmlTypeCode.Short => "short?",
-                XmlTypeCode.Byte => "byte?",
-                XmlTypeCode.NonNegativeInteger => "int?",
-                XmlTypeCode.PositiveInteger => "int?",
-                XmlTypeCode.UnsignedLong => "ulong?",
-                XmlTypeCode.UnsignedInt => "uint?",
-                XmlTypeCode.UnsignedShort => "ushort?",
-                XmlTypeCode.UnsignedByte => "byte?",
-                XmlTypeCode.Float => "float?",
-                XmlTypeCode.Double => "double?",
-                XmlTypeCode.Date => "DateTime?",
-                XmlTypeCode.DateTime => "DateTime?",
-                _ => "string?"
+                XmlTypeCode.Date => "date",
+                _ => null
             };
         }
 
@@ -591,13 +682,15 @@ public sealed class XsdModelGenerator : IIncrementalGenerator
 
     private sealed class PropertySpec
     {
-        public PropertySpec(string name, string typeName, string attribute, string? xmlName = null, bool isList = false)
+        public PropertySpec(string name, string typeName, string attribute, string? xmlName = null, bool isList = false, string? dataType = null, bool ignore = false)
         {
             Name = name;
             TypeName = typeName;
             Attribute = attribute;
             XmlName = xmlName;
             IsList = isList;
+            DataType = dataType;
+            Ignore = ignore;
         }
 
         public string Name { get; }
@@ -605,17 +698,43 @@ public sealed class XsdModelGenerator : IIncrementalGenerator
         public string Attribute { get; }
         public string? XmlName { get; }
         public bool IsList { get; }
+        public bool Ignore { get; }
+        public string? DataType { get; }
+
+        public static PropertySpec XmlIgnore(string name, string typeName)
+        {
+            return new PropertySpec(name, typeName, "XmlIgnore", null, false, null, true);
+        }
 
         public string ToCode()
         {
             var builder = new StringBuilder();
-            var attribute = XmlName == null ? Attribute : $"{Attribute}(\"{XmlName}\")";
+            var attribute = Ignore
+                ? "XmlIgnore"
+                : BuildAttribute();
             builder.AppendLine($"    [{attribute}]");
             var propertyType = IsList ? $"List<{TypeName.TrimEnd('?')}>" : TypeName;
             var initializer = IsList ? " = new();" : string.Empty;
             builder.AppendLine($"    public {propertyType} {Name} {{ get; set; }}{initializer}");
             builder.AppendLine();
             return builder.ToString();
+        }
+
+        private string BuildAttribute()
+        {
+            var namePart = XmlName == null ? string.Empty : $"\"{XmlName}\"";
+            if (string.IsNullOrWhiteSpace(DataType))
+            {
+                return XmlName == null ? Attribute : $"{Attribute}({namePart})";
+            }
+
+            var dataTypePart = $"DataType=\"{DataType}\"";
+            if (XmlName == null)
+            {
+                return $"{Attribute}({dataTypePart})";
+            }
+
+            return $"{Attribute}({namePart}, {dataTypePart})";
         }
     }
 

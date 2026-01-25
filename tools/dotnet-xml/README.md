@@ -65,3 +65,11 @@ ready for future publishing.
 
 The models are generated at build time from versioned XSDs embedded in the
 NuGet package. Updating the package is what upgrades the schema version.
+
+## Compatibility Plan
+
+- Package versions map to schema versions (v2 package ships v2 schemas/models).
+- When v3 lands, `NFOStandard.Xml` v3 will embed both v2 and v3 schemas so it
+  can read v2 or v3 inputs.
+- The v3 package will only write v3 output; upgrading legacy content will be a
+  one-way operation via `object.Migrate()` to a v3 model.

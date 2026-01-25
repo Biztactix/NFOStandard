@@ -95,6 +95,9 @@ jobs:
     - name: Build .NET XML toolkit
       run: dotnet build tools/dotnet-xml/NFOStandard.Xml.Console/NFOStandard.Xml.Console.csproj
 
+    - name: Run .NET XML tests
+      run: dotnet test tools/dotnet-xml/NFOStandard.Xml.Tests/NFOStandard.Xml.Tests.csproj
+
     - name: Validate root examples (offline v2)
       run: dotnet run --no-build --project tools/dotnet-xml/NFOStandard.Xml.Console/NFOStandard.Xml.Console.csproj -- \
         --file ExampleMovie.xml \
