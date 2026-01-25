@@ -32,6 +32,9 @@ Arguments:
 - `--schema-dir`, `-s`: Path containing `main.xsd` and `Schemas/` (defaults to `./v2` when present)
 - `--json`: Output results as JSON
 
+When `--schema-dir` is omitted, the CLI uses the schema version declared in
+`xsi:schemaLocation` and validates against the embedded versioned schemas.
+
 ## Library Usage
 
 ```csharp

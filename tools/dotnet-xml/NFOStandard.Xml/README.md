@@ -45,6 +45,14 @@ if (!result.IsValid)
 }
 ```
 
+If you omit `schemaDir`, the validator inspects `xsi:schemaLocation` and uses
+the embedded schema version when available:
+
+```csharp
+var validator = new NfoValidator();
+var result = validator.ValidateFile("movie.nfo");
+```
+
 ### Create a New Document
 
 ```csharp

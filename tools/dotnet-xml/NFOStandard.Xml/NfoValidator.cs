@@ -25,6 +25,7 @@ public sealed class NfoValidator
 
         var resolvedSchemaDir = ResolveSchemaDirectory(schemaDir);
         string? schemaSource = null;
+        string? embeddedVersion = null;
 
         var schemaSet = new XmlSchemaSet();
         XmlResolver resolver = resolvedSchemaDir != null
@@ -63,7 +64,31 @@ public sealed class NfoValidator
                     });
                 }
 
-                schemaSet.Add(null, schemaSource);
+                embeddedVersion = NfoSchemaRegistry.DetectVersion(schemaSource);
+                if (embeddedVersion != null && NfoSchemaRegistry.HasVersion(embeddedVersion))
+                {
+                    resolver = new EmbeddedSchemaResolver(embeddedVersion);
+                    schemaSet.XmlResolver = resolver;
+                    using var schemaStream = NfoSchemaRegistry.OpenSchema(embeddedVersion, "main.xsd");
+                    if (schemaStream == null)
+                    {
+                        return new ValidationResult(false, schemaSource, new List<string>
+                        {
+                            $"Embedded schema not found for {embeddedVersion}."
+                        });
+                    }
+
+                    using var schemaReader = XmlReader.Create(schemaStream, new XmlReaderSettings
+                    {
+                        XmlResolver = resolver
+                    });
+                    schemaSet.Add(null, schemaReader);
+                    schemaSource = $"embedded:{embeddedVersion}";
+                }
+                else
+                {
+                    schemaSet.Add(null, schemaSource);
+                }
             }
         }
         catch (Exception ex)
