@@ -60,5 +60,5 @@ ready for future publishing.
 
 ## Model Generation
 
-The models are generated at build time from the `v2` XSDs using a source
-generator. Updating the schema files will regenerate the models automatically.
+The models are generated at build time from versioned XSDs embedded in the
+NuGet package. Updating the package is what upgrades the schema version.

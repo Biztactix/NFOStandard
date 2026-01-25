@@ -15,32 +15,12 @@ public sealed class XsdModelGenerator : IIncrementalGenerator
 {
     public void Initialize(IncrementalGeneratorInitializationContext context)
     {
-        var xsdFiles = context.AdditionalTextsProvider
-            .Where(file => file.Path.EndsWith(".xsd", StringComparison.OrdinalIgnoreCase))
-            .Collect();
-
-        context.RegisterSourceOutput(xsdFiles, (productionContext, files) =>
+        context.RegisterPostInitializationOutput(productionContext =>
         {
-            if (files.IsDefaultOrEmpty)
-            {
-                return;
-            }
-
             var schemaSet = new XmlSchemaSet();
-            foreach (var file in files)
+            foreach (var schema in LoadEmbeddedSchemas())
             {
-                var text = file.GetText(productionContext.CancellationToken);
-                if (text == null)
-                {
-                    continue;
-                }
-
-                using var reader = new StringReader(text.ToString());
-                var schema = XmlSchema.Read(reader, (_, _) => { });
-                if (schema != null)
-                {
-                    schemaSet.Add(schema);
-                }
+                schemaSet.Add(schema);
             }
 
             schemaSet.Compile();
@@ -49,6 +29,30 @@ public sealed class XsdModelGenerator : IIncrementalGenerator
             var source = generator.Generate();
             productionContext.AddSource("NfoModels.g.cs", SourceText.From(source, Encoding.UTF8));
         });
+    }
+
+    private static IEnumerable<XmlSchema> LoadEmbeddedSchemas()
+    {
+        var assembly = typeof(XsdModelGenerator).Assembly;
+        var resources = assembly.GetManifestResourceNames()
+            .Where(name => name.EndsWith(".xsd", StringComparison.OrdinalIgnoreCase))
+            .OrderBy(name => name, StringComparer.OrdinalIgnoreCase);
+
+        foreach (var resource in resources)
+        {
+            using var stream = assembly.GetManifestResourceStream(resource);
+            if (stream == null)
+            {
+                continue;
+            }
+
+            using var reader = new StreamReader(stream, Encoding.UTF8);
+            var schema = XmlSchema.Read(reader, (_, _) => { });
+            if (schema != null)
+            {
+                yield return schema;
+            }
+        }
     }
 
     private sealed class ModelGenerator
