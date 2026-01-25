@@ -15,6 +15,8 @@
     <RepositoryUrl>https://github.com/Biztactix/NFOStandard</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>nfo;xml;validator;schema;metadata</PackageTags>
+    <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
+    <CompilerGeneratedFilesOutputPath>$(BaseIntermediateOutputPath)Generated</CompilerGeneratedFilesOutputPath>
   </PropertyGroup>
 
   <ItemGroup>

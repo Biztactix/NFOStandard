@@ -75,8 +75,10 @@ public sealed class XsdModelGenerator : IIncrementalGenerator
             ["albumType"] = "MusicAlbum"
         };
         private readonly Dictionary<XmlSchemaType, string> _typeNames = new();
+        private readonly Dictionary<string, GeneratedEnum> _enumNames = new(StringComparer.OrdinalIgnoreCase);
         private readonly HashSet<string> _generated = new(StringComparer.OrdinalIgnoreCase);
         private readonly List<GeneratedType> _types = new();
+        private readonly List<GeneratedEnum> _enums = new();
 
         public ModelGenerator(XmlSchemaSet schemaSet)
         {
@@ -121,6 +123,11 @@ public sealed class XsdModelGenerator : IIncrementalGenerator
             foreach (var type in _types.OrderBy(t => t.Name))
             {
                 builder.AppendLine(type.ToCode());
+            }
+
+            foreach (var enumType in _enums.OrderBy(e => e.Name))
+            {
+                builder.AppendLine(enumType.ToCode());
             }
 
             return builder.ToString();
@@ -205,7 +212,7 @@ public sealed class XsdModelGenerator : IIncrementalGenerator
                 {
                     foreach (XmlSchemaAttribute attribute in extension.Attributes)
                     {
-                        type.Properties.Add(CreateAttributeProperty(attribute));
+                        type.Properties.Add(CreateAttributeProperty(attribute, type.Name));
                     }
                 }
 
@@ -219,7 +226,7 @@ public sealed class XsdModelGenerator : IIncrementalGenerator
 
             foreach (XmlSchemaAttribute attribute in complexType.Attributes)
             {
-                type.Properties.Add(CreateAttributeProperty(attribute));
+                type.Properties.Add(CreateAttributeProperty(attribute, type.Name));
             }
 
             return type;
@@ -259,7 +266,7 @@ public sealed class XsdModelGenerator : IIncrementalGenerator
                 var isList = element.MaxOccurs > 1;
                 var propertyName = ToPascal(elementName);
 
-                var (propertyType, nestedType) = ResolveElementType(element, propertyName);
+                var (propertyType, nestedType) = ResolveElementType(element, propertyName, parent.Name);
                 if (nestedType != null)
                 {
                     parent.NestedTypes.Add(nestedType);
@@ -273,12 +280,12 @@ public sealed class XsdModelGenerator : IIncrementalGenerator
             yield break;
         }
 
-        private (string typeName, GeneratedType? nestedType) ResolveElementType(XmlSchemaElement element, string fallbackName)
+        private (string typeName, GeneratedType? nestedType) ResolveElementType(XmlSchemaElement element, string fallbackName, string parentName)
         {
             var schemaType = element.ElementSchemaType;
             if (schemaType is XmlSchemaSimpleType simpleType)
             {
-                return (MapSimpleType(simpleType), null);
+                return (MapSimpleType(simpleType, $"{parentName}{fallbackName}"), null);
             }
 
             if (schemaType is XmlSchemaComplexType complexType)
@@ -297,18 +304,25 @@ public sealed class XsdModelGenerator : IIncrementalGenerator
             return ("string?", null);
         }
 
-        private PropertySpec CreateAttributeProperty(XmlSchemaAttribute attribute)
+        private PropertySpec CreateAttributeProperty(XmlSchemaAttribute attribute, string parentName)
         {
             var name = attribute.Name ?? attribute.RefName.Name ?? "attribute";
             var propertyName = ToPascal(name);
             var type = attribute.AttributeSchemaType is XmlSchemaSimpleType simpleType
-                ? MapSimpleType(simpleType)
+                ? MapSimpleType(simpleType, $"{parentName}{propertyName}")
                 : "string?";
             return new PropertySpec(propertyName, type, "XmlAttribute", name, false);
         }
 
-        private string MapSimpleType(XmlSchemaSimpleType simpleType)
+        private string MapSimpleType(XmlSchemaSimpleType simpleType, string fallbackName)
         {
+            if (TryGetEnumValues(simpleType, out var values))
+            {
+                var enumName = ResolveEnumName(simpleType, fallbackName);
+                RegisterEnum(enumName, values);
+                return $"{enumName}?";
+            }
+
             if (simpleType.Datatype == null)
             {
                 return "string?";
@@ -337,6 +351,76 @@ public sealed class XsdModelGenerator : IIncrementalGenerator
                 XmlTypeCode.DateTime => "DateTime?",
                 _ => "string?"
             };
+        }
+
+        private bool TryGetEnumValues(XmlSchemaSimpleType simpleType, out List<string> values)
+        {
+            values = new List<string>();
+            if (simpleType.Content is not XmlSchemaSimpleTypeRestriction restriction)
+            {
+                return false;
+            }
+
+            foreach (var facet in restriction.Facets)
+            {
+                if (facet is XmlSchemaEnumerationFacet enumerationFacet && enumerationFacet.Value != null)
+                {
+                    values.Add(enumerationFacet.Value);
+                }
+                else
+                {
+                    return false;
+                }
+            }
+
+            return values.Count > 0;
+        }
+
+        private string ResolveEnumName(XmlSchemaSimpleType simpleType, string fallbackName)
+        {
+            var name = simpleType.Name ?? fallbackName;
+            var enumName = ToPascal(name);
+            if (!enumName.EndsWith("Enum", StringComparison.OrdinalIgnoreCase))
+            {
+                enumName += "Enum";
+            }
+
+            return enumName;
+        }
+
+        private void RegisterEnum(string enumName, List<string> values)
+        {
+            if (_enumNames.ContainsKey(enumName))
+            {
+                return;
+            }
+
+            var members = values
+                .Select(NormalizeEnumMember)
+                .Where(member => !string.IsNullOrWhiteSpace(member))
+                .Distinct(StringComparer.OrdinalIgnoreCase)
+                .ToList();
+
+            var generatedEnum = new GeneratedEnum(enumName, members);
+            _enumNames[enumName] = generatedEnum;
+            _enums.Add(generatedEnum);
+        }
+
+        private string NormalizeEnumMember(string value)
+        {
+            var cleaned = new string(value.Where(ch => char.IsLetterOrDigit(ch) || ch == '_' || ch == '-').ToArray());
+            if (string.IsNullOrWhiteSpace(cleaned))
+            {
+                return "Unknown";
+            }
+
+            var candidate = ToPascal(cleaned);
+            if (char.IsDigit(candidate[0]))
+            {
+                return $"Value{candidate}";
+            }
+
+            return candidate;
         }
 
         private string ToPascal(string value)
@@ -437,6 +521,32 @@ public sealed class XsdModelGenerator : IIncrementalGenerator
             var propertyType = IsList ? $"List<{TypeName.TrimEnd('?')}>" : TypeName;
             var initializer = IsList ? " = new();" : string.Empty;
             builder.AppendLine($"    public {propertyType} {Name} {{ get; set; }}{initializer}");
+            builder.AppendLine();
+            return builder.ToString();
+        }
+    }
+
+    private sealed class GeneratedEnum
+    {
+        public GeneratedEnum(string name, List<string> members)
+        {
+            Name = name;
+            Members = members;
+        }
+
+        public string Name { get; }
+        public List<string> Members { get; }
+
+        public string ToCode()
+        {
+            var builder = new StringBuilder();
+            builder.AppendLine($"public enum {Name}");
+            builder.AppendLine("{");
+            foreach (var member in Members)
+            {
+                builder.AppendLine($"    {member},");
+            }
+            builder.AppendLine("}");
             builder.AppendLine();
             return builder.ToString();
         }
