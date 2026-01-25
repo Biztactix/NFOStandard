@@ -133,7 +133,8 @@ public sealed class NfoValidator
     {
         if (!string.IsNullOrWhiteSpace(schemaDir))
         {
-            return NormalizeSchemaDirectory(schemaDir);
+            var schemaDirValue = schemaDir!.Trim();
+            return NormalizeSchemaDirectory(schemaDirValue);
         }
 
         var candidate = Path.Combine(Directory.GetCurrentDirectory(), DefaultSchemaRelativePath);

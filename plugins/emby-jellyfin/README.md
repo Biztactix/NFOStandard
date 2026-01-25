@@ -35,14 +35,19 @@ This plugin enables Emby and Jellyfin to read and write NFO files following the 
 Requirements:
 - .NET 8 SDK
 - Visual Studio 2022+ or VS Code
-- NuGet access to Jellyfin packages (Jellyfin.Common/Controller/Model)
+- NuGet access to Jellyfin packages (Jellyfin.Common/Controller/Model 10.10.x)
+- NuGet access to Emby packages (MediaBrowser.Server.Core 4.9.x)
 
 ```bash
 cd plugins/emby-jellyfin/NFOStandard
 dotnet build -c Release
 ```
 
-This project references `tools/dotnet-xml/NFOStandard.Xml` via a local
+This project multi-targets:
+- `net8.0` for Jellyfin (Jellyfin.* packages)
+- `netstandard2.0` for Emby (MediaBrowser.Server.Core)
+
+It references `tools/dotnet-xml/NFOStandard.Xml` via a local
 `ProjectReference` for offline builds.
 
 The compiled plugin will be in `bin/Release/net5.0/`

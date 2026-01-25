@@ -47,6 +47,11 @@ cd tools/js-validator
 npm test
 ```
 
+### Plugin Build and Manifest
+```bash
+python tests/plugin_checks.py
+```
+
 ### Manual Testing
 ```bash
 # Test all valid files should pass

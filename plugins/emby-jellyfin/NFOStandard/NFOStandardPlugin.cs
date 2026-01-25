@@ -18,7 +18,7 @@ namespace NFOStandard
 
         public override string Description => "Read and write metadata using the NFO Standard format";
 
-        public static NFOStandardPlugin Instance { get; private set; }
+        public static NFOStandardPlugin? Instance { get; private set; }
 
         public NFOStandardPlugin(IApplicationPaths applicationPaths, IXmlSerializer xmlSerializer)
             : base(applicationPaths, xmlSerializer)

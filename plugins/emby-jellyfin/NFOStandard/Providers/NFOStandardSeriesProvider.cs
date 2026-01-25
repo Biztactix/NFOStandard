@@ -4,11 +4,18 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using MediaBrowser.Model.Configuration;
 using MediaBrowser.Controller.Entities.TV;
 using MediaBrowser.Controller.Providers;
 using MediaBrowser.Model.Entities;
 using MediaBrowser.Model.IO;
+#if NET8_0
+using Jellyfin.Data.Enums;
+using Microsoft.Extensions.Logging;
+#else
 using MediaBrowser.Model.Logging;
+#endif
+using MediaBrowser.Controller.Entities;
 
 namespace NFOStandard.Providers
 {
@@ -29,7 +36,11 @@ namespace NFOStandard.Providers
             _fileSystem = fileSystem;
         }
 
+#if NETSTANDARD2_0
+        public Task<MetadataResult<Series>> GetMetadata(ItemInfo info, LibraryOptions libraryOptions, IDirectoryService directoryService, CancellationToken cancellationToken)
+#else
         public Task<MetadataResult<Series>> GetMetadata(ItemInfo info, IDirectoryService directoryService, CancellationToken cancellationToken)
+#endif
         {
             var result = new MetadataResult<Series>();
             
@@ -44,9 +55,9 @@ namespace NFOStandard.Providers
                 var doc = XDocument.Load(nfoPath);
                 var root = doc.Root;
                 
-                if (root?.Name.LocalName != "root" || root.Name.Namespace != NFONamespace)
+                if (root == null || root.Name.LocalName != "root" || root.Name.Namespace != NFONamespace)
                 {
-                    _logger.Info($"NFO file is not NFO Standard compliant: {nfoPath}");
+                    LogInfo($"NFO file is not NFO Standard compliant: {nfoPath}");
                     return Task.FromResult(result);
                 }
 
@@ -59,7 +70,7 @@ namespace NFOStandard.Providers
                 if (tvshowElement != null)
                 {
                     var series = new Series();
-                    ParseSeriesElement(series, tvshowElement);
+                    ParseSeriesElement(series, tvshowElement, result);
                     
                     result.HasMetadata = true;
                     result.Item = series;
@@ -67,13 +78,13 @@ namespace NFOStandard.Providers
             }
             catch (Exception ex)
             {
-                _logger.ErrorException($"Error parsing NFO file: {nfoPath}", ex);
+                LogError(ex, $"Error parsing NFO file: {nfoPath}");
             }
 
             return Task.FromResult(result);
         }
 
-        private void ParseSeriesElement(Series series, XElement tvshowElement)
+        private void ParseSeriesElement(Series series, XElement tvshowElement, MetadataResult<Series> result)
         {
             // Title
             series.Name = GetElementValue(tvshowElement, "title");
@@ -108,14 +119,15 @@ namespace NFOStandard.Providers
             var status = GetElementValue(tvshowElement, "status");
             if (!string.IsNullOrWhiteSpace(status))
             {
-                if (status.Equals("ended", StringComparison.OrdinalIgnoreCase) ||
-                    status.Equals("canceled", StringComparison.OrdinalIgnoreCase) ||
-                    status.Equals("cancelled", StringComparison.OrdinalIgnoreCase))
+                var statusValue = status!;
+                if (statusValue.Equals("ended", StringComparison.OrdinalIgnoreCase) ||
+                    statusValue.Equals("canceled", StringComparison.OrdinalIgnoreCase) ||
+                    statusValue.Equals("cancelled", StringComparison.OrdinalIgnoreCase))
                 {
                     series.Status = SeriesStatus.Ended;
                 }
-                else if (status.Equals("continuing", StringComparison.OrdinalIgnoreCase) ||
-                         status.Equals("returning series", StringComparison.OrdinalIgnoreCase))
+                else if (statusValue.Equals("continuing", StringComparison.OrdinalIgnoreCase) ||
+                         statusValue.Equals("returning series", StringComparison.OrdinalIgnoreCase))
                 {
                     series.Status = SeriesStatus.Continuing;
                 }
@@ -151,7 +163,7 @@ namespace NFOStandard.Providers
             }
 
             // People
-            ParsePeople(series, tvshowElement);
+            ParsePeople(series, tvshowElement, result);
 
             // Premiered date
             var premieredStr = GetElementValue(tvshowElement, "premiered");
@@ -206,10 +218,8 @@ namespace NFOStandard.Providers
             }
         }
 
-        private void ParsePeople(Series series, XElement tvshowElement)
+        private void ParsePeople(Series series, XElement tvshowElement, MetadataResult<Series> result)
         {
-            var people = new System.Collections.Generic.List<PersonInfo>();
-
             // Actors
             foreach (var actor in tvshowElement.Elements("actor"))
             {
@@ -217,18 +227,24 @@ namespace NFOStandard.Providers
                 {
                     Name = GetElementValue(actor, "name"),
                     Role = GetElementValue(actor, "role"),
+#if NET8_0
+                    Type = PersonKind.Actor
+#else
                     Type = PersonType.Actor
+#endif
                 };
 
                 var orderStr = GetElementValue(actor, "order");
+#if NET8_0
                 if (int.TryParse(orderStr, out var order))
                 {
                     person.SortOrder = order;
                 }
+#endif
 
                 if (!string.IsNullOrWhiteSpace(person.Name))
                 {
-                    people.Add(person);
+                    result.AddPerson(person);
                 }
             }
 
@@ -238,17 +254,16 @@ namespace NFOStandard.Providers
                 var name = GetElementValue(creator, "name");
                 if (!string.IsNullOrWhiteSpace(name))
                 {
-                    people.Add(new PersonInfo
+                    result.AddPerson(new PersonInfo
                     {
                         Name = name,
+#if NET8_0
+                        Type = PersonKind.Producer
+#else
                         Type = PersonType.Producer
+#endif
                     });
                 }
-            }
-
-            if (people.Any())
-            {
-                series.People = people.ToArray();
             }
         }
 
@@ -281,7 +296,25 @@ namespace NFOStandard.Providers
 
                 if (!string.IsNullOrWhiteSpace(type) && !string.IsNullOrWhiteSpace(value))
                 {
-                    switch (type.ToLowerInvariant())
+                    var typeValue = type!;
+#if NET8_0
+                    switch (typeValue.ToLowerInvariant())
+                    {
+                        case "imdb":
+                            series.TrySetProviderId(MetadataProvider.Imdb, value);
+                            break;
+                        case "tvdb":
+                            series.TrySetProviderId(MetadataProvider.Tvdb, value);
+                            break;
+                        case "tmdb":
+                            series.TrySetProviderId(MetadataProvider.Tmdb, value);
+                            break;
+                        default:
+                            series.SetProviderId(typeValue, value);
+                            break;
+                    }
+#else
+                    switch (typeValue.ToLowerInvariant())
                     {
                         case "imdb":
                             series.ProviderIds[MetadataProviders.Imdb.ToString()] = value;
@@ -293,19 +326,20 @@ namespace NFOStandard.Providers
                             series.ProviderIds[MetadataProviders.Tmdb.ToString()] = value;
                             break;
                         default:
-                            series.ProviderIds[type] = value;
+                            series.ProviderIds[typeValue] = value;
                             break;
                     }
+#endif
                 }
             }
         }
 
-        private string GetElementValue(XElement parent, string elementName)
+        private string? GetElementValue(XElement parent, string elementName)
         {
             return parent.Element(elementName)?.Value?.Trim();
         }
 
-        private string GetNfoPath(string seriesPath)
+        private string? GetNfoPath(string seriesPath)
         {
             if (string.IsNullOrWhiteSpace(seriesPath) || !_fileSystem.DirectoryExists(seriesPath))
             {
@@ -321,7 +355,11 @@ namespace NFOStandard.Providers
             return null;
         }
 
+#if NETSTANDARD2_0
+        public bool HasChanged(BaseItem item, LibraryOptions libraryOptions, IDirectoryService directoryService)
+#else
         public bool HasChanged(BaseItem item, IDirectoryService directoryService)
+#endif
         {
             var nfoPath = GetNfoPath(item.Path);
             if (string.IsNullOrEmpty(nfoPath))
@@ -336,6 +374,24 @@ namespace NFOStandard.Providers
             }
 
             return false;
+        }
+
+        private void LogInfo(string message)
+        {
+#if NET8_0
+            _logger.LogInformation(message);
+#else
+            _logger.Info(message);
+#endif
+        }
+
+        private void LogError(Exception exception, string message)
+        {
+#if NET8_0
+            _logger.LogError(exception, message);
+#else
+            _logger.ErrorException(message, exception);
+#endif
         }
     }
 }

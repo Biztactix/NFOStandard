@@ -87,6 +87,11 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
     - name: Set up .NET
       uses: actions/setup-dotnet@v4
       with:
@@ -97,6 +102,9 @@ jobs:
 
     - name: Run .NET XML tests
       run: dotnet test tools/dotnet-xml/NFOStandard.Xml.Tests/NFOStandard.Xml.Tests.csproj
+
+    - name: Validate plugin builds and manifest
+      run: python tests/plugin_checks.py
 
     - name: Validate root examples (offline v2)
       run: dotnet run --no-build --project tools/dotnet-xml/NFOStandard.Xml.Console/NFOStandard.Xml.Console.csproj -- --file ExampleMovie.xml --schema-dir v2
