@@ -1,87 +1,117 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <root xmlns="NFOStandard" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="NFOStandard https://xsd.nfostandard.com/main.xsd">
     <media>
         <movie>
-            <title>Example Movie</title>
-            <originaltitle>Example Original Title</originaltitle>
-            <sorttitle>Example Sort Title</sorttitle>
-            <alternatetitle>Alternate Title 1</alternatetitle>
-            <alternatetitle>Alternate Title 2</alternatetitle>
-            <rating name="IMDB" value="7.8" votes="12345"/>
-            <userrating>8.2</userrating>
-            <outline>An example outline of the movie.</outline>
-            <plot>A detailed plot description of the movie.</plot>
-            <tagline>An example tagline.</tagline>
-            <runtime>120</runtime>
-            <banner type="poster" width="300" height="450" url="http://example.com/banner1.jpg"/>
-            <thumb type="thumbnail" width="150" height="150" url="http://example.com/thumb1.jpg"/>
-            <fanart type="background" width="1920" height="1080" url="http://example.com/fanart1.jpg"/>
-            <contentrating country="US" board="MPAA" rating="PG-13" image="http://example.com/rating.jpg"/>
-            <uniqueid type="imdb" default="true">tt1234567</uniqueid>
+            <title>Inception</title>
+            <originalTitle>Inception</originalTitle>
+            <sortTitle>Inception</sortTitle>
+            <alternateTitle>Origen</alternateTitle>
+            <alternateTitle>Kezdet</alternateTitle>
+            <rating name="imdb" value="8.8" votes="2400000"/>
+            <rating name="tmdb" value="8.4" votes="35000"/>
+            <userRating>9.0</userRating>
+            <outline>A thief who steals corporate secrets through dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O.</outline>
+            <plot>Dom Cobb is a skilled thief, the absolute best in the dangerous art of extraction: stealing valuable secrets from deep within the subconscious during the dream state. Cobb's rare ability has made him a coveted player in the treacherous world of corporate espionage, but it has also made him an international fugitive and cost him everything he has ever loved. Now Cobb is being offered a chance at redemption. One last job could give him his life back but only if he can accomplish the impossible — inception: planting an idea in someone's mind. If he succeeds, it will be the perfect crime. But no amount of careful planning or expertise can prepare the team for the dangerous enemy that seems to predict their every move.</plot>
+            <tagline>Your mind is the scene of the crime.</tagline>
+            <runtime>148</runtime>
+            <banner type="poster" width="680" height="1000" url="https://image.tmdb.org/t/p/original/ljsZTbVsrQSqZgWeep2B1QiDKuh.jpg"/>
+            <thumb type="thumbnail" width="300" height="450" url="https://image.tmdb.org/t/p/w300/ljsZTbVsrQSqZgWeep2B1QiDKuh.jpg"/>
+            <fanart type="background" width="1920" height="1080" url="https://image.tmdb.org/t/p/original/8ZTVqvKDQ8emSGUEMjsS4yHAwrp.jpg"/>
+            <contentRating country="US" board="MPAA" rating="PG-13" image="https://www.themoviedb.org/assets/2/v4/logos/mpaa/pg13.png"/>
+            <contentRating country="AU" board="ACB" rating="M" image="https://upload.wikimedia.org/wikipedia/commons/4/43/Australian_Classification_Mature_%28M%29.svg"/>
+            <uniqueId type="imdb" default="true">tt1375666</uniqueId>
+            <uniqueId type="tmdb">27205</uniqueId>
+            <genre>Science Fiction</genre>
             <genre>Action</genre>
-            <genre>Adventure</genre>
-            <tag>Example Tag 1</tag>
-            <tag>Example Tag 2</tag>
-            <setname>Example Set Name</setname>
-            <setoverview>Overview of the set.</setoverview>
-            <country>USA</country>
-            <productioncompany>Example Production Company</productioncompany>
-            <keyword>Keyword1</keyword>
-            <keyword>Keyword2</keyword>
-            <releasedate>2022-05-26</releasedate>
-            <award>Best Movie Award</award>
-            <subtitlelanguage>English</subtitlelanguage>
-            <soundtrack>Example Soundtrack</soundtrack>
-            <parentalguide>Parental guide information.</parentalguide>
+            <genre>Thriller</genre>
+            <tag>dreams</tag>
+            <tag>heist</tag>
+            <tag>subconscious</tag>
+            <setName>The Inception Collection</setName>
+            <setOverview>Films exploring the concept of dream infiltration and shared dreaming technology.</setOverview>
+            <country>United States</country>
+            <country>United Kingdom</country>
+            <productionCompany>Warner Bros. Pictures</productionCompany>
+            <productionCompany>Legendary Entertainment</productionCompany>
+            <productionCompany>Syncopy</productionCompany>
+            <keyword>dreams</keyword>
+            <keyword>heist</keyword>
+            <keyword>subconscious</keyword>
+            <keyword>corporate espionage</keyword>
+            <releaseDate>2010-07-16</releaseDate>
+            <award>Academy Award for Best Cinematography</award>
+            <award>Academy Award for Best Sound Editing</award>
+            <award>Academy Award for Best Sound Mixing</award>
+            <award>Academy Award for Best Visual Effects</award>
+            <subtitleLanguage>English</subtitleLanguage>
+            <subtitleLanguage>Spanish</subtitleLanguage>
+            <soundtrack>Time by Hans Zimmer</soundtrack>
+            <parentalGuide>Contains sequences of violence and action throughout. Some thematic elements.</parentalGuide>
             <actor>
-                <name>Actor Name 1</name>
-                <role>Lead</role>
+                <name>Leonardo DiCaprio</name>
+                <role>Dom Cobb</role>
                 <order>1</order>
-                <thumb>http://example.com/actor1.jpg</thumb>
-                <bio>Biography of Actor 1.</bio>
-                <url>http://example.com/actor1</url>
+                <thumb>https://image.tmdb.org/t/p/w300/wo2hJpn04vbtmh0B9utCFdsQhxM.jpg</thumb>
+                <bio>Leonardo Wilhelm DiCaprio is an American actor and film producer known for his work in biopics and period films.</bio>
+                <url>https://www.themoviedb.org/person/6193-leonardo-dicaprio</url>
             </actor>
             <actor>
-                <name>Actor Name 2</name>
-                <role>Supporting</role>
+                <name>Joseph Gordon-Levitt</name>
+                <role>Arthur</role>
                 <order>2</order>
-                <thumb>http://example.com/actor2.jpg</thumb>
-                <bio>Biography of Actor 2.</bio>
-                <url>http://example.com/actor2</url>
+                <thumb>https://image.tmdb.org/t/p/w300/zSuXCR6xCKIgo9vx2Yj7cYoB3Vs.jpg</thumb>
+                <bio>Joseph Leonard Gordon-Levitt is an American actor and filmmaker known for his roles in 500 Days of Summer and The Dark Knight Rises.</bio>
+                <url>https://www.themoviedb.org/person/24045-joseph-gordon-levitt</url>
+            </actor>
+            <actor>
+                <name>Elliot Page</name>
+                <role>Ariadne</role>
+                <order>3</order>
+                <thumb>https://image.tmdb.org/t/p/w300/cKkGFig0qzSGXKPaQwcqFcEbJmh.jpg</thumb>
+                <bio>Elliot Page is a Canadian actor and producer known for Juno, X-Men: Days of Future Past, and The Umbrella Academy.</bio>
+                <url>https://www.themoviedb.org/person/27578-elliot-page</url>
+            </actor>
+            <actor>
+                <name>Tom Hardy</name>
+                <role>Eames</role>
+                <order>4</order>
+                <thumb>https://image.tmdb.org/t/p/w300/d81K0RH8UX7tZj49tZaQhZ9ewH.jpg</thumb>
+                <bio>Edward Thomas Hardy is an English actor and producer known for The Dark Knight Rises, Mad Max: Fury Road, and Venom.</bio>
+                <url>https://www.themoviedb.org/person/2524-tom-hardy</url>
             </actor>
             <director>
-                <name>Director Name</name>
+                <name>Christopher Nolan</name>
                 <role>Director</role>
                 <order>1</order>
-                <thumb>http://example.com/director.jpg</thumb>
-                <bio>Biography of the Director.</bio>
-                <url>http://example.com/director</url>
+                <thumb>https://image.tmdb.org/t/p/w300/xuAIuYSmsUzKlUMBFGVZaWsY3DZ.jpg</thumb>
+                <bio>Christopher Edward Nolan is a British-American film director, producer, and screenwriter known for The Dark Knight Trilogy, Inception, and Oppenheimer.</bio>
+                <url>https://www.themoviedb.org/person/525-christopher-nolan</url>
             </director>
             <writer>
-                <name>Writer Name</name>
-                <role>Writer</role>
+                <name>Christopher Nolan</name>
+                <role>Screenplay</role>
                 <order>1</order>
-                <thumb>http://example.com/writer.jpg</thumb>
-                <bio>Biography of the Writer.</bio>
-                <url>http://example.com/writer</url>
+                <thumb>https://image.tmdb.org/t/p/w300/xuAIuYSmsUzKlUMBFGVZaWsY3DZ.jpg</thumb>
+                <bio>Christopher Edward Nolan is a British-American film director, producer, and screenwriter known for The Dark Knight Trilogy, Inception, and Oppenheimer.</bio>
+                <url>https://www.themoviedb.org/person/525-christopher-nolan</url>
             </writer>
             <composer>
-                <name>Composer Name</name>
-                <role>Composer</role>
+                <name>Hans Zimmer</name>
+                <role>Original Music Composer</role>
                 <order>1</order>
-                <thumb>http://example.com/composer.jpg</thumb>
-                <bio>Biography of the Composer.</bio>
-                <url>http://example.com/composer</url>
+                <thumb>https://image.tmdb.org/t/p/w300/tpQnDeHY15szIXvpnhlprufz4d.jpg</thumb>
+                <bio>Hans Florian Zimmer is a German-born film score composer and record producer known for Inception, Interstellar, and Dune.</bio>
+                <url>https://www.themoviedb.org/person/947-hans-zimmer</url>
             </composer>
             <producers>
-                <name>Producer Name</name>
+                <name>Emma Thomas</name>
                 <role>Producer</role>
                 <order>1</order>
-                <thumb>http://example.com/producer.jpg</thumb>
-                <bio>Biography of the Producer.</bio>
-                <url>http://example.com/producer</url>
+                <thumb>https://image.tmdb.org/t/p/w300/ynMFBZ2McKnEMYoU0wEBhPFkUCi.jpg</thumb>
+                <bio>Emma Thomas is a British film producer and the co-founder of Syncopy, known for producing many of Christopher Nolan's films.</bio>
+                <url>https://www.themoviedb.org/person/556-emma-thomas</url>
             </producers>
-            <collection>Example Collection</collection>
+            <collection>Christopher Nolan Collection</collection>
         </movie>
     </media>
     <library>

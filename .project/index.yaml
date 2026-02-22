@@ -1,0 +1,497 @@
+entries:
+- id: EPIC-NFO-1
+  title: Schema Naming & Type Consistency
+  type: epic
+  status: done
+  points: null
+  story_id: null
+  epic_id: null
+- id: EPIC-NFO-2
+  title: Schema Completeness
+  type: epic
+  status: done
+  points: null
+  story_id: null
+  epic_id: null
+- id: EPIC-NFO-3
+  title: Examples & Documentation
+  type: epic
+  status: done
+  points: null
+  story_id: null
+  epic_id: null
+- id: EPIC-NFO-4
+  title: Validation & CI
+  type: epic
+  status: active
+  points: null
+  story_id: null
+  epic_id: null
+- id: US-NFO-1
+  title: Standardize element naming to camelCase across all schemas
+  type: story
+  status: done
+  points: 5
+  story_id: null
+  epic_id: EPIC-NFO-1
+- id: US-NFO-2
+  title: Extract shared inline types to common.xsd
+  type: story
+  status: done
+  points: 3
+  story_id: null
+  epic_id: EPIC-NFO-1
+- id: US-NFO-3
+  title: Standardize required vs optional field patterns
+  type: story
+  status: done
+  points: 3
+  story_id: null
+  epic_id: EPIC-NFO-1
+- id: US-NFO-4
+  title: Enhance tvshow.xsd with missing standard fields
+  type: story
+  status: done
+  points: 3
+  story_id: null
+  epic_id: EPIC-NFO-2
+- id: US-NFO-5
+  title: Enhance video.xsd with missing standard fields
+  type: story
+  status: done
+  points: 2
+  story_id: null
+  epic_id: EPIC-NFO-2
+- id: US-NFO-6
+  title: Enhance anime.xsd and adult.xsd with missing fields
+  type: story
+  status: done
+  points: 3
+  story_id: null
+  epic_id: EPIC-NFO-2
+- id: US-NFO-7
+  title: Create example XML files for all content types
+  type: story
+  status: done
+  points: 5
+  story_id: null
+  epic_id: EPIC-NFO-3
+- id: US-NFO-8
+  title: Add formal schema specification document
+  type: story
+  status: done
+  points: 5
+  story_id: null
+  epic_id: EPIC-NFO-3
+- id: US-NFO-9
+  title: Add XML schema validation script and GitHub Actions CI
+  type: story
+  status: done
+  points: 5
+  story_id: null
+  epic_id: EPIC-NFO-4
+- id: US-NFO-1-1
+  title: 'Test: All element names use consistent camelCase convention'
+  type: task
+  status: done
+  points: 2
+  story_id: US-NFO-1
+  epic_id: null
+- id: US-NFO-1-10
+  title: Update README inline example to match camelCase renames
+  type: task
+  status: done
+  points: 1
+  story_id: US-NFO-1
+  epic_id: null
+- id: US-NFO-1-2
+  title: 'Test: movie.xsd elements renamed to match other schemas'
+  type: task
+  status: done
+  points: 2
+  story_id: US-NFO-1
+  epic_id: null
+- id: US-NFO-1-3
+  title: 'Test: adult.xsd and video.xsd primary identifier standardized'
+  type: task
+  status: done
+  points: 2
+  story_id: US-NFO-1
+  epic_id: null
+- id: US-NFO-1-4
+  title: 'Test: ExampleMovie.xml updated to match renamed elements'
+  type: task
+  status: done
+  points: 2
+  story_id: US-NFO-1
+  epic_id: null
+- id: US-NFO-1-5
+  title: 'Test: README example updated to match renamed elements'
+  type: task
+  status: done
+  points: 1
+  story_id: US-NFO-1
+  epic_id: null
+- id: US-NFO-1-6
+  title: Rename movie.xsd elements to camelCase
+  type: task
+  status: done
+  points: 3
+  story_id: US-NFO-1
+  epic_id: null
+- id: US-NFO-1-7
+  title: Rename tvshow.xsd elements to camelCase
+  type: task
+  status: done
+  points: 2
+  story_id: US-NFO-1
+  epic_id: null
+- id: US-NFO-1-8
+  title: Rename adult.xsd and video.xsd identifiers
+  type: task
+  status: done
+  points: 2
+  story_id: US-NFO-1
+  epic_id: null
+- id: US-NFO-1-9
+  title: Update ExampleMovie.xml to match camelCase renames
+  type: task
+  status: done
+  points: 1
+  story_id: US-NFO-1
+  epic_id: null
+- id: US-NFO-2-1
+  title: 'Test: serviceLinksType defined in common.xsd and used by music/musicvideo/podcast'
+  type: task
+  status: done
+  points: 1
+  story_id: US-NFO-2
+  epic_id: null
+- id: US-NFO-2-2
+  title: 'Test: tvshow thumb and fanart use subMediaType from common.xsd (with any
+    needed attribute additions)'
+  type: task
+  status: done
+  points: 2
+  story_id: US-NFO-2
+  epic_id: null
+- id: US-NFO-2-3
+  title: 'Test: No inline complex types duplicated across schemas'
+  type: task
+  status: done
+  points: 2
+  story_id: US-NFO-2
+  epic_id: null
+- id: US-NFO-2-4
+  title: Define serviceLinksType in common.xsd and refactor consumers
+  type: task
+  status: done
+  points: 2
+  story_id: US-NFO-2
+  epic_id: null
+- id: US-NFO-2-5
+  title: Enhance subMediaType and refactor tvshow inline thumb/fanart
+  type: task
+  status: done
+  points: 2
+  story_id: US-NFO-2
+  epic_id: null
+- id: US-NFO-3-1
+  title: 'Test: Documented policy for required vs optional fields'
+  type: task
+  status: done
+  points: 2
+  story_id: US-NFO-3
+  epic_id: null
+- id: US-NFO-3-2
+  title: 'Test: All schemas follow the agreed policy'
+  type: task
+  status: done
+  points: 2
+  story_id: US-NFO-3
+  epic_id: null
+- id: US-NFO-3-3
+  title: 'Test: No schema requires more than 2-3 fields'
+  type: task
+  status: done
+  points: 2
+  story_id: US-NFO-3
+  epic_id: null
+- id: US-NFO-3-4
+  title: Document required/optional field policy in DECISIONS.md
+  type: task
+  status: done
+  points: 1
+  story_id: US-NFO-3
+  epic_id: null
+- id: US-NFO-3-5
+  title: Relax required fields in music.xsd and musicvideo.xsd
+  type: task
+  status: done
+  points: 2
+  story_id: US-NFO-3
+  epic_id: null
+- id: US-NFO-3-6
+  title: Relax required fields in anime, adult, video, audiobook, and podcast schemas
+  type: task
+  status: done
+  points: 1
+  story_id: US-NFO-3
+  epic_id: null
+- id: US-NFO-4-1
+  title: 'Test: tvshow.xsd includes director/writer/composer person elements'
+  type: task
+  status: done
+  points: 1
+  story_id: US-NFO-4
+  epic_id: null
+- id: US-NFO-4-2
+  title: 'Test: tvshow.xsd includes runtime and language elements'
+  type: task
+  status: done
+  points: 1
+  story_id: US-NFO-4
+  epic_id: null
+- id: US-NFO-4-3
+  title: 'Test: tvshow.xsd includes outline for short descriptions'
+  type: task
+  status: done
+  points: 1
+  story_id: US-NFO-4
+  epic_id: null
+- id: US-NFO-4-4
+  title: 'Test: tvshow.xsd includes country and productionCompany'
+  type: task
+  status: done
+  points: 1
+  story_id: US-NFO-4
+  epic_id: null
+- id: US-NFO-4-5
+  title: Add crew and descriptive elements to tvshow.xsd
+  type: task
+  status: done
+  points: 2
+  story_id: US-NFO-4
+  epic_id: null
+- id: US-NFO-4-6
+  title: Add production and localization elements to tvshow.xsd
+  type: task
+  status: done
+  points: 1
+  story_id: US-NFO-4
+  epic_id: null
+- id: US-NFO-5-1
+  title: 'Test: video.xsd includes genre and language elements'
+  type: task
+  status: done
+  points: 1
+  story_id: US-NFO-5
+  epic_id: null
+- id: US-NFO-5-2
+  title: 'Test: video.xsd includes duration element'
+  type: task
+  status: done
+  points: 1
+  story_id: US-NFO-5
+  epic_id: null
+- id: US-NFO-5-3
+  title: 'Test: video.xsd supports multiple ratings and uniqueIds'
+  type: task
+  status: done
+  points: 1
+  story_id: US-NFO-5
+  epic_id: null
+- id: US-NFO-5-4
+  title: 'Test: video.xsd includes banner and fanart image elements'
+  type: task
+  status: done
+  points: 1
+  story_id: US-NFO-5
+  epic_id: null
+- id: US-NFO-5-5
+  title: Add missing elements and fix cardinality in video.xsd
+  type: task
+  status: done
+  points: 2
+  story_id: US-NFO-5
+  epic_id: null
+- id: US-NFO-6-1
+  title: 'Test: anime.xsd includes plot and outline distinction'
+  type: task
+  status: done
+  points: 1
+  story_id: US-NFO-6
+  epic_id: null
+- id: US-NFO-6-2
+  title: 'Test: anime.xsd isAdult changed from integer to boolean'
+  type: task
+  status: done
+  points: 1
+  story_id: US-NFO-6
+  epic_id: null
+- id: US-NFO-6-3
+  title: 'Test: adult.xsd includes genre and language elements'
+  type: task
+  status: done
+  points: 1
+  story_id: US-NFO-6
+  epic_id: null
+- id: US-NFO-6-4
+  title: 'Test: adult.xsd includes banner and fanart image elements'
+  type: task
+  status: done
+  points: 1
+  story_id: US-NFO-6
+  epic_id: null
+- id: US-NFO-6-5
+  title: Enhance anime.xsd with outline, fix isAdult type, add extras
+  type: task
+  status: done
+  points: 2
+  story_id: US-NFO-6
+  epic_id: null
+- id: US-NFO-6-6
+  title: Enhance adult.xsd with genre, language, images, and contentRating
+  type: task
+  status: done
+  points: 2
+  story_id: US-NFO-6
+  epic_id: null
+- id: US-NFO-7-1
+  title: 'Test: Example XML files exist for all 9 content types'
+  type: task
+  status: done
+  points: 2
+  story_id: US-NFO-7
+  epic_id: null
+- id: US-NFO-7-2
+  title: 'Test: All examples use realistic data (not placeholder strings)'
+  type: task
+  status: done
+  points: 2
+  story_id: US-NFO-7
+  epic_id: null
+- id: US-NFO-7-3
+  title: 'Test: All examples validate against their respective schemas'
+  type: task
+  status: done
+  points: 2
+  story_id: US-NFO-7
+  epic_id: null
+- id: US-NFO-7-4
+  title: 'Test: SamplePodcast.xml replaced with realistic data'
+  type: task
+  status: done
+  points: 2
+  story_id: US-NFO-7
+  epic_id: null
+- id: US-NFO-7-5
+  title: Rewrite SamplePodcast.xml with realistic data
+  type: task
+  status: done
+  points: 1
+  story_id: US-NFO-7
+  epic_id: null
+- id: US-NFO-7-6
+  title: Create example XMLs for tvshow, anime, and video
+  type: task
+  status: done
+  points: 2
+  story_id: US-NFO-7
+  epic_id: null
+- id: US-NFO-7-7
+  title: Create example XMLs for music, musicvideo, audiobook, and adult
+  type: task
+  status: done
+  points: 2
+  story_id: US-NFO-7
+  epic_id: null
+- id: US-NFO-8-1
+  title: 'Test: SPECIFICATION.md exists with all element definitions'
+  type: task
+  status: done
+  points: 3
+  story_id: US-NFO-8
+  epic_id: null
+- id: US-NFO-8-2
+  title: 'Test: Each content type has its own section with field table'
+  type: task
+  status: done
+  points: 2
+  story_id: US-NFO-8
+  epic_id: null
+- id: US-NFO-8-3
+  title: 'Test: Shared types (common.xsd / person.xsd) documented'
+  type: task
+  status: done
+  points: 2
+  story_id: US-NFO-8
+  epic_id: null
+- id: US-NFO-8-4
+  title: 'Test: Usage guidelines section included'
+  type: task
+  status: done
+  points: 1
+  story_id: US-NFO-8
+  epic_id: null
+- id: US-NFO-8-5
+  title: 'Write spec foundation: intro, shared types, usage guidelines'
+  type: task
+  status: done
+  points: 2
+  story_id: US-NFO-8
+  epic_id: null
+- id: US-NFO-8-6
+  title: Write content type reference sections for all 9 types
+  type: task
+  status: done
+  points: 3
+  story_id: US-NFO-8
+  epic_id: null
+- id: US-NFO-9-1
+  title: 'Test: Validation script exists that checks all XSD files compile'
+  type: task
+  status: done
+  points: 2
+  story_id: US-NFO-9
+  epic_id: null
+- id: US-NFO-9-2
+  title: 'Test: Validation script validates all example XMLs against schemas'
+  type: task
+  status: done
+  points: 2
+  story_id: US-NFO-9
+  epic_id: null
+- id: US-NFO-9-3
+  title: 'Test: GitHub Actions workflow runs on push and PR'
+  type: task
+  status: done
+  points: 2
+  story_id: US-NFO-9
+  epic_id: null
+- id: US-NFO-9-4
+  title: 'Test: README includes local validation instructions'
+  type: task
+  status: done
+  points: 1
+  story_id: US-NFO-9
+  epic_id: null
+- id: US-NFO-9-5
+  title: Create validation script with XML catalog for local schema resolution
+  type: task
+  status: done
+  points: 3
+  story_id: US-NFO-9
+  epic_id: null
+- id: US-NFO-9-6
+  title: Create GitHub Actions workflow and add README validation instructions
+  type: task
+  status: done
+  points: 2
+  story_id: US-NFO-9
+  epic_id: null
+total_points: 130
+completed_points: 130
+story_count: 9
+task_count: 57
+epic_count: 4

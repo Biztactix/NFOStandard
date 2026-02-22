@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root xmlns="NFOStandard" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="NFOStandard https://xsd.nfostandard.com/main.xsd">
+    <media>
+        <anime>
+            <title>Cowboy Bebop - Ballad of Fallen Angels</title>
+            <releaseDate>1998-11-06</releaseDate>
+            <productionCompany>Sunrise</productionCompany>
+            <genre>Action</genre>
+            <genre>Science Fiction</genre>
+            <genre>Drama</genre>
+            <language>Japanese</language>
+            <language>English</language>
+            <season>1</season>
+            <episode>5</episode>
+            <duration>24</duration>
+            <isAdult>false</isAdult>
+            <director>
+                <name>Shinichiro Watanabe</name>
+                <role>Director</role>
+                <order>1</order>
+                <bio>Shinichiro Watanabe is a Japanese anime director known for Cowboy Bebop, Samurai Champloo, and Space Dandy. His works are celebrated for blending genres and incorporating diverse musical influences.</bio>
+            </director>
+            <voiceActor>
+                <name>Koichi Yamadera</name>
+                <role>Spike Spiegel</role>
+                <order>1</order>
+                <bio>Koichi Yamadera is a prolific Japanese voice actor known for voicing Spike Spiegel in Cowboy Bebop and numerous other iconic anime characters.</bio>
+                <tag>Japanese voice cast</tag>
+            </voiceActor>
+            <voiceActor>
+                <name>Unsho Ishizuka</name>
+                <role>Jet Black</role>
+                <order>2</order>
+                <bio>Unsho Ishizuka was a Japanese voice actor known for his deep, commanding voice, voicing Jet Black in Cowboy Bebop and Professor Oak in Pokemon.</bio>
+                <tag>Japanese voice cast</tag>
+            </voiceActor>
+            <voiceActor>
+                <name>Megumi Hayashibara</name>
+                <role>Faye Valentine</role>
+                <order>3</order>
+                <bio>Megumi Hayashibara is a Japanese voice actress and singer known for her roles as Faye Valentine in Cowboy Bebop and Rei Ayanami in Neon Genesis Evangelion.</bio>
+                <tag>Japanese voice cast</tag>
+            </voiceActor>
+            <voiceActor>
+                <name>Steve Blum</name>
+                <role>Spike Spiegel (English)</role>
+                <order>4</order>
+                <bio>Steven Jay Blum is an American voice actor best known for voicing Spike Spiegel in the English dub of Cowboy Bebop.</bio>
+                <tag>English dub cast</tag>
+            </voiceActor>
+            <keyword>bounty hunter</keyword>
+            <keyword>space western</keyword>
+            <keyword>noir</keyword>
+            <keyword>syndicate</keyword>
+            <tag>bebop</tag>
+            <tag>space</tag>
+            <tag>bounty hunters</tag>
+            <outline>Spike's violent past catches up with him when his former partner from the Red Dragon Crime Syndicate resurfaces.</outline>
+            <tagline>See you space cowboy...</tagline>
+            <description>Spike is lured into a deadly confrontation with Vicious, his former partner in the Red Dragon Crime Syndicate. As memories of his past — including his relationship with Julia — come flooding back, Spike must face the man who wants him dead. The episode is a turning point in the series, revealing the dark history that haunts Spike and establishing the central conflict that drives the show to its conclusion.</description>
+            <rating name="imdb" value="9.0" votes="5200"/>
+            <rating name="myanimelist" value="8.9" votes="890000"/>
+            <userRating>9.5</userRating>
+            <uniqueId type="imdb" default="true">tt0618966</uniqueId>
+            <uniqueId type="myanimelist">1</uniqueId>
+            <uniqueId type="anidb">23</uniqueId>
+            <contentRating country="US" board="TV Parental Guidelines" rating="TV-14" image="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/TV-14_icon.svg/200px-TV-14_icon.svg.png"/>
+            <contentRating country="JP" board="EIRIN" rating="PG-12" image="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Eirin_PG12.svg/200px-Eirin_PG12.svg.png"/>
+            <country>Japan</country>
+            <subtitleLanguage>English</subtitleLanguage>
+            <subtitleLanguage>Spanish</subtitleLanguage>
+            <soundtrack>Rain by Yoko Kanno and the Seatbelts</soundtrack>
+            <banner type="poster" width="680" height="1000" url="https://image.tmdb.org/t/p/original/eLkdjFJkEByComJYEXmQBhCoBES.jpg"/>
+            <thumb type="thumbnail" width="300" height="450" url="https://image.tmdb.org/t/p/w300/eLkdjFJkEByComJYEXmQBhCoBES.jpg"/>
+            <fanart type="background" width="1920" height="1080" url="https://image.tmdb.org/t/p/original/bQFc15UMZQLPR0S9kDRPuCRBPPN.jpg"/>
+        </anime>
+    </media>
+</root>

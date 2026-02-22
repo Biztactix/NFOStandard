@@ -10,13 +10,13 @@
     <xs:complexType name="audiobookType">
         <xs:sequence>
             <xs:element name="title" type="xs:string" minOccurs="1" maxOccurs="1"/>
-            <xs:element name="releaseDate" type="xs:date" minOccurs="1" maxOccurs="1"/>
-            <xs:element name="productionCompany" type="xs:string" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="releaseDate" type="xs:date" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="productionCompany" type="xs:string" minOccurs="0" maxOccurs="1"/>
             <xs:element name="isbn" type="xs:string" minOccurs="0" maxOccurs="1"/>
             <xs:element name="duration" type="xs:integer" minOccurs="0" maxOccurs="1"/>
             <xs:element name="language" type="xs:string" minOccurs="0" maxOccurs="1"/>
             <xs:element name="genre" type="xs:string" minOccurs="0" maxOccurs="1"/>
-            <xs:element name="writer" type="personType" minOccurs="1" maxOccurs="unbounded"/>
+            <xs:element name="writer" type="personType" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="voiceActor" type="personType"  minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="keyword" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="tag" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>

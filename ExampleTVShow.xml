@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root xmlns="NFOStandard" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="NFOStandard https://xsd.nfostandard.com/main.xsd">
+    <media>
+        <tvshow>
+            <title>Ozymandias</title>
+            <originalTitle>Ozymandias</originalTitle>
+            <showTitle>Breaking Bad</showTitle>
+            <sortTitle>Breaking Bad S05E14</sortTitle>
+            <rating name="imdb" value="10.0" votes="210000"/>
+            <rating name="tmdb" value="9.1" votes="4200"/>
+            <userRating>10.0</userRating>
+            <season>5</season>
+            <episode>14</episode>
+            <outline>Everyone copes with radically changed circumstances.</outline>
+            <plot>Walt goes on the run while Jesse is forced to cook. Skyler and Walt Jr. must deal with the repercussions of Walt's exposure, and Hank faces the consequences of his investigation. All the players in the drug trade struggle for survival in the wake of devastating events.</plot>
+            <tagline>Remember my name.</tagline>
+            <runtime>47</runtime>
+            <language>English</language>
+            <language>Spanish</language>
+            <banner type="poster" width="680" height="1000" url="https://image.tmdb.org/t/p/original/ggFHVNu6YYI5L9pCfOacjizRGt.jpg"/>
+            <thumb type="thumbnail" width="300" height="169" url="https://image.tmdb.org/t/p/w300/ggFHVNu6YYI5L9pCfOacjizRGt.jpg"/>
+            <fanart type="background" width="1920" height="1080" url="https://image.tmdb.org/t/p/original/tsRy63Mu5cu8etL1X7ZLyf7UP1M.jpg"/>
+            <contentRating country="US" board="TV Parental Guidelines" rating="TV-MA" image="https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/TV-MA_icon.svg/200px-TV-MA_icon.svg.png"/>
+            <uniqueId type="imdb" default="true">tt2301451</uniqueId>
+            <uniqueId type="tmdb">62161</uniqueId>
+            <uniqueId type="tvdb">4639411</uniqueId>
+            <genre>Drama</genre>
+            <genre>Crime</genre>
+            <genre>Thriller</genre>
+            <tag>drugs</tag>
+            <tag>new mexico</tag>
+            <tag>methamphetamine</tag>
+            <country>United States</country>
+            <productionCompany>High Bridge Entertainment</productionCompany>
+            <productionCompany>Gran Via Productions</productionCompany>
+            <productionCompany>Sony Pictures Television</productionCompany>
+            <keyword>drug trade</keyword>
+            <keyword>family drama</keyword>
+            <keyword>consequences</keyword>
+            <releaseDate>2013-09-15</releaseDate>
+            <award>Primetime Emmy Award for Outstanding Writing for a Drama Series</award>
+            <award>Primetime Emmy Award for Outstanding Directing for a Drama Series</award>
+            <subtitleLanguage>English</subtitleLanguage>
+            <subtitleLanguage>Spanish</subtitleLanguage>
+            <parentalGuide>Contains intense violence, drug content, and strong language throughout.</parentalGuide>
+            <premiered>2008-01-20</premiered>
+            <year>2013</year>
+            <status>Ended</status>
+            <studio>AMC</studio>
+            <actor>
+                <name>Bryan Cranston</name>
+                <role>Walter White</role>
+                <order>1</order>
+                <thumb>https://image.tmdb.org/t/p/w300/7Jahy5LZX2Fo8fGJltMreAI49Bf.jpg</thumb>
+                <bio>Bryan Lee Cranston is an American actor and filmmaker best known for his portrayal of Walter White in Breaking Bad and Hal in Malcolm in the Middle.</bio>
+                <url>https://www.themoviedb.org/person/17419-bryan-cranston</url>
+            </actor>
+            <actor>
+                <name>Aaron Paul</name>
+                <role>Jesse Pinkman</role>
+                <order>2</order>
+                <thumb>https://image.tmdb.org/t/p/w300/8Kce1OnbSftBWPAymGjUbLFHjon.jpg</thumb>
+                <bio>Aaron Paul Sturtevant is an American actor known for his critically acclaimed portrayal of Jesse Pinkman in Breaking Bad.</bio>
+                <url>https://www.themoviedb.org/person/84497-aaron-paul</url>
+            </actor>
+            <actor>
+                <name>Anna Gunn</name>
+                <role>Skyler White</role>
+                <order>3</order>
+                <thumb>https://image.tmdb.org/t/p/w300/adppyeu1a4REN3khtgmXeLJrGOp.jpg</thumb>
+                <bio>Anna Gunn is an American actress known for her role as Skyler White in Breaking Bad, for which she won two Primetime Emmy Awards.</bio>
+                <url>https://www.themoviedb.org/person/134531-anna-gunn</url>
+            </actor>
+            <actor>
+                <name>Dean Norris</name>
+                <role>Hank Schrader</role>
+                <order>4</order>
+                <thumb>https://image.tmdb.org/t/p/w300/yEl7O9XNMZY0i3TnGKthJBJzXEn.jpg</thumb>
+                <bio>Dean Joseph Norris is an American actor known for his role as Hank Schrader in Breaking Bad.</bio>
+                <url>https://www.themoviedb.org/person/14329-dean-norris</url>
+            </actor>
+            <director>
+                <name>Rian Johnson</name>
+                <role>Director</role>
+                <order>1</order>
+                <thumb>https://image.tmdb.org/t/p/w300/uBkmc3KRIn1gfOlNgRFRfmOGvZA.jpg</thumb>
+                <bio>Rian Craig Johnson is an American filmmaker known for directing Brick, Looper, Star Wars: The Last Jedi, and Knives Out.</bio>
+                <url>https://www.themoviedb.org/person/67367-rian-johnson</url>
+            </director>
+            <writer>
+                <name>Moira Walley-Beckett</name>
+                <role>Writer</role>
+                <order>1</order>
+                <bio>Moira Walley-Beckett is a Canadian screenwriter and producer known for her Emmy-winning work on Breaking Bad.</bio>
+            </writer>
+            <composer>
+                <name>Dave Porter</name>
+                <role>Original Music Composer</role>
+                <order>1</order>
+                <bio>Dave Porter is an American composer known for scoring Breaking Bad, Better Call Saul, and other television series.</bio>
+            </composer>
+            <producers>
+                <name>Vince Gilligan</name>
+                <role>Executive Producer</role>
+                <order>1</order>
+                <thumb>https://image.tmdb.org/t/p/w300/wSTvJGz7QbJf1HNmAPeBH21JOCM.jpg</thumb>
+                <bio>George Vincent Gilligan Jr. is an American writer, producer, and director known for creating Breaking Bad and co-creating Better Call Saul.</bio>
+                <url>https://www.themoviedb.org/person/66633-vince-gilligan</url>
+            </producers>
+        </tvshow>
+    </media>
+    <library>
+        <appID>Jellyfin</appID>
+        <libraryid>tvshows</libraryid>
+        <dateAdded>2024-06-10T00:00:00</dateAdded>
+    </library>
+</root>
