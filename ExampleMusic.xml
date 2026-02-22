@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root xmlns="NFOStandard" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="NFOStandard https://xsd.nfostandard.com/main.xsd">
+    <media>
+        <music>
+            <title>Bohemian Rhapsody</title>
+            <releaseDate>1975-10-31</releaseDate>
+            <album>
+                <title>A Night at the Opera</title>
+                <position>11</position>
+                <artist>Queen</artist>
+                <cover type="front" width="600" height="600" url="https://upload.wikimedia.org/wikipedia/en/4/4d/Queen_A_Night_At_The_Opera.png"/>
+            </album>
+            <productionCompany>EMI Records</productionCompany>
+            <producer>
+                <name>Roy Thomas Baker</name>
+                <role>Producer</role>
+                <order>1</order>
+                <bio>Roy Thomas Baker is an English record producer known for his work with Queen, The Cars, and Journey.</bio>
+            </producer>
+            <writer>
+                <name>Freddie Mercury</name>
+                <role>Songwriter</role>
+                <order>1</order>
+                <bio>Freddie Mercury was a British singer, songwriter, and record producer, best known as the lead vocalist of the rock band Queen.</bio>
+            </writer>
+            <artist>
+                <name>Freddie Mercury</name>
+                <role>Lead Vocals, Piano</role>
+                <order>1</order>
+                <bio>Freddie Mercury was a British singer, songwriter, and record producer, best known as the lead vocalist of the rock band Queen.</bio>
+            </artist>
+            <artist>
+                <name>Brian May</name>
+                <role>Guitar, Vocals</role>
+                <order>2</order>
+                <bio>Sir Brian Harold May is an English musician, songwriter, and astrophysicist, best known as the lead guitarist of Queen.</bio>
+            </artist>
+            <artist>
+                <name>Roger Taylor</name>
+                <role>Drums, Vocals</role>
+                <order>3</order>
+                <bio>Roger Meddows Taylor is an English musician, songwriter, and multi-instrumentalist, best known as the drummer of Queen.</bio>
+            </artist>
+            <artist>
+                <name>John Deacon</name>
+                <role>Bass Guitar</role>
+                <order>4</order>
+                <bio>John Richard Deacon is an English retired musician and songwriter, best known as the bass guitarist of Queen.</bio>
+            </artist>
+            <genre>Rock</genre>
+            <genre>Progressive Rock</genre>
+            <genre>Hard Rock</genre>
+            <genre>Opera</genre>
+            <duration>6</duration>
+            <language>English</language>
+            <keyword>rock opera</keyword>
+            <keyword>a cappella</keyword>
+            <keyword>piano ballad</keyword>
+            <tag>classic rock</tag>
+            <tag>70s</tag>
+            <tag>queen</tag>
+            <description>Bohemian Rhapsody is a six-minute suite by the British rock band Queen, written by Freddie Mercury for the album A Night at the Opera. The song has no chorus but consists of several sections: an intro, a ballad segment, an operatic passage, a hard rock part, and a reflective coda. It became one of the best-selling singles of all time and is widely regarded as one of the greatest songs in the history of rock music.</description>
+            <rating name="rateyourmusic" value="4.2" max="5"/>
+            <uniqueId type="musicbrainz" default="true">b1a9c0e9-d987-4042-ae91-78d6a1502b45</uniqueId>
+            <uniqueId type="isrc">GBUM71029604</uniqueId>
+            <contentRating country="US" board="RIAA" rating="Diamond" image="https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/RIAA_logo.svg/200px-RIAA_logo.svg.png"/>
+            <cover type="front" width="600" height="600" url="https://upload.wikimedia.org/wikipedia/en/4/4d/Queen_A_Night_At_The_Opera.png"/>
+            <serviceLinks>
+                <service>Spotify</service>
+                <url>https://open.spotify.com/track/7tFiyTwD0nx5a1eklYtX2J</url>
+            </serviceLinks>
+            <serviceLinks>
+                <service>Apple Music</service>
+                <url>https://music.apple.com/us/album/bohemian-rhapsody/1440650428?i=1440650588</url>
+            </serviceLinks>
+        </music>
+    </media>
+</root>

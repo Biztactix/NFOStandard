@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root xmlns="NFOStandard" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="NFOStandard https://xsd.nfostandard.com/main.xsd">
+    <media>
+        <video>
+            <title>Summer Road Trip 2024 - Pacific Coast Highway</title>
+            <filmingDate>2024-07-15</filmingDate>
+            <producer>
+                <name>Sarah Mitchell</name>
+                <role>Videographer</role>
+                <order>1</order>
+            </producer>
+            <collectionName>Summer Vacation 2024</collectionName>
+            <people>
+                <name>Sarah Mitchell</name>
+                <role>Narrator</role>
+                <order>1</order>
+            </people>
+            <people>
+                <name>James Mitchell</name>
+                <role>Driver</role>
+                <order>2</order>
+            </people>
+            <keyword>road trip</keyword>
+            <keyword>pacific coast highway</keyword>
+            <keyword>california</keyword>
+            <keyword>travel</keyword>
+            <genre>Travel</genre>
+            <genre>Home Video</genre>
+            <language>English</language>
+            <tag>vacation</tag>
+            <tag>summer 2024</tag>
+            <tag>family</tag>
+            <duration>18</duration>
+            <description>A scenic drive along California's Pacific Coast Highway from San Francisco to Big Sur, capturing the stunning ocean views, redwood forests, and coastal cliffs. Highlights include stops at Half Moon Bay, the Bixby Creek Bridge, and McWay Falls at Julia Pfeiffer Burns State Park.</description>
+            <rating name="personal" value="9.0"/>
+            <uniqueId type="filename" default="true">PCH_roadtrip_2024-07-15</uniqueId>
+            <thumb type="thumbnail" width="1920" height="1080" url="file:///media/videos/thumbs/pch_roadtrip_thumb.jpg"/>
+            <banner type="poster" width="1920" height="1080" url="file:///media/videos/banners/pch_roadtrip_banner.jpg"/>
+            <fanart type="background" width="3840" height="2160" url="file:///media/videos/fanart/pch_roadtrip_bg.jpg"/>
+        </video>
+    </media>
+</root>

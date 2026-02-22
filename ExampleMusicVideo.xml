@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root xmlns="NFOStandard" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="NFOStandard https://xsd.nfostandard.com/main.xsd">
+    <media>
+        <musicvideo>
+            <title>Thriller</title>
+            <releaseDate>1983-12-02</releaseDate>
+            <productionCompany>Epic Records</productionCompany>
+            <producer>
+                <name>Quincy Jones</name>
+                <role>Producer</role>
+                <order>1</order>
+                <bio>Quincy Delight Jones Jr. was an American record producer, musician, songwriter, and composer. He produced Michael Jackson's best-selling albums Off the Wall, Thriller, and Bad.</bio>
+            </producer>
+            <writer>
+                <name>Rod Temperton</name>
+                <role>Songwriter</role>
+                <order>1</order>
+                <bio>Rodney Lynn Temperton was an English songwriter, musician, and record producer best known for writing songs for Michael Jackson including Thriller and Rock with You.</bio>
+            </writer>
+            <artist>
+                <name>Michael Jackson</name>
+                <role>Lead Artist</role>
+                <order>1</order>
+                <thumb>https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Michael_Jackson_in_1988.jpg/220px-Michael_Jackson_in_1988.jpg</thumb>
+                <bio>Michael Joseph Jackson was an American singer, songwriter, and dancer, dubbed the King of Pop. He is regarded as one of the most significant cultural figures of the 20th century.</bio>
+            </artist>
+            <genre>Pop</genre>
+            <genre>Horror</genre>
+            <genre>Funk</genre>
+            <duration>14</duration>
+            <language>English</language>
+            <keyword>horror</keyword>
+            <keyword>dance</keyword>
+            <keyword>zombie</keyword>
+            <keyword>werewolf</keyword>
+            <tag>80s</tag>
+            <tag>king of pop</tag>
+            <tag>iconic</tag>
+            <description>The music video for Thriller, directed by John Landis, is a 14-minute short film that revolutionized the music video format. Featuring elaborate choreography, cinematic production values, and narration by Vincent Price, the video depicts Michael Jackson and his date encountering zombies who rise from their graves. The choreographed zombie dance sequence became one of the most iconic moments in pop culture history. It was the first music video inducted into the National Film Registry by the Library of Congress.</description>
+            <rating name="imdb" value="8.5" votes="3400"/>
+            <uniqueId type="imdb" default="true">tt0088263</uniqueId>
+            <uniqueId type="musicbrainz">f32fab67-77dd-3f35-a70e-6aa084412dc8</uniqueId>
+            <contentRating country="US" board="MPAA" rating="Not Rated" image="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/MPAA_logo.svg/200px-MPAA_logo.svg.png"/>
+            <cover type="poster" width="680" height="1000" url="https://upload.wikimedia.org/wikipedia/en/d/da/Thriller_music_video_screenshot.jpg"/>
+            <serviceLinks>
+                <service>YouTube</service>
+                <url>https://www.youtube.com/watch?v=sOnqjkJTMaA</url>
+            </serviceLinks>
+            <serviceLinks>
+                <service>Spotify</service>
+                <url>https://open.spotify.com/track/2LlQb7Uoj1kKyGhlkBf9aC</url>
+            </serviceLinks>
+        </musicvideo>
+    </media>
+</root>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root xmlns="NFOStandard" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="NFOStandard https://xsd.nfostandard.com/main.xsd">
+    <media>
+        <audiobook>
+            <title>The Hitchhiker's Guide to the Galaxy</title>
+            <releaseDate>2005-09-29</releaseDate>
+            <productionCompany>Random House Audio</productionCompany>
+            <isbn>978-0739322208</isbn>
+            <duration>326</duration>
+            <language>English</language>
+            <genre>Science Fiction Comedy</genre>
+            <writer>
+                <name>Douglas Adams</name>
+                <role>Author</role>
+                <order>1</order>
+                <bio>Douglas Noel Adams was an English author, humourist, and screenwriter, best known for The Hitchhiker's Guide to the Galaxy series. He was an advocate for environmentalism and conservation.</bio>
+            </writer>
+            <voiceActor>
+                <name>Stephen Fry</name>
+                <role>Narrator</role>
+                <order>1</order>
+                <thumb>https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Stephen_Fry_June_2016.jpg/220px-Stephen_Fry_June_2016.jpg</thumb>
+                <bio>Stephen John Fry is an English actor, broadcaster, comedian, director, and writer. He is known for his roles in Blackadder, Jeeves and Wooster, and as narrator of the Harry Potter audiobooks (UK edition).</bio>
+            </voiceActor>
+            <keyword>science fiction</keyword>
+            <keyword>comedy</keyword>
+            <keyword>space travel</keyword>
+            <keyword>42</keyword>
+            <tag>douglas adams</tag>
+            <tag>british humor</tag>
+            <tag>classic sci-fi</tag>
+            <description>Seconds before Earth is demolished to make way for a galactic freeway, Arthur Dent is plucked off the planet by his friend Ford Prefect, a researcher for the revised edition of The Hitchhiker's Guide to the Galaxy. Together they journey through space aided by the Guide, encountering Zaphod Beeblebrox, the two-headed, three-armed ex-president of the Galaxy, Trillian, a brilliant astrophysicist, and Marvin, the paranoid android. Narrated by Stephen Fry, this audiobook brings Adams' beloved comic masterpiece to life with wit and warmth.</description>
+            <rating name="audible" value="4.7" max="5" votes="28000"/>
+            <rating name="goodreads" value="4.2" max="5" votes="1700000"/>
+            <uniqueId type="audible" default="true">B0009R6ZQO</uniqueId>
+            <uniqueId type="isbn">978-0739322208</uniqueId>
+            <contentRating country="US" board="Common Sense Media" rating="Ages 12+" image="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Common_Sense_Media_logo.svg/200px-Common_Sense_Media_logo.svg.png"/>
+            <cover type="front" width="500" height="500" url="https://m.media-amazon.com/images/I/51MzUz8rQcL._SL500_.jpg"/>
+        </audiobook>
+    </media>
+</root>

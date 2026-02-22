@@ -8,6 +8,7 @@ Welcome to the Open NFO Standard repository! This project aims to create a unifi
 - [Features](#features)
 - [File Structure](#file-structure)
 - [Example XML File](#example-xml-file)
+- [Local Validation](#local-validation)
 - [Contributing](#contributing)
 - [License](#license)
 - [Contact](#contact)
@@ -47,12 +48,12 @@ This is an example of how to use the XSDs to reference it so that it's easy for 
 	<media>
 	  <movie>
 		<title>Inception</title>
-		<originaltitle>Inception</originaltitle>
-		<sorttitle>Inception</sorttitle>
-		<alternatetitle>Origem</alternatetitle>
-		<alternatetitle>Début</alternatetitle>
+		<originalTitle>Inception</originalTitle>
+		<sortTitle>Inception</sortTitle>
+		<alternateTitle>Origem</alternateTitle>
+		<alternateTitle>Début</alternateTitle>
 		<rating name="imdb" max="10" default="true" value="8.8" votes="200000"/>
-		<userrating>9.0</userrating>
+		<userRating>9.0</userRating>
 		<outline>A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O.</outline>
 		<plot>Dom Cobb is a skilled thief, the absolute best in the dangerous art of extraction: stealing valuable secrets from deep within the subconscious during the dream state when the mind is at its most vulnerable. Cobb's rare ability has made him a coveted player in this treacherous new world of corporate espionage, but it has also made him an international fugitive and cost him everything he has ever loved. Now Cobb is being offered a chance at redemption. One last job could give him his life back but only if he can accomplish the impossible, inception.</plot>
 		<tagline>Your mind is the scene of the crime.</tagline>
@@ -60,24 +61,24 @@ This is an example of how to use the XSDs to reference it so that it's easy for 
 		<banner type="poster" width="300" height="450" url="http://example.com/banner1.jpg"/>
         <thumb type="thumbnail" width="150" height="150" url="http://example.com/thumb1.jpg"/>
         <fanart type="background" width="1920" height="1080" url="http://example.com/fanart1.jpg"/>
-		<contentrating country="USA" board="MPAA" rating="PG-13" image="mpaa_pg13.png"/>
-		<uniqueid type="imdb" default="true">tt1375666</uniqueid>
-		<uniqueid type="tmdb">12345</uniqueid>
+		<contentRating country="USA" board="MPAA" rating="PG-13" image="mpaa_pg13.png"/>
+		<uniqueId type="imdb" default="true">tt1375666</uniqueId>
+		<uniqueId type="tmdb">12345</uniqueId>
 		<genre>Action</genre>
 		<genre>Sci-Fi</genre>
 		<tag>Heist</tag>
 		<tag>Dream</tag>
-		<setname>Inception Series</setname>
-		<setoverview>Movies about dream extraction.</setoverview>
+		<setName>Inception Series</setName>
+		<setOverview>Movies about dream extraction.</setOverview>
 		<country>USA</country>
-		<productioncompany>Warner Bros.</productioncompany>
+		<productionCompany>Warner Bros.</productionCompany>
 		<keyword>dream</keyword>
 		<keyword>heist</keyword>
-		<releasedate>2010-07-16</releasedate>
+		<releaseDate>2010-07-16</releaseDate>
 		<award>Academy Award for Best Cinematography</award>
-		<subtitlelanguage>English</subtitlelanguage>
+		<subtitleLanguage>English</subtitleLanguage>
 		<soundtrack>Inception OST</soundtrack>
-		<parentalguide>Some material may be inappropriate for children under 13.</parentalguide>
+		<parentalGuide>Some material may be inappropriate for children under 13.</parentalGuide>
 		<actor>
 		  <name>Leonardo DiCaprio</name>
 		  <role>Dom Cobb</role>
@@ -112,9 +113,39 @@ This is an example of how to use the XSDs to reference it so that it's easy for 
 
 ```
 
+## Local Validation
+
+You can validate the XSD schemas and example XML files locally using the provided validation script.
+
+### Prerequisites
+
+Install `libxml2-utils` which provides `xmllint`:
+
+```bash
+# Ubuntu / Debian
+sudo apt-get install -y libxml2-utils
+
+# macOS (via Homebrew)
+brew install libxml2
+```
+
+### Running Validation
+
+```bash
+./validate.sh
+```
+
+This checks:
+- **XSD well-formedness** — all schema files parse correctly
+- **Example XML validation** — all `Example*.xml` and `Sample*.xml` files validate against `main.xsd`
+
+### Continuous Integration
+
+Validation runs automatically on pushes to `main` and on pull requests via GitHub Actions. See `.github/workflows/validate.yml`.
+
 ## Contributing
 
-We welcome contributions from the community! 
+We welcome contributions from the community!
 I will endeavor to review and approve pull requests in a timely manner.
 
 ## License

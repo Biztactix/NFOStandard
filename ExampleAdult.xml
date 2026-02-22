@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root xmlns="NFOStandard" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="NFOStandard https://xsd.nfostandard.com/main.xsd">
+    <media>
+        <adult>
+            <title>Sunset Romance</title>
+            <releaseDate>2023-06-15</releaseDate>
+            <productionCompany>Studio Fictional</productionCompany>
+            <siteName>ExampleSite</siteName>
+            <VideoURL>https://example.com/videos/sunset-romance</VideoURL>
+            <TrailerURL>https://example.com/trailers/sunset-romance</TrailerURL>
+            <duration>42</duration>
+            <director>
+                <name>Alex Director</name>
+                <role>Director</role>
+                <order>1</order>
+                <bio>Alex Director is a fictional director created for this example XML file.</bio>
+            </director>
+            <performer>
+                <name>Jane Doe</name>
+                <role>Lead</role>
+                <order>1</order>
+                <bio>Jane Doe is a fictional performer created for this example XML file.</bio>
+                <gender>Female</gender>
+            </performer>
+            <performer>
+                <name>John Smith</name>
+                <role>Lead</role>
+                <order>2</order>
+                <bio>John Smith is a fictional performer created for this example XML file.</bio>
+                <gender>Male</gender>
+            </performer>
+            <genre>Romance</genre>
+            <genre>Drama</genre>
+            <keyword>romance</keyword>
+            <keyword>drama</keyword>
+            <tag>fictional</tag>
+            <tag>example</tag>
+            <language>English</language>
+            <link>https://example.com/sunset-romance</link>
+            <outline>A fictional romantic drama created as an example for the NFOStandard adult content type.</outline>
+            <description>This is a fictional example entry demonstrating the adult content type schema for NFOStandard. All names, URLs, and details are entirely fictional and created solely to illustrate the XML structure and available metadata fields for adult content.</description>
+            <rating name="site" value="7.5" votes="150"/>
+            <contentRating country="US" board="MPAA" rating="NC-17" image="https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Nc-17.svg/200px-Nc-17.svg.png"/>
+            <uniqueId type="site" default="true">SR-2023-001</uniqueId>
+            <banner type="poster" width="680" height="1000" url="https://example.com/images/sunset-romance-poster.jpg"/>
+            <thumb type="thumbnail" width="300" height="450" url="https://example.com/images/sunset-romance-thumb.jpg"/>
+            <fanart type="background" width="1920" height="1080" url="https://example.com/images/sunset-romance-fanart.jpg"/>
+        </adult>
+    </media>
+</root>

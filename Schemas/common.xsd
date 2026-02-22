@@ -32,10 +32,20 @@
         </xs:simpleContent>
     </xs:complexType>
 
+    <xs:complexType name="serviceLinksType">
+        <xs:sequence>
+            <xs:element name="service" type="xs:string" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="url" type="xs:string" minOccurs="1" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
     <xs:complexType name="subMediaType">
         <xs:simpleContent>
             <xs:extension base="xs:string">
                 <xs:attribute name="type" type="xs:string" use="optional"/>
+                <xs:attribute name="aspect" type="xs:string" use="optional"/>
+                <xs:attribute name="season" type="xs:integer" use="optional"/>
+                <xs:attribute name="preview" type="xs:string" use="optional"/>
                 <xs:attribute name="width" type="xs:integer" use="optional"/>
                 <xs:attribute name="height" type="xs:integer" use="optional"/>
                 <xs:attribute name="url" type="xs:string" use="optional"/>
